@@ -1,0 +1,339 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C29A8E24150A560B00320140 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C29A8E23150A560B00320140 /* UIKit.framework */; };
+		C29A8E26150A560B00320140 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C29A8E25150A560B00320140 /* Foundation.framework */; };
+		C29A8E28150A560B00320140 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C29A8E27150A560B00320140 /* CoreGraphics.framework */; };
+		C29A8E2E150A560C00320140 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C29A8E2C150A560C00320140 /* InfoPlist.strings */; };
+		C29A8E30150A560C00320140 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C29A8E2F150A560C00320140 /* main.m */; };
+		C29A8E34150A560C00320140 /* MLWAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C29A8E33150A560C00320140 /* MLWAppDelegate.m */; };
+		C29A8E37150A560C00320140 /* MLWFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C29A8E36150A560C00320140 /* MLWFirstViewController.m */; };
+		C29A8E39150A560C00320140 /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = C29A8E38150A560C00320140 /* first.png */; };
+		C29A8E3B150A560C00320140 /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C29A8E3A150A560C00320140 /* first@2x.png */; };
+		C29A8E3E150A560C00320140 /* MLWSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C29A8E3D150A560C00320140 /* MLWSecondViewController.m */; };
+		C29A8E40150A560C00320140 /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = C29A8E3F150A560C00320140 /* second.png */; };
+		C29A8E42150A560C00320140 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C29A8E41150A560C00320140 /* second@2x.png */; };
+		C29A8E45150A560C00320140 /* MLWFirstViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = C29A8E43150A560C00320140 /* MLWFirstViewController_iPhone.xib */; };
+		C29A8E48150A560C00320140 /* MLWFirstViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = C29A8E46150A560C00320140 /* MLWFirstViewController_iPad.xib */; };
+		C29A8E4B150A560C00320140 /* MLWSecondViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = C29A8E49150A560C00320140 /* MLWSecondViewController_iPhone.xib */; };
+		C29A8E4E150A560C00320140 /* MLWSecondViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = C29A8E4C150A560C00320140 /* MLWSecondViewController_iPad.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		C29A8E1F150A560B00320140 /* MarkLogic World.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MarkLogic World.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C29A8E23150A560B00320140 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		C29A8E25150A560B00320140 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		C29A8E27150A560B00320140 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		C29A8E2B150A560B00320140 /* MarkLogic World-Info.plist */ = {isa = PBXFileReference; path = "MarkLogic World-Info.plist"; sourceTree = "<group>"; };
+		C29A8E2D150A560C00320140 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C29A8E2F150A560C00320140 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		C29A8E31150A560C00320140 /* MarkLogic World-Prefix.pch */ = {isa = PBXFileReference; path = "MarkLogic World-Prefix.pch"; sourceTree = "<group>"; };
+		C29A8E32150A560C00320140 /* MLWAppDelegate.h */ = {isa = PBXFileReference; path = MLWAppDelegate.h; sourceTree = "<group>"; };
+		C29A8E33150A560C00320140 /* MLWAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLWAppDelegate.m; sourceTree = "<group>"; };
+		C29A8E35150A560C00320140 /* MLWFirstViewController.h */ = {isa = PBXFileReference; path = MLWFirstViewController.h; sourceTree = "<group>"; };
+		C29A8E36150A560C00320140 /* MLWFirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLWFirstViewController.m; sourceTree = "<group>"; };
+		C29A8E38150A560C00320140 /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
+		C29A8E3A150A560C00320140 /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
+		C29A8E3C150A560C00320140 /* MLWSecondViewController.h */ = {isa = PBXFileReference; path = MLWSecondViewController.h; sourceTree = "<group>"; };
+		C29A8E3D150A560C00320140 /* MLWSecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLWSecondViewController.m; sourceTree = "<group>"; };
+		C29A8E3F150A560C00320140 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
+		C29A8E41150A560C00320140 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
+		C29A8E44150A560C00320140 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MLWFirstViewController_iPhone.xib; sourceTree = "<group>"; };
+		C29A8E47150A560C00320140 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MLWFirstViewController_iPad.xib; sourceTree = "<group>"; };
+		C29A8E4A150A560C00320140 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MLWSecondViewController_iPhone.xib; sourceTree = "<group>"; };
+		C29A8E4D150A560C00320140 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MLWSecondViewController_iPad.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C29A8E1C150A560B00320140 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C29A8E24150A560B00320140 /* UIKit.framework in Frameworks */,
+				C29A8E26150A560B00320140 /* Foundation.framework in Frameworks */,
+				C29A8E28150A560B00320140 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C29A8E14150A560B00320140 = {
+			isa = PBXGroup;
+			children = (
+				C29A8E29150A560B00320140 /* MarkLogic World */,
+				C29A8E22150A560B00320140 /* Frameworks */,
+				C29A8E20150A560B00320140 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C29A8E20150A560B00320140 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C29A8E1F150A560B00320140 /* MarkLogic World.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C29A8E22150A560B00320140 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C29A8E23150A560B00320140 /* UIKit.framework */,
+				C29A8E25150A560B00320140 /* Foundation.framework */,
+				C29A8E27150A560B00320140 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C29A8E29150A560B00320140 /* MarkLogic World */ = {
+			isa = PBXGroup;
+			children = (
+				C29A8E32150A560C00320140 /* MLWAppDelegate.h */,
+				C29A8E33150A560C00320140 /* MLWAppDelegate.m */,
+				C29A8E35150A560C00320140 /* MLWFirstViewController.h */,
+				C29A8E36150A560C00320140 /* MLWFirstViewController.m */,
+				C29A8E38150A560C00320140 /* first.png */,
+				C29A8E3A150A560C00320140 /* first@2x.png */,
+				C29A8E3C150A560C00320140 /* MLWSecondViewController.h */,
+				C29A8E3D150A560C00320140 /* MLWSecondViewController.m */,
+				C29A8E3F150A560C00320140 /* second.png */,
+				C29A8E41150A560C00320140 /* second@2x.png */,
+				C29A8E43150A560C00320140 /* MLWFirstViewController_iPhone.xib */,
+				C29A8E46150A560C00320140 /* MLWFirstViewController_iPad.xib */,
+				C29A8E49150A560C00320140 /* MLWSecondViewController_iPhone.xib */,
+				C29A8E4C150A560C00320140 /* MLWSecondViewController_iPad.xib */,
+				C29A8E2A150A560B00320140 /* Supporting Files */,
+			);
+			path = "MarkLogic World";
+			sourceTree = "<group>";
+		};
+		C29A8E2A150A560B00320140 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C29A8E2B150A560B00320140 /* MarkLogic World-Info.plist */,
+				C29A8E2C150A560C00320140 /* InfoPlist.strings */,
+				C29A8E2F150A560C00320140 /* main.m */,
+				C29A8E31150A560C00320140 /* MarkLogic World-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C29A8E1E150A560B00320140 /* MarkLogic World */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C29A8E51150A560C00320140 /* Build configuration list for PBXNativeTarget "MarkLogic World" */;
+			buildPhases = (
+				C29A8E1B150A560B00320140 /* Sources */,
+				C29A8E1C150A560B00320140 /* Frameworks */,
+				C29A8E1D150A560B00320140 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "MarkLogic World";
+			productName = "MarkLogic World";
+			productReference = C29A8E1F150A560B00320140 /* MarkLogic World.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C29A8E16150A560B00320140 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
+			buildConfigurationList = C29A8E19150A560B00320140 /* Build configuration list for PBXProject "MarkLogic World" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = C29A8E14150A560B00320140;
+			productRefGroup = C29A8E20150A560B00320140 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C29A8E1E150A560B00320140 /* MarkLogic World */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C29A8E1D150A560B00320140 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C29A8E2E150A560C00320140 /* InfoPlist.strings in Resources */,
+				C29A8E39150A560C00320140 /* first.png in Resources */,
+				C29A8E3B150A560C00320140 /* first@2x.png in Resources */,
+				C29A8E40150A560C00320140 /* second.png in Resources */,
+				C29A8E42150A560C00320140 /* second@2x.png in Resources */,
+				C29A8E45150A560C00320140 /* MLWFirstViewController_iPhone.xib in Resources */,
+				C29A8E48150A560C00320140 /* MLWFirstViewController_iPad.xib in Resources */,
+				C29A8E4B150A560C00320140 /* MLWSecondViewController_iPhone.xib in Resources */,
+				C29A8E4E150A560C00320140 /* MLWSecondViewController_iPad.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C29A8E1B150A560B00320140 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C29A8E30150A560C00320140 /* main.m in Sources */,
+				C29A8E34150A560C00320140 /* MLWAppDelegate.m in Sources */,
+				C29A8E37150A560C00320140 /* MLWFirstViewController.m in Sources */,
+				C29A8E3E150A560C00320140 /* MLWSecondViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		C29A8E2C150A560C00320140 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C29A8E2D150A560C00320140 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		C29A8E43150A560C00320140 /* MLWFirstViewController_iPhone.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C29A8E44150A560C00320140 /* en */,
+			);
+			name = MLWFirstViewController_iPhone.xib;
+			sourceTree = "<group>";
+		};
+		C29A8E46150A560C00320140 /* MLWFirstViewController_iPad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C29A8E47150A560C00320140 /* en */,
+			);
+			name = MLWFirstViewController_iPad.xib;
+			sourceTree = "<group>";
+		};
+		C29A8E49150A560C00320140 /* MLWSecondViewController_iPhone.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C29A8E4A150A560C00320140 /* en */,
+			);
+			name = MLWSecondViewController_iPhone.xib;
+			sourceTree = "<group>";
+		};
+		C29A8E4C150A560C00320140 /* MLWSecondViewController_iPad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C29A8E4D150A560C00320140 /* en */,
+			);
+			name = MLWSecondViewController_iPad.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C29A8E4F150A560C00320140 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C29A8E50150A560C00320140 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C29A8E52150A560C00320140 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MarkLogic World/MarkLogic World-Prefix.pch";
+				INFOPLIST_FILE = "MarkLogic World/MarkLogic World-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		C29A8E53150A560C00320140 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MarkLogic World/MarkLogic World-Prefix.pch";
+				INFOPLIST_FILE = "MarkLogic World/MarkLogic World-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C29A8E19150A560B00320140 /* Build configuration list for PBXProject "MarkLogic World" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C29A8E4F150A560C00320140 /* Debug */,
+				C29A8E50150A560C00320140 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C29A8E51150A560C00320140 /* Build configuration list for PBXNativeTarget "MarkLogic World" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C29A8E52150A560C00320140 /* Debug */,
+				C29A8E53150A560C00320140 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C29A8E16150A560B00320140 /* Project object */;
+}

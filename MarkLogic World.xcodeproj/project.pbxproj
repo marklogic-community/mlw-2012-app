@@ -7,47 +7,58 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C20CEE32151288B9009AA0AD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C20CEE31151288B9009AA0AD /* main.m */; };
+		C20CEE5715128B20009AA0AD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C20CEE5515128B20009AA0AD /* InfoPlist.strings */; };
 		C29A8E24150A560B00320140 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C29A8E23150A560B00320140 /* UIKit.framework */; };
 		C29A8E26150A560B00320140 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C29A8E25150A560B00320140 /* Foundation.framework */; };
 		C29A8E28150A560B00320140 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C29A8E27150A560B00320140 /* CoreGraphics.framework */; };
-		C29A8E2E150A560C00320140 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C29A8E2C150A560C00320140 /* InfoPlist.strings */; };
-		C29A8E30150A560C00320140 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C29A8E2F150A560C00320140 /* main.m */; };
-		C29A8E34150A560C00320140 /* MLWAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C29A8E33150A560C00320140 /* MLWAppDelegate.m */; };
-		C29A8E37150A560C00320140 /* MLWFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C29A8E36150A560C00320140 /* MLWFirstViewController.m */; };
-		C29A8E39150A560C00320140 /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = C29A8E38150A560C00320140 /* first.png */; };
-		C29A8E3B150A560C00320140 /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C29A8E3A150A560C00320140 /* first@2x.png */; };
-		C29A8E3E150A560C00320140 /* MLWSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C29A8E3D150A560C00320140 /* MLWSecondViewController.m */; };
-		C29A8E40150A560C00320140 /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = C29A8E3F150A560C00320140 /* second.png */; };
-		C29A8E42150A560C00320140 /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C29A8E41150A560C00320140 /* second@2x.png */; };
-		C29A8E45150A560C00320140 /* MLWFirstViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = C29A8E43150A560C00320140 /* MLWFirstViewController_iPhone.xib */; };
-		C29A8E48150A560C00320140 /* MLWFirstViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = C29A8E46150A560C00320140 /* MLWFirstViewController_iPad.xib */; };
-		C29A8E4B150A560C00320140 /* MLWSecondViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = C29A8E49150A560C00320140 /* MLWSecondViewController_iPhone.xib */; };
-		C29A8E4E150A560C00320140 /* MLWSecondViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = C29A8E4C150A560C00320140 /* MLWSecondViewController_iPad.xib */; };
+		C29A8E57150A5B3D00320140 /* MLWAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C29A8E56150A5B3D00320140 /* MLWAppDelegate.m */; };
+		C29A8E66150A5FD400320140 /* MLWTweetController.m in Sources */ = {isa = PBXBuildFile; fileRef = C29A8E65150A5FD400320140 /* MLWTweetController.m */; };
+		C29A8E69150A626200320140 /* MLWScheduleGridController.m in Sources */ = {isa = PBXBuildFile; fileRef = C29A8E68150A626200320140 /* MLWScheduleGridController.m */; };
+		C29A8E6C150A627F00320140 /* MLWScheduleListController.m in Sources */ = {isa = PBXBuildFile; fileRef = C29A8E6B150A627F00320140 /* MLWScheduleListController.m */; };
+		C29A8E6F150A637300320140 /* MLWSessionDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = C29A8E6E150A637300320140 /* MLWSessionDetailController.m */; };
+		C29A8E72150A648F00320140 /* MLWSponsorDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = C29A8E71150A648F00320140 /* MLWSponsorDetailController.m */; };
+		C29A8E75150FE50F00320140 /* MLWSponsorListController.m in Sources */ = {isa = PBXBuildFile; fileRef = C29A8E74150FE50F00320140 /* MLWSponsorListController.m */; };
+		C29A8E78150FE56100320140 /* MLWSponsorController.m in Sources */ = {isa = PBXBuildFile; fileRef = C29A8E77150FE56100320140 /* MLWSponsorController.m */; };
+		C29A8E7F1511023A00320140 /* MLWSponsor.m in Sources */ = {isa = PBXBuildFile; fileRef = C29A8E7E1511023A00320140 /* MLWSponsor.m */; };
+		C29A8E821511025300320140 /* MLWSession.m in Sources */ = {isa = PBXBuildFile; fileRef = C29A8E811511025300320140 /* MLWSession.m */; };
+		C29A8E851511028D00320140 /* MLWSpeaker.m in Sources */ = {isa = PBXBuildFile; fileRef = C29A8E841511028D00320140 /* MLWSpeaker.m */; };
+		C29A8E88151102DD00320140 /* MLWConference.m in Sources */ = {isa = PBXBuildFile; fileRef = C29A8E87151102DD00320140 /* MLWConference.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C20CEE2E151288AE009AA0AD /* MarkLogic World-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "MarkLogic World-Info.plist"; path = "Resources/MarkLogic World-Info.plist"; sourceTree = "<group>"; };
+		C20CEE2F151288AE009AA0AD /* MarkLogic World-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "MarkLogic World-Prefix.pch"; path = "Resources/MarkLogic World-Prefix.pch"; sourceTree = "<group>"; };
+		C20CEE31151288B9009AA0AD /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		C20CEE5615128B20009AA0AD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = InfoPlist.strings; sourceTree = "<group>"; };
 		C29A8E1F150A560B00320140 /* MarkLogic World.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MarkLogic World.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C29A8E23150A560B00320140 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C29A8E25150A560B00320140 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C29A8E27150A560B00320140 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		C29A8E2B150A560B00320140 /* MarkLogic World-Info.plist */ = {isa = PBXFileReference; path = "MarkLogic World-Info.plist"; sourceTree = "<group>"; };
-		C29A8E2D150A560C00320140 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		C29A8E2F150A560C00320140 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		C29A8E31150A560C00320140 /* MarkLogic World-Prefix.pch */ = {isa = PBXFileReference; path = "MarkLogic World-Prefix.pch"; sourceTree = "<group>"; };
-		C29A8E32150A560C00320140 /* MLWAppDelegate.h */ = {isa = PBXFileReference; path = MLWAppDelegate.h; sourceTree = "<group>"; };
-		C29A8E33150A560C00320140 /* MLWAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLWAppDelegate.m; sourceTree = "<group>"; };
-		C29A8E35150A560C00320140 /* MLWFirstViewController.h */ = {isa = PBXFileReference; path = MLWFirstViewController.h; sourceTree = "<group>"; };
-		C29A8E36150A560C00320140 /* MLWFirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLWFirstViewController.m; sourceTree = "<group>"; };
-		C29A8E38150A560C00320140 /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
-		C29A8E3A150A560C00320140 /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
-		C29A8E3C150A560C00320140 /* MLWSecondViewController.h */ = {isa = PBXFileReference; path = MLWSecondViewController.h; sourceTree = "<group>"; };
-		C29A8E3D150A560C00320140 /* MLWSecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MLWSecondViewController.m; sourceTree = "<group>"; };
-		C29A8E3F150A560C00320140 /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
-		C29A8E41150A560C00320140 /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
-		C29A8E44150A560C00320140 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MLWFirstViewController_iPhone.xib; sourceTree = "<group>"; };
-		C29A8E47150A560C00320140 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MLWFirstViewController_iPad.xib; sourceTree = "<group>"; };
-		C29A8E4A150A560C00320140 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MLWSecondViewController_iPhone.xib; sourceTree = "<group>"; };
-		C29A8E4D150A560C00320140 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MLWSecondViewController_iPad.xib; sourceTree = "<group>"; };
+		C29A8E55150A5B3D00320140 /* MLWAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWAppDelegate.h; path = Classes/MLWAppDelegate.h; sourceTree = "<group>"; };
+		C29A8E56150A5B3D00320140 /* MLWAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWAppDelegate.m; path = Classes/MLWAppDelegate.m; sourceTree = "<group>"; };
+		C29A8E64150A5FD400320140 /* MLWTweetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWTweetController.h; path = Controllers/MLWTweetController.h; sourceTree = "<group>"; };
+		C29A8E65150A5FD400320140 /* MLWTweetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWTweetController.m; path = Controllers/MLWTweetController.m; sourceTree = "<group>"; };
+		C29A8E67150A626200320140 /* MLWScheduleGridController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWScheduleGridController.h; path = Controllers/MLWScheduleGridController.h; sourceTree = "<group>"; };
+		C29A8E68150A626200320140 /* MLWScheduleGridController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWScheduleGridController.m; path = Controllers/MLWScheduleGridController.m; sourceTree = "<group>"; };
+		C29A8E6A150A627E00320140 /* MLWScheduleListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWScheduleListController.h; path = Controllers/MLWScheduleListController.h; sourceTree = "<group>"; };
+		C29A8E6B150A627F00320140 /* MLWScheduleListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWScheduleListController.m; path = Controllers/MLWScheduleListController.m; sourceTree = "<group>"; };
+		C29A8E6D150A637300320140 /* MLWSessionDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWSessionDetailController.h; path = Controllers/MLWSessionDetailController.h; sourceTree = "<group>"; };
+		C29A8E6E150A637300320140 /* MLWSessionDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWSessionDetailController.m; path = Controllers/MLWSessionDetailController.m; sourceTree = "<group>"; };
+		C29A8E70150A648F00320140 /* MLWSponsorDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWSponsorDetailController.h; path = Controllers/MLWSponsorDetailController.h; sourceTree = "<group>"; };
+		C29A8E71150A648F00320140 /* MLWSponsorDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWSponsorDetailController.m; path = Controllers/MLWSponsorDetailController.m; sourceTree = "<group>"; };
+		C29A8E73150FE50F00320140 /* MLWSponsorListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWSponsorListController.h; path = Controllers/MLWSponsorListController.h; sourceTree = "<group>"; };
+		C29A8E74150FE50F00320140 /* MLWSponsorListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWSponsorListController.m; path = Controllers/MLWSponsorListController.m; sourceTree = "<group>"; };
+		C29A8E76150FE56100320140 /* MLWSponsorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWSponsorController.h; path = Controllers/MLWSponsorController.h; sourceTree = "<group>"; };
+		C29A8E77150FE56100320140 /* MLWSponsorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWSponsorController.m; path = Controllers/MLWSponsorController.m; sourceTree = "<group>"; };
+		C29A8E7D1511023A00320140 /* MLWSponsor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWSponsor.h; path = Models/MLWSponsor.h; sourceTree = "<group>"; };
+		C29A8E7E1511023A00320140 /* MLWSponsor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWSponsor.m; path = Models/MLWSponsor.m; sourceTree = "<group>"; };
+		C29A8E801511025300320140 /* MLWSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWSession.h; path = Models/MLWSession.h; sourceTree = "<group>"; };
+		C29A8E811511025300320140 /* MLWSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWSession.m; path = Models/MLWSession.m; sourceTree = "<group>"; };
+		C29A8E831511028D00320140 /* MLWSpeaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWSpeaker.h; path = Models/MLWSpeaker.h; sourceTree = "<group>"; };
+		C29A8E841511028D00320140 /* MLWSpeaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWSpeaker.m; path = Models/MLWSpeaker.m; sourceTree = "<group>"; };
+		C29A8E86151102DD00320140 /* MLWConference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWConference.h; path = Models/MLWConference.h; sourceTree = "<group>"; };
+		C29A8E87151102DD00320140 /* MLWConference.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWConference.m; path = Models/MLWConference.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,10 +75,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C20CEE2D151287C1009AA0AD /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C20CEE5415128B20009AA0AD /* en.lproj */,
+				C20CEE31151288B9009AA0AD /* main.m */,
+				C20CEE2E151288AE009AA0AD /* MarkLogic World-Info.plist */,
+				C20CEE2F151288AE009AA0AD /* MarkLogic World-Prefix.pch */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		C20CEE5415128B20009AA0AD /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				C20CEE5515128B20009AA0AD /* InfoPlist.strings */,
+			);
+			name = en.lproj;
+			path = Resources/en.lproj;
+			sourceTree = "<group>";
+		};
 		C29A8E14150A560B00320140 = {
 			isa = PBXGroup;
 			children = (
-				C29A8E29150A560B00320140 /* MarkLogic World */,
+				C20CEE2D151287C1009AA0AD /* Resources */,
+				C29A8E7C151101B500320140 /* Models */,
+				C29A8E58150A5BFD00320140 /* Controllers */,
+				C29A8E54150A5B2900320140 /* Classes */,
+				C29A8E2A150A560B00320140 /* Supporting Files */,
 				C29A8E22150A560B00320140 /* Frameworks */,
 				C29A8E20150A560B00320140 /* Products */,
 			);
@@ -91,37 +126,57 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		C29A8E29150A560B00320140 /* MarkLogic World */ = {
-			isa = PBXGroup;
-			children = (
-				C29A8E32150A560C00320140 /* MLWAppDelegate.h */,
-				C29A8E33150A560C00320140 /* MLWAppDelegate.m */,
-				C29A8E35150A560C00320140 /* MLWFirstViewController.h */,
-				C29A8E36150A560C00320140 /* MLWFirstViewController.m */,
-				C29A8E38150A560C00320140 /* first.png */,
-				C29A8E3A150A560C00320140 /* first@2x.png */,
-				C29A8E3C150A560C00320140 /* MLWSecondViewController.h */,
-				C29A8E3D150A560C00320140 /* MLWSecondViewController.m */,
-				C29A8E3F150A560C00320140 /* second.png */,
-				C29A8E41150A560C00320140 /* second@2x.png */,
-				C29A8E43150A560C00320140 /* MLWFirstViewController_iPhone.xib */,
-				C29A8E46150A560C00320140 /* MLWFirstViewController_iPad.xib */,
-				C29A8E49150A560C00320140 /* MLWSecondViewController_iPhone.xib */,
-				C29A8E4C150A560C00320140 /* MLWSecondViewController_iPad.xib */,
-				C29A8E2A150A560B00320140 /* Supporting Files */,
-			);
-			path = "MarkLogic World";
-			sourceTree = "<group>";
-		};
 		C29A8E2A150A560B00320140 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				C29A8E2B150A560B00320140 /* MarkLogic World-Info.plist */,
-				C29A8E2C150A560C00320140 /* InfoPlist.strings */,
-				C29A8E2F150A560C00320140 /* main.m */,
-				C29A8E31150A560C00320140 /* MarkLogic World-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			path = "MarkLogic World";
+			sourceTree = "<group>";
+		};
+		C29A8E54150A5B2900320140 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				C29A8E55150A5B3D00320140 /* MLWAppDelegate.h */,
+				C29A8E56150A5B3D00320140 /* MLWAppDelegate.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		C29A8E58150A5BFD00320140 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				C29A8E64150A5FD400320140 /* MLWTweetController.h */,
+				C29A8E65150A5FD400320140 /* MLWTweetController.m */,
+				C29A8E67150A626200320140 /* MLWScheduleGridController.h */,
+				C29A8E68150A626200320140 /* MLWScheduleGridController.m */,
+				C29A8E6A150A627E00320140 /* MLWScheduleListController.h */,
+				C29A8E6B150A627F00320140 /* MLWScheduleListController.m */,
+				C29A8E6D150A637300320140 /* MLWSessionDetailController.h */,
+				C29A8E6E150A637300320140 /* MLWSessionDetailController.m */,
+				C29A8E70150A648F00320140 /* MLWSponsorDetailController.h */,
+				C29A8E71150A648F00320140 /* MLWSponsorDetailController.m */,
+				C29A8E73150FE50F00320140 /* MLWSponsorListController.h */,
+				C29A8E74150FE50F00320140 /* MLWSponsorListController.m */,
+				C29A8E76150FE56100320140 /* MLWSponsorController.h */,
+				C29A8E77150FE56100320140 /* MLWSponsorController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		C29A8E7C151101B500320140 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C29A8E7D1511023A00320140 /* MLWSponsor.h */,
+				C29A8E7E1511023A00320140 /* MLWSponsor.m */,
+				C29A8E801511025300320140 /* MLWSession.h */,
+				C29A8E811511025300320140 /* MLWSession.m */,
+				C29A8E831511028D00320140 /* MLWSpeaker.h */,
+				C29A8E841511028D00320140 /* MLWSpeaker.m */,
+				C29A8E86151102DD00320140 /* MLWConference.h */,
+				C29A8E87151102DD00320140 /* MLWConference.m */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -150,7 +205,7 @@
 		C29A8E16150A560B00320140 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0430;
 			};
 			buildConfigurationList = C29A8E19150A560B00320140 /* Build configuration list for PBXProject "MarkLogic World" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -174,15 +229,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C29A8E2E150A560C00320140 /* InfoPlist.strings in Resources */,
-				C29A8E39150A560C00320140 /* first.png in Resources */,
-				C29A8E3B150A560C00320140 /* first@2x.png in Resources */,
-				C29A8E40150A560C00320140 /* second.png in Resources */,
-				C29A8E42150A560C00320140 /* second@2x.png in Resources */,
-				C29A8E45150A560C00320140 /* MLWFirstViewController_iPhone.xib in Resources */,
-				C29A8E48150A560C00320140 /* MLWFirstViewController_iPad.xib in Resources */,
-				C29A8E4B150A560C00320140 /* MLWSecondViewController_iPhone.xib in Resources */,
-				C29A8E4E150A560C00320140 /* MLWSecondViewController_iPad.xib in Resources */,
+				C20CEE5715128B20009AA0AD /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,54 +240,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C29A8E30150A560C00320140 /* main.m in Sources */,
-				C29A8E34150A560C00320140 /* MLWAppDelegate.m in Sources */,
-				C29A8E37150A560C00320140 /* MLWFirstViewController.m in Sources */,
-				C29A8E3E150A560C00320140 /* MLWSecondViewController.m in Sources */,
+				C29A8E57150A5B3D00320140 /* MLWAppDelegate.m in Sources */,
+				C29A8E66150A5FD400320140 /* MLWTweetController.m in Sources */,
+				C29A8E69150A626200320140 /* MLWScheduleGridController.m in Sources */,
+				C29A8E6C150A627F00320140 /* MLWScheduleListController.m in Sources */,
+				C29A8E6F150A637300320140 /* MLWSessionDetailController.m in Sources */,
+				C29A8E72150A648F00320140 /* MLWSponsorDetailController.m in Sources */,
+				C29A8E75150FE50F00320140 /* MLWSponsorListController.m in Sources */,
+				C29A8E78150FE56100320140 /* MLWSponsorController.m in Sources */,
+				C29A8E7F1511023A00320140 /* MLWSponsor.m in Sources */,
+				C29A8E821511025300320140 /* MLWSession.m in Sources */,
+				C29A8E851511028D00320140 /* MLWSpeaker.m in Sources */,
+				C29A8E88151102DD00320140 /* MLWConference.m in Sources */,
+				C20CEE32151288B9009AA0AD /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		C29A8E2C150A560C00320140 /* InfoPlist.strings */ = {
+		C20CEE5515128B20009AA0AD /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				C29A8E2D150A560C00320140 /* en */,
+				C20CEE5615128B20009AA0AD /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		C29A8E43150A560C00320140 /* MLWFirstViewController_iPhone.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C29A8E44150A560C00320140 /* en */,
-			);
-			name = MLWFirstViewController_iPhone.xib;
-			sourceTree = "<group>";
-		};
-		C29A8E46150A560C00320140 /* MLWFirstViewController_iPad.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C29A8E47150A560C00320140 /* en */,
-			);
-			name = MLWFirstViewController_iPad.xib;
-			sourceTree = "<group>";
-		};
-		C29A8E49150A560C00320140 /* MLWSecondViewController_iPhone.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C29A8E4A150A560C00320140 /* en */,
-			);
-			name = MLWSecondViewController_iPhone.xib;
-			sourceTree = "<group>";
-		};
-		C29A8E4C150A560C00320140 /* MLWSecondViewController_iPad.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				C29A8E4D150A560C00320140 /* en */,
-			);
-			name = MLWSecondViewController_iPad.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -295,8 +319,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "MarkLogic World/MarkLogic World-Prefix.pch";
-				INFOPLIST_FILE = "MarkLogic World/MarkLogic World-Info.plist";
+				GCC_PREFIX_HEADER = "Resources/MarkLogic World-Prefix.pch";
+				INFOPLIST_FILE = "Resources/MarkLogic World-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -306,8 +330,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "MarkLogic World/MarkLogic World-Prefix.pch";
-				INFOPLIST_FILE = "MarkLogic World/MarkLogic World-Info.plist";
+				GCC_PREFIX_HEADER = "Resources/MarkLogic World-Prefix.pch";
+				INFOPLIST_FILE = "Resources/MarkLogic World-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -332,6 +356,7 @@
 				C29A8E53150A560C00320140 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

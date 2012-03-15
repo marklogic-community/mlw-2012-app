@@ -1,13 +1,13 @@
 //
-//  MLWSecondViewController.h
+//  MLWSponsorController.h
 //  MarkLogic World
 //
-//  Created by Ryan Grimm on 3/9/12.
+//  Created by Ryan Grimm on 3/13/12.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface MLWSecondViewController : UIViewController
+@interface MLWSponsorController : UISplitViewController
 
 @end

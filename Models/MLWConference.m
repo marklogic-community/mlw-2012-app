@@ -38,7 +38,7 @@
 	}
 
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-		SBJsonParser *parser = [[SBJsonParser alloc] init];
+		SBJsonParser *parser = [[[SBJsonParser alloc] init] autorelease];
 
 		NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/kvquery?key=type&value=speaker&length=1000&&outputFormat=json", CORONABASE]];
 		NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
@@ -153,7 +153,7 @@
 
 	for(MLWSession *session in sessions) {
 		if([session.formattedDate isEqualToString:lastHeader] == NO) {
-			[blocks addObject:[sessionsInBlock copy]];
+			[blocks addObject:[NSArray arrayWithArray:sessionsInBlock]];
 			[sessionsInBlock removeAllObjects];
 			[lastHeader release];
 			lastHeader = [session.formattedDate copy];
@@ -162,7 +162,7 @@
 		[sessionsInBlock addObject:session];
 	}
 
-	[blocks addObject:[sessionsInBlock copy]];
+	[blocks addObject:[NSArray arrayWithArray:sessionsInBlock]];
 	[lastHeader release];
 
 	return blocks;

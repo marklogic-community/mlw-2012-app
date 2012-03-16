@@ -52,6 +52,7 @@
 	spinner.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
 	[spinner startAnimating];
 	[self.loadingView addSubview:spinner];
+    [spinner release];
 
 	self.tableView = [[[UITableView alloc] init] autorelease];
 	self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -113,13 +114,18 @@
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 	if(cell == nil) {
 		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier] autorelease];
-		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
 		cell.textLabel.adjustsFontSizeToFitWidth = YES;
 		cell.textLabel.minimumFontSize = 14;
 	}
 
 	MLWSession *session = [self sessionForIndexPath:indexPath];
+	if(session.selectable) {
+		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+	}
+	else {
+		cell.accessoryType = UITableViewCellAccessoryNone;
+	}
 	cell.textLabel.text = session.title;
 	if(session.track != nil && session.location != nil) {
 		cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ - %@", session.track, session.location];
@@ -129,6 +135,13 @@
 	}
 
 	return cell;
+}
+
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	if([self sessionForIndexPath:indexPath].selectable == NO) {
+		return nil;
+	}
+	return indexPath;
 }
 
 - (void)tableView:(UITableView *) tableView didSelectRowAtIndexPath:(NSIndexPath *) indexPath {

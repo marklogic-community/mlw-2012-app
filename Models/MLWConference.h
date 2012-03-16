@@ -15,5 +15,6 @@
 - (BOOL)fetchSponsors:(void (^)(NSArray *sessions, NSError *error)) callback;
 - (BOOL)fetchTweets:(void (^)(NSArray *sessions, NSError *error)) callback;
 - (MLWSpeaker *)speakerWithId:(NSString *)speakerId;
+- (NSArray *)sessionsToBlocks:(NSArray *)sessions;
 
 @end

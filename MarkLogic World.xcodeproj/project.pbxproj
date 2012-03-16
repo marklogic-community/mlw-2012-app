@@ -25,7 +25,6 @@
 		C20CEE8815139A8E009AA0AD /* badge@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C20CEE8415139A8E009AA0AD /* badge@2x.png */; };
 		C20CEE8915139A8E009AA0AD /* calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = C20CEE8515139A8E009AA0AD /* calendar.png */; };
 		C20CEE8A15139A8E009AA0AD /* calendar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C20CEE8615139A8E009AA0AD /* calendar@2x.png */; };
-		C20CEE8D1513B930009AA0AD /* MLWSessionCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = C20CEE8C1513B930009AA0AD /* MLWSessionCellView.m */; };
 		C29A8E24150A560B00320140 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C29A8E23150A560B00320140 /* UIKit.framework */; };
 		C29A8E26150A560B00320140 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C29A8E25150A560B00320140 /* Foundation.framework */; };
 		C29A8E28150A560B00320140 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C29A8E27150A560B00320140 /* CoreGraphics.framework */; };
@@ -78,8 +77,6 @@
 		C20CEE8415139A8E009AA0AD /* badge@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "badge@2x.png"; sourceTree = "<group>"; };
 		C20CEE8515139A8E009AA0AD /* calendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calendar.png; sourceTree = "<group>"; };
 		C20CEE8615139A8E009AA0AD /* calendar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calendar@2x.png"; sourceTree = "<group>"; };
-		C20CEE8B1513B930009AA0AD /* MLWSessionCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWSessionCellView.h; path = Classes/MLWSessionCellView.h; sourceTree = "<group>"; };
-		C20CEE8C1513B930009AA0AD /* MLWSessionCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWSessionCellView.m; path = Classes/MLWSessionCellView.m; sourceTree = "<group>"; };
 		C29A8E1F150A560B00320140 /* MarkLogic World.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MarkLogic World.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C29A8E23150A560B00320140 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C29A8E25150A560B00320140 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -235,8 +232,6 @@
 			children = (
 				C29A8E55150A5B3D00320140 /* MLWAppDelegate.h */,
 				C29A8E56150A5B3D00320140 /* MLWAppDelegate.m */,
-				C20CEE8B1513B930009AA0AD /* MLWSessionCellView.h */,
-				C20CEE8C1513B930009AA0AD /* MLWSessionCellView.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -367,7 +362,6 @@
 				C20CEE7C1512905F009AA0AD /* SBJsonTokeniser.m in Sources */,
 				C20CEE7D1512905F009AA0AD /* SBJsonUTF8Stream.m in Sources */,
 				C20CEE7E1512905F009AA0AD /* SBJsonWriter.m in Sources */,
-				C20CEE8D1513B930009AA0AD /* MLWSessionCellView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

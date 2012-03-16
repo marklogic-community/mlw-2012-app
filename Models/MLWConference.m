@@ -23,12 +23,12 @@
 @synthesize speakers = _speakers;
 
 - (id)init {
-    self = [super init];
-    if(self) {
+	self = [super init];
+	if(self) {
 		self.sessions = nil;
 		self.speakers = nil;
-    }
-    return self;
+	}
+	return self;
 }
 
 - (BOOL)fetchSessions:(void (^)(NSArray *, NSError *)) callback {
@@ -140,6 +140,32 @@
 		}
 	}
 	return nil;
+}
+
+- (NSArray *)sessionsToBlocks:(NSArray *)sessions {
+	if(sessions.count == 0) {
+		return sessions;
+	}
+
+	NSMutableArray *blocks = [NSMutableArray arrayWithCapacity:25];
+	NSString *lastHeader = [((MLWSession *)[sessions objectAtIndex:0]).formattedDate copy];
+	NSMutableArray *sessionsInBlock = [NSMutableArray arrayWithCapacity:6];
+
+	for(MLWSession *session in sessions) {
+		if([session.formattedDate isEqualToString:lastHeader] == NO) {
+			[blocks addObject:[sessionsInBlock copy]];
+			[sessionsInBlock removeAllObjects];
+			[lastHeader release];
+			lastHeader = [session.formattedDate copy];
+		}
+
+		[sessionsInBlock addObject:session];
+	}
+
+	[blocks addObject:[sessionsInBlock copy]];
+	[lastHeader release];
+
+	return blocks;
 }
 
 - (void) dealloc {

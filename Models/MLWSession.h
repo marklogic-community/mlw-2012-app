@@ -11,6 +11,8 @@
 @interface MLWSession : NSObject
 
 - (id)initWithData:(NSDictionary *) jsonData;
+- (NSString *)formattedDate;
+
 @property (readonly) NSDate *startTime;
 @property (readonly) NSDate *endTime;
 @property (readonly) BOOL plenary;

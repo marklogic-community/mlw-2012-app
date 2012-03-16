@@ -10,12 +10,11 @@
 #import "MLWSessionDetailController.h"
 #import "MLWAppDelegate.h"
 #import "MLWSession.h"
-#import "MLWSessionCellView.h"
 
 @interface MLWScheduleListController ()
 @property (nonatomic, retain) UITableView *tableView;
 @property (nonatomic, retain) UIView *loadingView;
-@property (nonatomic, retain) NSArray *sessions;
+@property (nonatomic, retain) NSArray *sessionBlocks;
 
 - (MLWSession *)sessionForIndexPath:(NSIndexPath *) indexPath;
 @end
@@ -25,17 +24,17 @@
 
 @synthesize tableView = _tableView;
 @synthesize loadingView = _loadingView;
-@synthesize sessions = _sessions;
+@synthesize sessionBlocks = _sessionsInBlocks;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
+	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+	if (self) {
 		self.navigationItem.title = @"Schedule";
 		self.tabBarItem.title = @"Schedule";
 		self.tabBarItem.image = [UIImage imageNamed:@"calendar"];
-    }
-    return self;
+	}
+	return self;
 }
 
 #pragma mark - View lifecycle
@@ -63,7 +62,7 @@
 	MLWAppDelegate *appDelegate = (MLWAppDelegate *)[UIApplication sharedApplication].delegate;
 	MLWConference *conference = appDelegate.conference;
 	BOOL cached = [conference fetchSessions:^(NSArray *sessions, NSError *error) {
-		self.sessions = sessions;
+		self.sessionBlocks = [conference sessionsToBlocks:sessions];
 
 		[self.tableView reloadData];
 		[UIView transitionWithView:self.loadingView duration:0.5f options:UIViewAnimationOptionCurveLinear animations:^{
@@ -80,43 +79,56 @@
 	}
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+	[self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
+	[super viewDidAppear:animated];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+	if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
 		return (interfaceOrientation == UIInterfaceOrientationPortrait);
 	}
 
-    return YES;
+	return YES;
 }
 
 #pragma mark - View lifecycle
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *) tableView {
-    return 1;
+	return self.sessionBlocks.count;
 }
 
 - (NSInteger)tableView:(UITableView *) tableView numberOfRowsInSection:(NSInteger) section {
-	return self.sessions.count;
+	NSArray *sessionsInBlock = [self.sessionBlocks objectAtIndex:section];
+	return sessionsInBlock.count;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+	NSArray *sessionsInBlock = [self.sessionBlocks objectAtIndex:section];
+	return ((MLWSession *)[sessionsInBlock objectAtIndex:0]).formattedDate;
 }
 
 - (UITableViewCell *)tableView:(UITableView *) tableView cellForRowAtIndexPath:(NSIndexPath *) indexPath {
-    static NSString *cellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if(cell == nil) {
+	static NSString *cellIdentifier = @"Cell";
+	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+	if(cell == nil) {
 		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier] autorelease];
 		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-		[cell.contentView addSubview:[[[MLWSessionCellView alloc] initWithFrame:cell.contentView.bounds] autorelease]];
-    }
+
+		cell.textLabel.adjustsFontSizeToFitWidth = YES;
+		cell.textLabel.minimumFontSize = 14;
+	}
 
 	MLWSession *session = [self sessionForIndexPath:indexPath];
-	/*
-	MLWSessionCellView *cellView = (MLWSessionCellView *)[cell.contentView.subviews lastObject];
-	[cellView updateWithSessionData:session];
-	*/
-
 	cell.textLabel.text = session.title;
-	cell.detailTextLabel.text = session.location;
+	if(session.track != nil && session.location != nil) {
+		cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ - %@", session.track, session.location];
+	}
+	else if(session.location != nil) {
+		cell.detailTextLabel.text = session.location;
+	}
 
-    return cell;
+	return cell;
 }
 
 - (void)tableView:(UITableView *) tableView didSelectRowAtIndexPath:(NSIndexPath *) indexPath {
@@ -126,23 +138,23 @@
 }
 
 - (MLWSession *)sessionForIndexPath:(NSIndexPath *) indexPath {
-	MLWSession *session = [self.sessions objectAtIndex:indexPath.row];
-	return session;
+	NSArray *sessionsInBlock = [self.sessionBlocks objectAtIndex:indexPath.section];
+	return [sessionsInBlock objectAtIndex:indexPath.row];
 }
 
 
 - (void)viewDidUnload {
-    [super viewDidUnload];
+	[super viewDidUnload];
 	self.tableView = nil;
 	self.view = nil;
-	self.sessions = nil;
+	self.sessionBlocks = nil;
 }
 
 - (void)dealloc {
-    [super dealloc];
+	[super dealloc];
 	self.tableView = nil;
 	self.view = nil;
-	self.sessions = nil;
+	self.sessionBlocks = nil;
 }
 
 @end

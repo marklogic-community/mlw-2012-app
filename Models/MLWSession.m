@@ -27,8 +27,8 @@
 @synthesize location = _location;
 
 - (id)initWithData:(NSDictionary *) jsonData {
-    self = [super init];
-    if(self) {
+	self = [super init];
+	if(self) {
 		_startTime = [[self stringToDate:[jsonData objectForKey:@"startTime::date"]] retain];
 		_endTime = [[self stringToDate:[jsonData objectForKey:@"endTime::date"]] retain];
 		_plenary = [[jsonData objectForKey:@"plenary"] boolValue];
@@ -37,6 +37,15 @@
 		_abstract = [[jsonData objectForKey:@"abstract"] retain];
 		_track = [[jsonData objectForKey:@"track"] retain];
 		_location = [[jsonData objectForKey:@"location"] retain];
+
+		if([_track isKindOfClass:[NSNull class]] || _track.length == 0) {
+			[_track release];
+			_track = nil;
+		}
+		if([_location isKindOfClass:[NSNull class]] || _location.length == 0) {
+			[_location release];
+			_location = nil;
+		}
 
 		MLWAppDelegate *appDelegate = (MLWAppDelegate *)[UIApplication sharedApplication].delegate;
 		MLWConference *conference = appDelegate.conference;
@@ -47,13 +56,25 @@
 				[_speakers addObject:speaker];
 			}
 		}
-    }
-    return self;
+	}
+	return self;
 }
 
 - (NSString *)speakerString {
 	return @"Matt Carroll – Berico Technologies";
 }
+
+- (NSString *)formattedDate {
+	NSDateFormatter *startFormat = [[[NSDateFormatter alloc] init] autorelease];
+	[startFormat setDateFormat:@"EEEE, h:mma"];
+
+	NSDateFormatter *endFormat = [[[NSDateFormatter alloc] init] autorelease];
+	[endFormat setDateStyle:NSDateFormatterNoStyle];
+	[endFormat setTimeStyle:NSDateFormatterShortStyle];
+
+	return [NSString stringWithFormat:@"%@ - %@", [startFormat stringFromDate:_startTime], [endFormat stringFromDate:_endTime]];
+}
+
 
 - (NSDate *)stringToDate:(NSString *) dateString {
 	NSDateFormatter *dateFormat = [[[NSDateFormatter alloc] init] autorelease];

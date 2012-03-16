@@ -22,6 +22,9 @@
 		UINavigationController *detailNavController = [[[UINavigationController alloc] initWithRootViewController:detailController] autorelease];
 
 		self.viewControllers = [NSArray arrayWithObjects:listNavController, detailNavController, nil];
+
+		self.tabBarItem.title = @"Sponsors";
+		self.tabBarItem.image = [UIImage imageNamed:@"badge"];
     }
     return self;
 }

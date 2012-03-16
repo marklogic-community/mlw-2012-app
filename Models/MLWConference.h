@@ -7,11 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MLWSpeaker.h"
 
 @interface MLWConference : NSObject
 
-- (BOOL)sessions:(void (^)(NSArray *sessions, NSError *error)) callback;
-- (BOOL)sponsors:(void (^)(NSArray *sessions, NSError *error)) callback;
-- (BOOL)tweets:(void (^)(NSArray *sessions, NSError *error)) callback;
+- (BOOL)fetchSessions:(void (^)(NSArray *sessions, NSError *error)) callback;
+- (BOOL)fetchSponsors:(void (^)(NSArray *sessions, NSError *error)) callback;
+- (BOOL)fetchTweets:(void (^)(NSArray *sessions, NSError *error)) callback;
+- (MLWSpeaker *)speakerWithId:(NSString *)speakerId;
 
 @end

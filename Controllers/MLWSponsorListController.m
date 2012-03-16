@@ -15,6 +15,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
 		self.navigationItem.title = @"Sponsors";
+		self.tabBarItem.title = @"Sponsors";
+		self.tabBarItem.image = [UIImage imageNamed:@"badge"];
     }
     return self;
 }

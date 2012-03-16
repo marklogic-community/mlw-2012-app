@@ -10,48 +10,32 @@
 
 @implementation MLWSpeaker
 
+@synthesize id = _id;
+@synthesize name = _name;
+@synthesize title = _title;
+@synthesize organization = _organization;
+@synthesize email = _email;
+@synthesize bio = _bio;
+
 - (id)initWithData:(NSDictionary *) jsonData {
     self = [super init];
     if(self) {
-		name = [[jsonData objectForKey:@"name"] copy];
-		title = [[jsonData objectForKey:@"title"] copy];
-		organization = [[jsonData objectForKey:@"organization"] copy];
-		email = [[jsonData objectForKey:@"email"] copy];
-		bio = [[jsonData objectForKey:@"bio"] copy];
+		_id = [[jsonData objectForKey:@"id"] retain];
+		_name = [[jsonData objectForKey:@"name"] retain];
+		_title = [[jsonData objectForKey:@"title"] retain];
+		_organization = [[jsonData objectForKey:@"organization"] retain];
+		_email = [[jsonData objectForKey:@"email"] retain];
+		_bio = [[jsonData objectForKey:@"bio"] retain];
     }
     return self;
 }
 
-- (NSString *)name {
-	return name;
-}
-
-- (NSString *)title {
-	return title;
-}
-
-- (NSString *)organization {
-	return organization;
-}
-
-- (NSString *)contact {
-	return email;
-}
-
-- (NSString *)bio {
-	return bio;
-}
-
-- (NSArray *)sessions {
-	return [NSArray arrayWithObjects:nil];
-}
-
 - (void) dealloc {
-	[name release];
-	[title release];
-	[organization release];
-	[email release];
-	[bio release];
+	[_id release];
+	[_title release];
+	[_organization release];
+	[_email release];
+	[_bio release];
 
 	[super dealloc];
 }

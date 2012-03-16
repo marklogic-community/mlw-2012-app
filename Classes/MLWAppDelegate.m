@@ -15,10 +15,12 @@
 
 @implementation MLWAppDelegate
 
+@synthesize conference;
 @synthesize window = _window;
 @synthesize tabBarController = _tabBarController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+	self.conference = [[[MLWConference alloc] init] autorelease];
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     self.tabBarController = [[[UITabBarController alloc] init] autorelease];
 

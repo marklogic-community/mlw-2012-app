@@ -7,61 +7,68 @@
 //
 
 #import "MLWSession.h"
+#import "MLWAppDelegate.h"
+
+@interface MLWSession ()
+- (NSDate *)stringToDate:(NSString *) dateString;
+@end
 
 @implementation MLWSession
+
+@synthesize startTime = _startTime;
+@synthesize endTime = _endTime;
+@synthesize plenary = _plenary;
+@synthesize selectable = _selectable;
+@synthesize title = _title;
+@synthesize speakers = _speakers;
+@synthesize speakerString = _speakerString;
+@synthesize abstract = _abstract;
+@synthesize track = _track;
+@synthesize location = _location;
 
 - (id)initWithData:(NSDictionary *) jsonData {
     self = [super init];
     if(self) {
-		// startTime = [[jsonData objectForKey:@"name"] copy];
-		// endTime = [[jsonData objectForKey:@"title"] copy];
-		plenary = [[jsonData objectForKey:@"plenary"] copy];
-		selectable = [[jsonData objectForKey:@"selectable"] copy];
-		title = [[jsonData objectForKey:@"title"] copy];
-		description = [[jsonData objectForKey:@"description"] copy];
+		_startTime = [[self stringToDate:[jsonData objectForKey:@"startTime::date"]] retain];
+		_endTime = [[self stringToDate:[jsonData objectForKey:@"endTime::date"]] retain];
+		_plenary = [[jsonData objectForKey:@"plenary"] boolValue];
+		_selectable = [[jsonData objectForKey:@"selectable"] boolValue];
+		_title = [[jsonData objectForKey:@"title"] retain];
+		_abstract = [[jsonData objectForKey:@"abstract"] retain];
+		_track = [[jsonData objectForKey:@"track"] retain];
+		_location = [[jsonData objectForKey:@"location"] retain];
+
+		MLWAppDelegate *appDelegate = (MLWAppDelegate *)[UIApplication sharedApplication].delegate;
+		MLWConference *conference = appDelegate.conference;
+		_speakers = [[NSMutableArray alloc] initWithCapacity:3];
+		for(NSString *speakerId in [jsonData objectForKey:@"speakerIds"]) {
+			MLWSpeaker *speaker = [conference speakerWithId:speakerId];
+			if(speaker != nil) {
+				[_speakers addObject:speaker];
+			}
+		}
     }
     return self;
-}
-
-- (NSDate *)startTime {
-	return [NSDate date];
-}
-
-- (NSDate *)endTime {
-	return [NSDate date];
-}
-
-- (BOOL)plenary {
-	return [plenary boolValue];
-}
-
-- (BOOL)selectable {
-	return [selectable boolValue];
-}
-
-- (NSString *)title {
-	return title;
-}
-
-- (NSArray *)speakers {
-	return [NSArray arrayWithObjects:nil];
 }
 
 - (NSString *)speakerString {
 	return @"Matt Carroll – Berico Technologies";
 }
 
-- (NSString *)description {
-	return description;
+- (NSDate *)stringToDate:(NSString *) dateString {
+	NSDateFormatter *dateFormat = [[[NSDateFormatter alloc] init] autorelease];
+	[dateFormat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZ"];
+	NSRange timezone = NSMakeRange([dateString length] - 3, 3);
+	NSString *cleanDate = [dateString stringByReplacingOccurrencesOfString:@":" withString:@"" options:NSCaseInsensitiveSearch range:timezone];
+	return [dateFormat dateFromString:cleanDate];
 }
 
 - (void) dealloc {
-	[startTime release];
-	[endTime release];
-	[plenary release];
-	[selectable release];
-	[title release];
-	[description release];
+	[_startTime release];
+	[_endTime release];
+	[_title release];
+	[_abstract release];
+	[_track release];
 
 	[super dealloc];
 }

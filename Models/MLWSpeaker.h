@@ -8,20 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MLWSpeaker : NSObject {
-	NSString *name;
-	NSString *title;
-	NSString *organization;
-	NSString *email;
-	NSString *bio;
-}
+@interface MLWSpeaker : NSObject
  
 - (id)initWithData:(NSDictionary *) jsonData;
-- (NSString *)name;
-- (NSString *)title;
-- (NSString *)organization;
-- (NSString *)contact;
-- (NSString *)bio;
-- (NSArray *)sessions;
+@property (readonly) NSString *id;
+@property (readonly) NSString *name;
+@property (readonly) NSString *title;
+@property (readonly) NSString *organization;
+@property (readonly) NSString *email;
+@property (readonly) NSString *bio;
 
 @end

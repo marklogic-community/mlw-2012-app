@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MLWConference.h"
 
 @interface MLWAppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
+@property (strong, nonatomic) MLWConference *conference;
 @property (strong, nonatomic) UITabBarController *tabBarController;
 
 @end

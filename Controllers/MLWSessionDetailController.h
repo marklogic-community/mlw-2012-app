@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MLWSession.h"
 
 @interface MLWSessionDetailController : UIViewController
+
+- (id)initWithSession:(MLWSession *)session;
 
 @end

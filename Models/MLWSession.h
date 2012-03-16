@@ -8,23 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MLWSession : NSObject {
-	NSDate *startTime;
-	NSDate *endTime;
-	NSNumber *plenary;
-	NSNumber *selectable;
-	NSString *title;
-	NSString *description;
-}
+@interface MLWSession : NSObject
 
 - (id)initWithData:(NSDictionary *) jsonData;
-- (NSDate *)startTime;
-- (NSDate *)endTime;
-- (BOOL)plenary;
-- (BOOL)selectable;
-- (NSString *)title;
-- (NSArray *)speakers;
-- (NSString *)speakerString;
-- (NSString *)description;
+@property (readonly) NSDate *startTime;
+@property (readonly) NSDate *endTime;
+@property (readonly) BOOL plenary;
+@property (readonly) BOOL selectable;
+@property (readonly) NSString *title;
+@property (readonly) NSMutableArray *speakers;
+@property (readonly) NSString *speakerString;
+@property (readonly) NSString *abstract;
+@property (readonly) NSString *track;
+@property (readonly) NSString *location;
 
 @end

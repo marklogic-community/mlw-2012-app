@@ -11,12 +11,12 @@
 #import <QuartzCore/QuartzCore.h>
 #import "MLWScheduleGridView.h"
 #import "MLWSession.h"
-#import "MLWSessionView.h"
 #import "UIPurposeView.h"
 
 @implementation MLWScheduleGridView
 
 @synthesize sessions = _sessions;
+@synthesize delegate;
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -66,6 +66,7 @@
 			if(blockSessions.count == 1) {
 				MLWSession *session = [blockSessions objectAtIndex:0];
 				MLWSessionView *sessionView = [[MLWSessionView alloc] initWithFrame:CGRectMake(totalWidth, totalHeight, self.frame.size.width - totalWidth, rowHeight) session:session]; 
+				sessionView.delegate = delegate;
 				[self addSubview:sessionView];
 				totalHeight += rowHeight;
 				[sessionView release];
@@ -96,6 +97,7 @@
 				breakoutWrapper.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 				for(MLWSession *session in blockSessions) {
 					MLWSessionView *sessionView = [[MLWSessionView alloc] initWithFrame:CGRectMake(totalWidth, 0, columnWidth, sessionRowHeight) session:session]; 
+					sessionView.delegate = delegate;
 					[breakoutWrapper addSubview:sessionView];
 					totalWidth += columnWidth;
 					[sessionView release];
@@ -164,6 +166,7 @@
 }
 
 - (void)dealloc {
+	self.delegate = nil;
 	self.sessions = nil;
 	[super dealloc];
 }

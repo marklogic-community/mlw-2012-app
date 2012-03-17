@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MLWSessionView.h"
 
 @interface MLWScheduleGridView : UIView {
 	BOOL removeChildren;
 }
 
+@property (nonatomic, assign) NSObject<MLWSessionViewDelegate> *delegate;
 @property (nonatomic, retain) NSArray *sessions;
 
 @end

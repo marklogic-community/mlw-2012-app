@@ -9,10 +9,18 @@
 #import <UIKit/UIKit.h>
 #import "MLWSession.h"
 
+@class MLWSessionView;
+
+@protocol MLWSessionViewDelegate <NSObject>
+@optional
+- (void)sessionViewWasSelected:(MLWSessionView *) view;
+@end
+
 @interface MLWSessionView : UIView
 
 - (id)initWithFrame:(CGRect)frame session:(MLWSession *) session;
 
+@property (nonatomic, assign) NSObject<MLWSessionViewDelegate> *delegate;
 @property (readonly) MLWSession *session;
 
 @end

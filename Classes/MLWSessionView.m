@@ -17,6 +17,7 @@
 
 @implementation MLWSessionView
 
+@synthesize delegate;
 @synthesize session = _session;
 @synthesize titleLabel;
 @synthesize trackLabel;
@@ -83,7 +84,19 @@
 	}
 }
 
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+	if(touches.count > 1) {
+		[super touchesEnded:touches withEvent:event];
+		return;
+	}   
+
+	if([delegate respondsToSelector:@selector(sessionViewWasSelected:)]) {
+		[delegate performSelectorOnMainThread:@selector(sessionViewWasSelected:) withObject:self waitUntilDone:NO];
+	}   
+}
+
 - (void) dealloc {
+	self.delegate = nil;
 	self.titleLabel = nil;
 	self.trackLabel = nil;
 	self.locationLabel = nil;

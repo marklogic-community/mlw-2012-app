@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MLWSessionView.h"
 
-@interface MLWScheduleGridController : UIViewController
+@interface MLWScheduleGridController : UIViewController<MLWSessionViewDelegate>
 
 @end

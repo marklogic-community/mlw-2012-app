@@ -55,6 +55,7 @@
     [spinner release];
 
 	self.gridView = [[[MLWScheduleGridView alloc] initWithFrame:self.view.bounds] autorelease];
+	self.gridView.delegate = self;
 	[self.gridView addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionNew context:nil];
 	[self.view addSubview:self.gridView];
 
@@ -95,6 +96,12 @@
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
 	[self.gridView setNeedsLayout];
+}
+
+- (void)sessionViewWasSelected:(MLWSessionView *)sessionView {
+	MLWSessionDetailController *viewShowController = [[MLWSessionDetailController alloc] initWithSession:sessionView.session];
+	[self.navigationController pushViewController:viewShowController animated:YES];
+	[viewShowController release];
 }
 
 

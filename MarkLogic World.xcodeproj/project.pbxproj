@@ -38,9 +38,7 @@
 		C29A8E69150A626200320140 /* MLWScheduleGridController.m in Sources */ = {isa = PBXBuildFile; fileRef = C29A8E68150A626200320140 /* MLWScheduleGridController.m */; };
 		C29A8E6C150A627F00320140 /* MLWScheduleListController.m in Sources */ = {isa = PBXBuildFile; fileRef = C29A8E6B150A627F00320140 /* MLWScheduleListController.m */; };
 		C29A8E6F150A637300320140 /* MLWSessionDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = C29A8E6E150A637300320140 /* MLWSessionDetailController.m */; };
-		C29A8E72150A648F00320140 /* MLWSponsorDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = C29A8E71150A648F00320140 /* MLWSponsorDetailController.m */; };
 		C29A8E75150FE50F00320140 /* MLWSponsorListController.m in Sources */ = {isa = PBXBuildFile; fileRef = C29A8E74150FE50F00320140 /* MLWSponsorListController.m */; };
-		C29A8E78150FE56100320140 /* MLWSponsorController.m in Sources */ = {isa = PBXBuildFile; fileRef = C29A8E77150FE56100320140 /* MLWSponsorController.m */; };
 		C29A8E7F1511023A00320140 /* MLWSponsor.m in Sources */ = {isa = PBXBuildFile; fileRef = C29A8E7E1511023A00320140 /* MLWSponsor.m */; };
 		C29A8E821511025300320140 /* MLWSession.m in Sources */ = {isa = PBXBuildFile; fileRef = C29A8E811511025300320140 /* MLWSession.m */; };
 		C29A8E851511028D00320140 /* MLWSpeaker.m in Sources */ = {isa = PBXBuildFile; fileRef = C29A8E841511028D00320140 /* MLWSpeaker.m */; };
@@ -104,12 +102,8 @@
 		C29A8E6B150A627F00320140 /* MLWScheduleListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWScheduleListController.m; path = Controllers/MLWScheduleListController.m; sourceTree = "<group>"; };
 		C29A8E6D150A637300320140 /* MLWSessionDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWSessionDetailController.h; path = Controllers/MLWSessionDetailController.h; sourceTree = "<group>"; };
 		C29A8E6E150A637300320140 /* MLWSessionDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWSessionDetailController.m; path = Controllers/MLWSessionDetailController.m; sourceTree = "<group>"; };
-		C29A8E70150A648F00320140 /* MLWSponsorDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWSponsorDetailController.h; path = Controllers/MLWSponsorDetailController.h; sourceTree = "<group>"; };
-		C29A8E71150A648F00320140 /* MLWSponsorDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWSponsorDetailController.m; path = Controllers/MLWSponsorDetailController.m; sourceTree = "<group>"; };
 		C29A8E73150FE50F00320140 /* MLWSponsorListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWSponsorListController.h; path = Controllers/MLWSponsorListController.h; sourceTree = "<group>"; };
 		C29A8E74150FE50F00320140 /* MLWSponsorListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWSponsorListController.m; path = Controllers/MLWSponsorListController.m; sourceTree = "<group>"; };
-		C29A8E76150FE56100320140 /* MLWSponsorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWSponsorController.h; path = Controllers/MLWSponsorController.h; sourceTree = "<group>"; };
-		C29A8E77150FE56100320140 /* MLWSponsorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWSponsorController.m; path = Controllers/MLWSponsorController.m; sourceTree = "<group>"; };
 		C29A8E7D1511023A00320140 /* MLWSponsor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWSponsor.h; path = Models/MLWSponsor.h; sourceTree = "<group>"; };
 		C29A8E7E1511023A00320140 /* MLWSponsor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWSponsor.m; path = Models/MLWSponsor.m; sourceTree = "<group>"; };
 		C29A8E801511025300320140 /* MLWSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWSession.h; path = Models/MLWSession.h; sourceTree = "<group>"; };
@@ -259,12 +253,8 @@
 				C29A8E6B150A627F00320140 /* MLWScheduleListController.m */,
 				C29A8E6D150A637300320140 /* MLWSessionDetailController.h */,
 				C29A8E6E150A637300320140 /* MLWSessionDetailController.m */,
-				C29A8E70150A648F00320140 /* MLWSponsorDetailController.h */,
-				C29A8E71150A648F00320140 /* MLWSponsorDetailController.m */,
 				C29A8E73150FE50F00320140 /* MLWSponsorListController.h */,
 				C29A8E74150FE50F00320140 /* MLWSponsorListController.m */,
-				C29A8E76150FE56100320140 /* MLWSponsorController.h */,
-				C29A8E77150FE56100320140 /* MLWSponsorController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -356,9 +346,7 @@
 				C29A8E69150A626200320140 /* MLWScheduleGridController.m in Sources */,
 				C29A8E6C150A627F00320140 /* MLWScheduleListController.m in Sources */,
 				C29A8E6F150A637300320140 /* MLWSessionDetailController.m in Sources */,
-				C29A8E72150A648F00320140 /* MLWSponsorDetailController.m in Sources */,
 				C29A8E75150FE50F00320140 /* MLWSponsorListController.m in Sources */,
-				C29A8E78150FE56100320140 /* MLWSponsorController.m in Sources */,
 				C29A8E7F1511023A00320140 /* MLWSponsor.m in Sources */,
 				C29A8E821511025300320140 /* MLWSession.m in Sources */,
 				C29A8E851511028D00320140 /* MLWSpeaker.m in Sources */,

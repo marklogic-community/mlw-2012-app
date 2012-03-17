@@ -9,7 +9,6 @@
 #import "MLWAppDelegate.h"
 #import "MLWScheduleListController.h"
 #import "MLWScheduleGridController.h"
-#import "MLWSponsorController.h"
 #import "MLWSponsorListController.h"
 #import "MLWTweetController.h"
 
@@ -28,14 +27,15 @@
 	UINavigationController *tweetNavController = [[[UINavigationController alloc] initWithRootViewController:tweetController] autorelease];
 	tweetController.title = @"Tweets";
 
+	MLWSponsorListController *sponsorViewController = [[[MLWSponsorListController alloc] init] autorelease];
+	UINavigationController *sponsorNavController = [[[UINavigationController alloc] initWithRootViewController:sponsorViewController] autorelease];
+	sponsorNavController.title = @"Sponsors";
+
     if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         MLWScheduleListController *scheduleViewController = [[[MLWScheduleListController alloc] init] autorelease];
 		UINavigationController *scheduleNavController = [[[UINavigationController alloc] initWithRootViewController:scheduleViewController] autorelease];
 		scheduleNavController.title = @"Schedule";
 
-        MLWSponsorListController *sponsorViewController = [[[MLWSponsorListController alloc] init] autorelease];
-		UINavigationController *sponsorNavController = [[[UINavigationController alloc] initWithRootViewController:sponsorViewController] autorelease];
-		sponsorNavController.title = @"Sponsors";
 
 		self.tabBarController.viewControllers = [NSArray arrayWithObjects:scheduleNavController, tweetNavController, sponsorNavController, nil];
     }
@@ -43,9 +43,6 @@
         MLWScheduleGridController *scheduleViewController = [[[MLWScheduleGridController alloc] init] autorelease];
 		UINavigationController *scheduleNavController = [[[UINavigationController alloc] initWithRootViewController:scheduleViewController] autorelease];
 		scheduleNavController.title = @"Schedule";
-
-        MLWSponsorController *sponsorViewController = [[[MLWSponsorController alloc] init] autorelease];
-		sponsorViewController.title = @"Sponsors";
 
 		self.tabBarController.viewControllers = [NSArray arrayWithObjects:scheduleNavController, tweetNavController, sponsorViewController, nil];
     }

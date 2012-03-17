@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MLWTweetController : UIViewController
+@interface MLWTweetController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @end

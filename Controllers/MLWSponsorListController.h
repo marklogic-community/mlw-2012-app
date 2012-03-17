@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MLWSponsorListController : UIViewController
+@interface MLWSponsorListController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+
 
 @end

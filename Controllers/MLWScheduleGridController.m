@@ -38,10 +38,14 @@
 }
 
 - (void)loadView {
-	self.scrollView = [[[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)] autorelease];
+	self.view = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)] autorelease];
+	self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"fabric"]];
+
+	self.scrollView = [[[UIScrollView alloc] initWithFrame:self.view.bounds] autorelease];
 	self.scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-	self.scrollView.backgroundColor = [UIColor whiteColor];
-	self.view = self.scrollView;
+	self.scrollView.backgroundColor = [UIColor clearColor];
+	[self.view addSubview:self.scrollView];
 
 	self.loadingView = [[[UIView alloc] initWithFrame:self.view.frame] autorelease];
 	self.loadingView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -55,9 +59,10 @@
     [spinner release];
 
 	self.gridView = [[[MLWScheduleGridView alloc] initWithFrame:self.view.bounds] autorelease];
+	self.gridView.backgroundColor = [UIColor whiteColor];
 	self.gridView.delegate = self;
 	[self.gridView addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionNew context:nil];
-	[self.view addSubview:self.gridView];
+	[self.scrollView addSubview:self.gridView];
 
 	MLWAppDelegate *appDelegate = (MLWAppDelegate *)[UIApplication sharedApplication].delegate;
 	MLWConference *conference = appDelegate.conference;

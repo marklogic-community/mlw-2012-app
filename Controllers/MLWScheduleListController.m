@@ -10,6 +10,7 @@
 #import "MLWSessionDetailController.h"
 #import "MLWAppDelegate.h"
 #import "MLWSession.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface MLWScheduleListController ()
 @property (nonatomic, retain) UITableView *tableView;
@@ -41,7 +42,7 @@
 - (void)loadView {
 	self.view = [[[UIView alloc] init] autorelease];
 	self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-	self.view.backgroundColor = [UIColor whiteColor];
+	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"fabric"]];
 
 	self.loadingView = [[[UIView alloc] init] autorelease];
 	self.loadingView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -57,6 +58,8 @@
 	self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	self.tableView.delegate = self;
 	self.tableView.dataSource = self;
+	self.tableView.backgroundColor = [UIColor clearColor];
+	self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 	[self.view addSubview:self.tableView];
 
 	MLWAppDelegate *appDelegate = (MLWAppDelegate *)[UIApplication sharedApplication].delegate;
@@ -113,7 +116,6 @@
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 	if(cell == nil) {
 		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier] autorelease];
-
 		cell.textLabel.adjustsFontSizeToFitWidth = YES;
 		cell.textLabel.minimumFontSize = 14;
 	}
@@ -134,6 +136,12 @@
 	}
 
 	return cell;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+	cell.layer.borderColor = [UIColor colorWithWhite:0.8f alpha:1.0f].CGColor;
+	cell.layer.borderWidth = 0.5f;
+	cell.backgroundColor = [UIColor whiteColor];
 }
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {

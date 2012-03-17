@@ -75,6 +75,13 @@
 	return [NSString stringWithFormat:@"%@ - %@", [startFormat stringFromDate:_startTime], [endFormat stringFromDate:_endTime]];
 }
 
+- (NSString *)formattedTime {
+	NSDateFormatter *format = [[[NSDateFormatter alloc] init] autorelease];
+	[format setDateFormat:@"h:mma"];
+
+	return [[NSString stringWithFormat:@"%@ - %@", [format stringFromDate:_startTime], [format stringFromDate:_endTime]] lowercaseString];
+}
+
 
 - (NSDate *)stringToDate:(NSString *) dateString {
 	NSDateFormatter *dateFormat = [[[NSDateFormatter alloc] init] autorelease];

@@ -12,6 +12,7 @@
 
 - (id)initWithData:(NSDictionary *) jsonData;
 - (NSString *)formattedDate;
+- (NSString *)formattedTime;
 
 @property (readonly) NSDate *startTime;
 @property (readonly) NSDate *endTime;

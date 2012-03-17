@@ -26,8 +26,7 @@
 @synthesize loadingView = _loadingView;
 @synthesize sessionBlocks = _sessionsInBlocks;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
 	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
 	if (self) {
 		self.navigationItem.title = @"Schedule";

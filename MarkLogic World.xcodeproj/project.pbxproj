@@ -25,6 +25,10 @@
 		C20CEE8815139A8E009AA0AD /* badge@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C20CEE8415139A8E009AA0AD /* badge@2x.png */; };
 		C20CEE8915139A8E009AA0AD /* calendar.png in Resources */ = {isa = PBXBuildFile; fileRef = C20CEE8515139A8E009AA0AD /* calendar.png */; };
 		C20CEE8A15139A8E009AA0AD /* calendar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C20CEE8615139A8E009AA0AD /* calendar@2x.png */; };
+		C20CEE901513F586009AA0AD /* MLWScheduleGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = C20CEE8F1513F586009AA0AD /* MLWScheduleGridView.m */; };
+		C20CEE9315141D16009AA0AD /* MLWSessionView.m in Sources */ = {isa = PBXBuildFile; fileRef = C20CEE9215141D16009AA0AD /* MLWSessionView.m */; };
+		C20CEE951514D385009AA0AD /* blank.png in Resources */ = {isa = PBXBuildFile; fileRef = C20CEE941514D385009AA0AD /* blank.png */; };
+		C20CEE981514E9D0009AA0AD /* UIPurposeView.m in Sources */ = {isa = PBXBuildFile; fileRef = C20CEE971514E9D0009AA0AD /* UIPurposeView.m */; };
 		C29A8E24150A560B00320140 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C29A8E23150A560B00320140 /* UIKit.framework */; };
 		C29A8E26150A560B00320140 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C29A8E25150A560B00320140 /* Foundation.framework */; };
 		C29A8E28150A560B00320140 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C29A8E27150A560B00320140 /* CoreGraphics.framework */; };
@@ -77,6 +81,13 @@
 		C20CEE8415139A8E009AA0AD /* badge@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "badge@2x.png"; sourceTree = "<group>"; };
 		C20CEE8515139A8E009AA0AD /* calendar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calendar.png; sourceTree = "<group>"; };
 		C20CEE8615139A8E009AA0AD /* calendar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "calendar@2x.png"; sourceTree = "<group>"; };
+		C20CEE8E1513F586009AA0AD /* MLWScheduleGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWScheduleGridView.h; path = Classes/MLWScheduleGridView.h; sourceTree = "<group>"; };
+		C20CEE8F1513F586009AA0AD /* MLWScheduleGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWScheduleGridView.m; path = Classes/MLWScheduleGridView.m; sourceTree = "<group>"; };
+		C20CEE9115141D16009AA0AD /* MLWSessionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWSessionView.h; path = Classes/MLWSessionView.h; sourceTree = "<group>"; };
+		C20CEE9215141D16009AA0AD /* MLWSessionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWSessionView.m; path = Classes/MLWSessionView.m; sourceTree = "<group>"; };
+		C20CEE941514D385009AA0AD /* blank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blank.png; sourceTree = "<group>"; };
+		C20CEE961514E9D0009AA0AD /* UIPurposeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIPurposeView.h; path = Classes/UIPurposeView.h; sourceTree = "<group>"; };
+		C20CEE971514E9D0009AA0AD /* UIPurposeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIPurposeView.m; path = Classes/UIPurposeView.m; sourceTree = "<group>"; };
 		C29A8E1F150A560B00320140 /* MarkLogic World.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MarkLogic World.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C29A8E23150A560B00320140 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C29A8E25150A560B00320140 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -178,6 +189,7 @@
 		C20CEE8215139A8E009AA0AD /* images */ = {
 			isa = PBXGroup;
 			children = (
+				C20CEE941514D385009AA0AD /* blank.png */,
 				C20CEE8315139A8E009AA0AD /* badge.png */,
 				C20CEE8415139A8E009AA0AD /* badge@2x.png */,
 				C20CEE8515139A8E009AA0AD /* calendar.png */,
@@ -195,7 +207,6 @@
 				C29A8E7C151101B500320140 /* Models */,
 				C29A8E58150A5BFD00320140 /* Controllers */,
 				C29A8E54150A5B2900320140 /* Classes */,
-				C29A8E2A150A560B00320140 /* Supporting Files */,
 				C29A8E22150A560B00320140 /* Frameworks */,
 				C29A8E20150A560B00320140 /* Products */,
 			);
@@ -219,19 +230,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		C29A8E2A150A560B00320140 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "Supporting Files";
-			path = "MarkLogic World";
-			sourceTree = "<group>";
-		};
 		C29A8E54150A5B2900320140 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
 				C29A8E55150A5B3D00320140 /* MLWAppDelegate.h */,
 				C29A8E56150A5B3D00320140 /* MLWAppDelegate.m */,
+				C20CEE8E1513F586009AA0AD /* MLWScheduleGridView.h */,
+				C20CEE8F1513F586009AA0AD /* MLWScheduleGridView.m */,
+				C20CEE9115141D16009AA0AD /* MLWSessionView.h */,
+				C20CEE9215141D16009AA0AD /* MLWSessionView.m */,
+				C20CEE961514E9D0009AA0AD /* UIPurposeView.h */,
+				C20CEE971514E9D0009AA0AD /* UIPurposeView.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -327,6 +336,7 @@
 				C20CEE8815139A8E009AA0AD /* badge@2x.png in Resources */,
 				C20CEE8915139A8E009AA0AD /* calendar.png in Resources */,
 				C20CEE8A15139A8E009AA0AD /* calendar@2x.png in Resources */,
+				C20CEE951514D385009AA0AD /* blank.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,6 +372,9 @@
 				C20CEE7C1512905F009AA0AD /* SBJsonTokeniser.m in Sources */,
 				C20CEE7D1512905F009AA0AD /* SBJsonUTF8Stream.m in Sources */,
 				C20CEE7E1512905F009AA0AD /* SBJsonWriter.m in Sources */,
+				C20CEE901513F586009AA0AD /* MLWScheduleGridView.m in Sources */,
+				C20CEE9315141D16009AA0AD /* MLWSessionView.m in Sources */,
+				C20CEE981514E9D0009AA0AD /* UIPurposeView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

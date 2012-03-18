@@ -29,7 +29,7 @@
 		_session = [session retain];
 
 		self.layer.borderColor = [UIColor colorWithWhite:0.7f alpha:1.0f].CGColor;
-		self.layer.borderWidth = 0.5f;
+		self.layer.borderWidth = 1;
 
 		if(session == nil) {
 			self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"blank"]];

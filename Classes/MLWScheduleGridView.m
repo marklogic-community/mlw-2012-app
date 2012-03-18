@@ -23,8 +23,6 @@
     if(self) {
 		self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 		self.sessions = [NSArray array];
-		self.layer.borderColor = [UIColor colorWithWhite:0.7f alpha:1.0f].CGColor;
-		self.layer.borderWidth = 0.5f;
     }
     return self;
 }
@@ -44,14 +42,14 @@
 			[view removeFromSuperview];
 		}
 
-		float totalHeight = 0.5;
+		int totalHeight = 0;
 		for(NSArray *blockSessions in self.sessions) {
 			int totalWidth = 0;
 
-			UIPurposeView *timeView = [[UIPurposeView alloc] initWithFrame:CGRectMake(totalWidth, totalHeight, columnWidth, rowHeight)]; 
+			UIPurposeView *timeView = [[UIPurposeView alloc] initWithFrame:CGRectMake(totalWidth, totalHeight, columnWidth + 1, rowHeight + 1)]; 
 			timeView.purpose = @"time";
 			timeView.layer.borderColor = [UIColor colorWithWhite:0.7f alpha:1.0f].CGColor;
-			timeView.layer.borderWidth = 0.5f;
+			timeView.layer.borderWidth = 1;
 
 			UILabel *timeLabel = [[UILabel alloc] initWithFrame:CGRectInset(timeView.bounds, 5, 5)];
 			timeLabel.font = [UIFont boldSystemFontOfSize:11];
@@ -60,23 +58,24 @@
 			[timeLabel release];
 
 			[self addSubview:timeView];
+            [timeView release];
 
 			totalWidth += columnWidth;
 
 			if(blockSessions.count == 1) {
 				MLWSession *session = [blockSessions objectAtIndex:0];
-				MLWSessionView *sessionView = [[MLWSessionView alloc] initWithFrame:CGRectMake(totalWidth, totalHeight, self.frame.size.width - totalWidth, rowHeight) session:session]; 
+				MLWSessionView *sessionView = [[MLWSessionView alloc] initWithFrame:CGRectMake(totalWidth, totalHeight, self.frame.size.width - totalWidth, rowHeight + 1) session:session]; 
 				sessionView.delegate = delegate;
 				[self addSubview:sessionView];
 				totalHeight += rowHeight;
 				[sessionView release];
 			}
 			else {
-				UIPurposeView *labelView = [[UIPurposeView alloc] initWithFrame:CGRectMake(totalWidth, totalHeight, self.frame.size.width - totalWidth, rowHeight)]; 
+				UIPurposeView *labelView = [[UIPurposeView alloc] initWithFrame:CGRectMake(totalWidth, totalHeight, self.frame.size.width - totalWidth, rowHeight + 1)]; 
 				labelView.purpose = @"breakoutLabel";
 				labelView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 				labelView.layer.borderColor = [UIColor colorWithWhite:0.7f alpha:1.0f].CGColor;
-				labelView.layer.borderWidth = 0.5f;
+				labelView.layer.borderWidth = 1;
 
 				UILabel *sessionTitleLabel = [[UILabel alloc] initWithFrame:CGRectInset(labelView.bounds, 5, 5)];
 				sessionTitleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
@@ -92,32 +91,41 @@
 
 				int position = 0;
 				totalWidth = 0;
-				UIPurposeView *breakoutWrapper = [[UIPurposeView alloc] initWithFrame:CGRectMake(0, totalHeight, self.frame.size.width, sessionRowHeight)]; 
+				UIPurposeView *breakoutWrapper = [[UIPurposeView alloc] initWithFrame:CGRectMake(0, totalHeight, self.frame.size.width, sessionRowHeight + 1)]; 
 				breakoutWrapper.purpose = @"breakoutWrapper";
 				breakoutWrapper.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 				for(MLWSession *session in blockSessions) {
-					MLWSessionView *sessionView = [[MLWSessionView alloc] initWithFrame:CGRectMake(totalWidth, 0, columnWidth, sessionRowHeight) session:session]; 
+					position++;
+					int width = columnWidth + 1;
+					if(position == NUMBEROFCOLUMNS) {
+						width = self.frame.size.width - totalWidth;
+					}
+					MLWSessionView *sessionView = [[MLWSessionView alloc] initWithFrame:CGRectMake(totalWidth, 0, width, sessionRowHeight + 1) session:session]; 
 					sessionView.delegate = delegate;
 					[breakoutWrapper addSubview:sessionView];
 					totalWidth += columnWidth;
 					[sessionView release];
-					position++;
 				}
 				for(int i = position; i < NUMBEROFCOLUMNS; i++) {
-					MLWSessionView *blankView = [[MLWSessionView alloc] initWithFrame:CGRectMake(totalWidth, 0, columnWidth, sessionRowHeight) session:nil]; 
+					position++;
+					int width = columnWidth + 1;
+					if(position == NUMBEROFCOLUMNS) {
+						width = self.frame.size.width - totalWidth;
+					}
+					MLWSessionView *blankView = [[MLWSessionView alloc] initWithFrame:CGRectMake(totalWidth, 0, width, sessionRowHeight + 1) session:nil]; 
 					[breakoutWrapper addSubview:blankView];
 					totalWidth += columnWidth;
 					[blankView release];
-					position++;
 				}
 				[self addSubview:breakoutWrapper];
+                [breakoutWrapper release];
 				totalHeight += sessionRowHeight;
 			}
 
 		}
 
 		CGRect frame = self.frame;
-		frame.size.height = totalHeight + 0.5;
+		frame.size.height = totalHeight;
 		self.frame = frame;
 	}
 	else {
@@ -133,7 +141,7 @@
 			if([box isKindOfClass:[UIPurposeView class]]) {
 				UIPurposeView *purposeView = (UIPurposeView *)box;
 				if([purposeView.purpose isEqualToString:@"time"]) {
-					frame.size.width = columnWidth;
+					frame.size.width = columnWidth + 1;
 				}
 				else if([purposeView.purpose isEqualToString:@"breakoutLabel"]) {
 					frame.size.width = self.frame.size.width - columnWidth;
@@ -148,10 +156,17 @@
 						return NSOrderedDescending;
 					}];
 
+					int position = 0;
 					int totalWidth = 0;
 					for(MLWSessionView *sessionView in sessionViews) {
+						position++;
 						CGRect sessionFrame = sessionView.frame;
-						sessionFrame.size.width = columnWidth;
+						if(position == NUMBEROFCOLUMNS) {
+							sessionFrame.size.width = self.frame.size.width - totalWidth;
+						}
+						else {
+							sessionFrame.size.width = columnWidth + 1;
+						}
 						sessionFrame.origin.x = totalWidth;
 						sessionView.frame = sessionFrame;
 						totalWidth += columnWidth;

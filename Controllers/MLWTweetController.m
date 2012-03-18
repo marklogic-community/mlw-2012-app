@@ -8,6 +8,7 @@
 
 #import "MLWTweetController.h"
 #import "MLWAppDelegate.h"
+#import "UITableView+helpers.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface MLWTweetController ()
@@ -35,7 +36,6 @@
 - (void)loadView {
 	self.view = [[[UIView alloc] init] autorelease];
 	self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"fabric"]];
 
 	self.loadingView = [[[UIView alloc] init] autorelease];
 	self.loadingView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -51,8 +51,8 @@
 	self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	self.tableView.delegate = self;
 	self.tableView.dataSource = self;
-	self.tableView.backgroundColor = [UIColor clearColor];
 	self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+	[self.tableView applyBackground];
 	[self.view addSubview:self.tableView];
 
 	MLWAppDelegate *appDelegate = (MLWAppDelegate *)[UIApplication sharedApplication].delegate;

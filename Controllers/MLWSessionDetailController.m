@@ -7,6 +7,7 @@
 //
 
 #import "MLWSessionDetailController.h"
+#import "UITableView+helpers.h"
 
 @interface MLWSessionDetailController ()
 @property (nonatomic, retain) UITableView *tableView;
@@ -37,6 +38,7 @@
 	self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	self.tableView.delegate = self;
 	self.tableView.dataSource = self;
+	[self.tableView applyBackground];
 	[self.view addSubview:self.tableView];
 }
 
@@ -70,6 +72,10 @@
 	return 0;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+	return 40;
+}
+
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
 	if(section == 0) {
 		return @"Session Information";
@@ -86,6 +92,28 @@
 		}
 	}
 	return nil;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+	NSString *sectionTitle = [self tableView:tableView titleForHeaderInSection:section];
+	if(sectionTitle == nil) {
+		return nil;
+	}
+
+	UILabel *label = [[UILabel alloc] init];
+	label.frame = CGRectMake(20, 6, 300, 30);
+	label.backgroundColor = [UIColor clearColor];
+	label.textColor = [UIColor whiteColor];
+	label.shadowColor = [UIColor blackColor];
+	label.shadowOffset = CGSizeMake(0.0, 2.0);
+	label.font = [UIFont boldSystemFontOfSize:16];
+	label.text = sectionTitle;
+
+	UIView *view = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 40)] autorelease];
+	[view addSubview:label];
+	[label release];
+
+	return view;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

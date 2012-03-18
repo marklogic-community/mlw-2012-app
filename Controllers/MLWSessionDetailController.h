@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MLWSession.h"
 
-@interface MLWSessionDetailController : UIViewController
+@interface MLWSessionDetailController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 - (id)initWithSession:(MLWSession *)session;
 

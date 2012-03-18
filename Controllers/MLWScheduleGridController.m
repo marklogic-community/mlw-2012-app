@@ -18,6 +18,7 @@
 @property (nonatomic, retain) MLWScheduleGridView *gridView;
 @property (nonatomic, retain) UIView *loadingView;
 @property (nonatomic, retain) NSArray *sessionBlocks;
+@property (nonatomic, retain) UIPopoverController *popover;
 @end
 
 @implementation MLWScheduleGridController
@@ -26,6 +27,7 @@
 @synthesize gridView = _gridView;
 @synthesize loadingView = _loadingView;
 @synthesize sessionBlocks = _sessionsInBlocks;
+@synthesize popover = _popover;
 
 - (id)init {
     self = [super init];
@@ -104,9 +106,25 @@
 }
 
 - (void)sessionViewWasSelected:(MLWSessionView *)sessionView {
+	if(sessionView.session.selectable == NO) {
+		return;
+	}
+
 	MLWSessionDetailController *viewShowController = [[MLWSessionDetailController alloc] initWithSession:sessionView.session];
-	[self.navigationController pushViewController:viewShowController animated:YES];
+	if(self.popover == nil) {
+		self.popover = [[[UIPopoverController alloc] initWithContentViewController:viewShowController] autorelease];
+	}
+	else {
+		[self.popover setContentViewController:viewShowController animated:YES];
+	}
 	[viewShowController release];
+
+	CGRect sessionRect = sessionView.frame;
+	if(sessionView.session.plenary == NO) {
+		sessionRect.origin.y = sessionView.superview.frame.origin.y;
+	}
+
+	[self.popover presentPopoverFromRect:[self.gridView convertRect:sessionRect toView:self.view] inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
 
@@ -115,6 +133,7 @@
 	self.gridView = nil;
 	self.view = nil;
 	self.sessionBlocks = nil;
+	self.popover = nil;
 }
 
 - (void)dealloc {
@@ -122,6 +141,7 @@
 	self.gridView = nil;
 	self.view = nil;
 	self.sessionBlocks = nil;
+	self.popover = nil;
 }
 
 @end

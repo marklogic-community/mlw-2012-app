@@ -9,7 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "MLWSession.h"
 
-@interface MLWSessionDetailController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface MLWSessionDetailController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
+	int nameHeight;
+	int titleHeight;
+	int contactHeight;
+}
 
 - (id)initWithSession:(MLWSession *)session;
 

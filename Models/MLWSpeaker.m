@@ -23,9 +23,14 @@
 		_id = [[jsonData objectForKey:@"id"] retain];
 		_name = [[jsonData objectForKey:@"name"] retain];
 		_title = [[jsonData objectForKey:@"title"] retain];
-		_organization = [[jsonData objectForKey:@"organization"] retain];
+		_organization = [[jsonData objectForKey:@"affiliation"] retain];
 		_email = [[jsonData objectForKey:@"email"] retain];
 		_bio = [[jsonData objectForKey:@"bio"] retain];
+
+		if([_email isKindOfClass:[NSNull class]] || _email.length == 0) {
+			[_email release];
+			_email = nil;
+		}
     }
     return self;
 }

@@ -164,10 +164,12 @@
 		else {
 			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier] autorelease];
 		}
+		cell.selectionStyle = UITableViewCellSelectionStyleNone;
 	}
 
 	if(indexPath.section == 0) {
 		if(indexPath.row != 0) {
+			cell.textLabel.textColor = [UIColor colorWithRed:(236.0f/255.0f) green:(125.0f/255.0f) blue:(30.0f/255.0f) alpha:1.0f];
 			cell.detailTextLabel.font = [UIFont systemFontOfSize:13];
 		}
 
@@ -252,15 +254,15 @@
 
 		UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(10, 15, 45, 16)];
 		title.backgroundColor = [UIColor clearColor];
-		title.textColor = [UIColor colorWithRed:0.32 green:0.4 blue:0.57 alpha:1];
-		title.font = [UIFont boldSystemFontOfSize:14];
+		title.textColor = [UIColor colorWithRed:(236.0f/255.0f) green:(125.0f/255.0f) blue:(30.0f/255.0f) alpha:1.0f];
+		title.font = [UIFont boldSystemFontOfSize:13];
 		title.text = @"Title:";
 		[titleView addSubview:title];
 		[title release];
 
 		UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(55, 15, 280 - 55, 16)];
 		titleLabel.backgroundColor = [UIColor clearColor];
-		titleLabel.font = [UIFont boldSystemFontOfSize:14];
+		titleLabel.font = [UIFont boldSystemFontOfSize:13];
 		titleLabel.text = speaker.title;
 		titleLabel.adjustsFontSizeToFitWidth = YES;
 		titleLabel.minimumFontSize = 10;
@@ -277,15 +279,15 @@
 
 			UILabel *email = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 45, 16)];
 			email.backgroundColor = [UIColor clearColor];
-			email.textColor = [UIColor colorWithRed:0.32 green:0.4 blue:0.57 alpha:1];
-			email.font = [UIFont boldSystemFontOfSize:14];
+			email.textColor = [UIColor colorWithRed:(236.0f/255.0f) green:(125.0f/255.0f) blue:(30.0f/255.0f) alpha:1.0f];
+			email.font = [UIFont boldSystemFontOfSize:13];
 			email.text = @"Email:";
 			[contactView addSubview:email];
 			[email release];
 
 			UILabel *contactLabel = [[UILabel alloc] initWithFrame:CGRectMake(55, 0, 280 - 55, 16)];
 			contactLabel.backgroundColor = [UIColor clearColor];
-			contactLabel.font = [UIFont boldSystemFontOfSize:14];
+			contactLabel.font = [UIFont boldSystemFontOfSize:13];
 			contactLabel.text = speaker.email;
 			contactLabel.adjustsFontSizeToFitWidth = YES;
 			contactLabel.minimumFontSize = 10;

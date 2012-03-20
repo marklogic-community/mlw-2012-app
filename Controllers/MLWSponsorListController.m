@@ -143,6 +143,7 @@
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 	if(cell == nil) {
 		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier] autorelease];
+		cell.selectionStyle = UITableViewCellSelectionStyleNone;
 	}
 
 	for(UIView *view in cell.contentView.subviews) {

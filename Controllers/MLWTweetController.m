@@ -107,6 +107,7 @@
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 	if(cell == nil) {
 		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier] autorelease];
+		cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
 		MLWTweetView *emptyView = [[MLWTweetView alloc] initWithFrame:cell.contentView.bounds];
 		[cell.contentView addSubview:emptyView];

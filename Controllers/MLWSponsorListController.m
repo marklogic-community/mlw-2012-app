@@ -125,6 +125,14 @@
 	return ((MLWSponsorView *)[sponsorViews objectAtIndex:0]).sponsor.level;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+	return 20;
+}
+
+- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+	return [tableView createHeaderForSection:section];
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 	MLWSponsorView *sponsorView = [self sponsorViewForIndexPath:indexPath];
 	return [sponsorView calculatedHeightWithWidth:self.view.frame.size.width];

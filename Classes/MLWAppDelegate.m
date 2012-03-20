@@ -25,15 +25,18 @@
 
 	MLWTweetController *tweetController = [[[MLWTweetController alloc] init] autorelease];
 	UINavigationController *tweetNavController = [[[UINavigationController alloc] initWithRootViewController:tweetController] autorelease];
+	tweetNavController.navigationBar.tintColor = [UIColor colorWithRed:(236.0f/255.0f) green:(125.0f/255.0f) blue:(30.0f/255.0f) alpha:1.0f];
 	tweetController.title = @"Tweets";
 
 	MLWSponsorListController *sponsorViewController = [[[MLWSponsorListController alloc] init] autorelease];
 	UINavigationController *sponsorNavController = [[[UINavigationController alloc] initWithRootViewController:sponsorViewController] autorelease];
+	sponsorNavController.navigationBar.tintColor = [UIColor colorWithRed:(236.0f/255.0f) green:(125.0f/255.0f) blue:(30.0f/255.0f) alpha:1.0f];
 	sponsorNavController.title = @"Sponsors";
 
     if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         MLWScheduleListController *scheduleViewController = [[[MLWScheduleListController alloc] init] autorelease];
 		UINavigationController *scheduleNavController = [[[UINavigationController alloc] initWithRootViewController:scheduleViewController] autorelease];
+		scheduleNavController.navigationBar.tintColor = [UIColor colorWithRed:(236.0f/255.0f) green:(125.0f/255.0f) blue:(30.0f/255.0f) alpha:1.0f];
 		scheduleNavController.title = @"Schedule";
 
 
@@ -42,9 +45,10 @@
 	else {
         MLWScheduleGridController *scheduleViewController = [[[MLWScheduleGridController alloc] init] autorelease];
 		UINavigationController *scheduleNavController = [[[UINavigationController alloc] initWithRootViewController:scheduleViewController] autorelease];
+		scheduleNavController.navigationBar.tintColor = [UIColor colorWithRed:(236.0f/255.0f) green:(125.0f/255.0f) blue:(30.0f/255.0f) alpha:1.0f];
 		scheduleNavController.title = @"Schedule";
 
-		self.tabBarController.viewControllers = [NSArray arrayWithObjects:scheduleNavController, tweetNavController, sponsorViewController, nil];
+		self.tabBarController.viewControllers = [NSArray arrayWithObjects:scheduleNavController, tweetNavController, sponsorNavController, nil];
     }
 
     self.window.rootViewController = self.tabBarController;

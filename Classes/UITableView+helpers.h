@@ -11,5 +11,6 @@
 @interface UITableView (helpers)
 
 - (void)applyBackground;
+- (UIView *)createHeaderForSection:(NSInteger) section;
 
 @end

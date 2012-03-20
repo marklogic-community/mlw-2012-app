@@ -1,5 +1,3 @@
-//
-//  MLWConference.m
 //  MarkLogic World
 //
 //  Created by Ryan Grimm on 3/14/12.
@@ -10,6 +8,7 @@
 #import "MLWSpeaker.h"
 #import "MLWSession.h"
 #import "MLWSponsor.h"
+#import "MLWTweet.h"
 #import "SBJson.h"
 
 @interface MLWConference ()
@@ -125,11 +124,54 @@
 	return NO;
 }
 
-- (BOOL)fetchSponsors:(void (^)(NSArray *sessions, NSError *error)) callback {
-	return YES;
+- (BOOL)fetchTweets:(void (^)(NSArray *sessions, NSError *error)) callback {
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+		SBJsonParser *parser = [[[SBJsonParser alloc] init] autorelease];
+
+		NSURL *url = [NSURL URLWithString:@"http://search.twitter.com/search.json?q=marklogic&rpp=50&include_entities=true&result_type=recent"];
+		NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+		request.URL = url;
+
+		NSURLResponse *response = nil;
+		NSError *error = nil;
+		NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+		[request release];
+
+		if(error != nil || data == nil) {
+			NSLog(@"MLWConference: could not fetch latest tweets - %@", error);
+			dispatch_async(dispatch_get_main_queue(), ^ {
+				callback(nil, error);
+			});
+			return;
+		}
+
+		NSDictionary *results = [parser objectWithData:data];
+		if(results == nil) {
+			NSLog(@"MLWConference: JSON parsing error - %@", parser.error);
+			// XXX create NSError
+			dispatch_async(dispatch_get_main_queue(), ^ {
+				callback(nil, nil);
+			});
+			return;
+		}
+
+		NSMutableArray *tweetObjects = [NSMutableArray arrayWithCapacity:100];
+		MLWTweet *tweet;
+		for(NSDictionary *rawTweet in [results objectForKey:@"results"]) {
+			tweet = [[MLWTweet alloc] initWithData:rawTweet];
+			[tweetObjects addObject:tweet];
+			[tweet release];
+		}
+
+		dispatch_async(dispatch_get_main_queue(), ^ {
+			callback(tweetObjects, nil);
+		});
+	});
+
+	return NO;
 }
 
-- (BOOL)fetchTweets:(void (^)(NSArray *sessions, NSError *error)) callback {
+- (BOOL)fetchSponsors:(void (^)(NSArray *sessions, NSError *error)) callback {
 	return YES;
 }
 

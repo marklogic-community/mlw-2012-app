@@ -20,7 +20,6 @@
 @property (readonly) BOOL selectable;
 @property (readonly) NSString *title;
 @property (readonly) NSMutableArray *speakers;
-@property (readonly) NSString *speakerString;
 @property (readonly) NSString *abstract;
 @property (readonly) NSString *track;
 @property (readonly) NSString *location;

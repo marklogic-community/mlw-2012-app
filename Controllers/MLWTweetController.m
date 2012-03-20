@@ -9,6 +9,8 @@
 #import "MLWTweetController.h"
 #import "MLWAppDelegate.h"
 #import "UITableView+helpers.h"
+#import "MLWTweet.h"
+#import "MLWTweetView.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface MLWTweetController ()
@@ -93,14 +95,27 @@
 	return self.tweets.count;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+	if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+		return 105;
+	}
+	return 75;
+}
+
 - (UITableViewCell *)tableView:(UITableView *) tableView cellForRowAtIndexPath:(NSIndexPath *) indexPath {
 	static NSString *cellIdentifier = @"Cell";
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 	if(cell == nil) {
 		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier] autorelease];
-		cell.textLabel.adjustsFontSizeToFitWidth = YES;
-		cell.textLabel.minimumFontSize = 14;
+
+		MLWTweetView *emptyView = [[MLWTweetView alloc] initWithFrame:cell.contentView.bounds];
+		[cell.contentView addSubview:emptyView];
+		[emptyView release];
 	}
+
+	MLWTweet *tweet = [self.tweets objectAtIndex:indexPath.row];
+	MLWTweetView *tweetView = (MLWTweetView *)[cell.contentView.subviews lastObject];
+	[tweetView updateTweet:tweet];
 
 	return cell;
 }

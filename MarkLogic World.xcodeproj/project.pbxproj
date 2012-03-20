@@ -31,6 +31,9 @@
 		C20CEE981514E9D0009AA0AD /* UIPurposeView.m in Sources */ = {isa = PBXBuildFile; fileRef = C20CEE971514E9D0009AA0AD /* UIPurposeView.m */; };
 		C20CEE9E151506D5009AA0AD /* fabric.png in Resources */ = {isa = PBXBuildFile; fileRef = C20CEE9D151506D5009AA0AD /* fabric.png */; };
 		C20CEEA815168177009AA0AD /* UITableView+helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = C20CEEA715168177009AA0AD /* UITableView+helpers.m */; };
+		C20CEEB41517B5A9009AA0AD /* MLWTweet.m in Sources */ = {isa = PBXBuildFile; fileRef = C20CEEB31517B5A9009AA0AD /* MLWTweet.m */; };
+		C20CEEB71517D948009AA0AD /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C20CEEB61517D948009AA0AD /* ImageIO.framework */; };
+		C20CEEBA1517E594009AA0AD /* MLWTweetView.m in Sources */ = {isa = PBXBuildFile; fileRef = C20CEEB91517E594009AA0AD /* MLWTweetView.m */; };
 		C29A8E24150A560B00320140 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C29A8E23150A560B00320140 /* UIKit.framework */; };
 		C29A8E26150A560B00320140 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C29A8E25150A560B00320140 /* Foundation.framework */; };
 		C29A8E28150A560B00320140 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C29A8E27150A560B00320140 /* CoreGraphics.framework */; };
@@ -91,6 +94,11 @@
 		C20CEE9D151506D5009AA0AD /* fabric.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fabric.png; sourceTree = "<group>"; };
 		C20CEEA615168177009AA0AD /* UITableView+helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UITableView+helpers.h"; path = "Classes/UITableView+helpers.h"; sourceTree = "<group>"; };
 		C20CEEA715168177009AA0AD /* UITableView+helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITableView+helpers.m"; path = "Classes/UITableView+helpers.m"; sourceTree = "<group>"; };
+		C20CEEB21517B5A9009AA0AD /* MLWTweet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWTweet.h; path = Models/MLWTweet.h; sourceTree = "<group>"; };
+		C20CEEB31517B5A9009AA0AD /* MLWTweet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWTweet.m; path = Models/MLWTweet.m; sourceTree = "<group>"; };
+		C20CEEB61517D948009AA0AD /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		C20CEEB81517E594009AA0AD /* MLWTweetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWTweetView.h; path = Classes/MLWTweetView.h; sourceTree = "<group>"; };
+		C20CEEB91517E594009AA0AD /* MLWTweetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWTweetView.m; path = Classes/MLWTweetView.m; sourceTree = "<group>"; };
 		C29A8E1F150A560B00320140 /* MarkLogic World.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MarkLogic World.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C29A8E23150A560B00320140 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C29A8E25150A560B00320140 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -122,6 +130,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C20CEEB71517D948009AA0AD /* ImageIO.framework in Frameworks */,
 				C29A8E24150A560B00320140 /* UIKit.framework in Frameworks */,
 				C29A8E26150A560B00320140 /* Foundation.framework in Frameworks */,
 				C29A8E28150A560B00320140 /* CoreGraphics.framework in Frameworks */,
@@ -202,6 +211,7 @@
 		C29A8E14150A560B00320140 = {
 			isa = PBXGroup;
 			children = (
+				C20CEEB61517D948009AA0AD /* ImageIO.framework */,
 				C20CEE5815129049009AA0AD /* SBJSON */,
 				C20CEE2D151287C1009AA0AD /* Resources */,
 				C29A8E7C151101B500320140 /* Models */,
@@ -243,6 +253,8 @@
 				C20CEE971514E9D0009AA0AD /* UIPurposeView.m */,
 				C20CEEA615168177009AA0AD /* UITableView+helpers.h */,
 				C20CEEA715168177009AA0AD /* UITableView+helpers.m */,
+				C20CEEB81517E594009AA0AD /* MLWTweetView.h */,
+				C20CEEB91517E594009AA0AD /* MLWTweetView.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -275,6 +287,8 @@
 				C29A8E841511028D00320140 /* MLWSpeaker.m */,
 				C29A8E86151102DD00320140 /* MLWConference.h */,
 				C29A8E87151102DD00320140 /* MLWConference.m */,
+				C20CEEB21517B5A9009AA0AD /* MLWTweet.h */,
+				C20CEEB31517B5A9009AA0AD /* MLWTweet.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -373,6 +387,8 @@
 				C20CEE9315141D16009AA0AD /* MLWSessionView.m in Sources */,
 				C20CEE981514E9D0009AA0AD /* UIPurposeView.m in Sources */,
 				C20CEEA815168177009AA0AD /* UITableView+helpers.m in Sources */,
+				C20CEEB41517B5A9009AA0AD /* MLWTweet.m in Sources */,
+				C20CEEBA1517E594009AA0AD /* MLWTweetView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

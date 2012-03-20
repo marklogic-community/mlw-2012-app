@@ -21,7 +21,6 @@
 @synthesize selectable = _selectable;
 @synthesize title = _title;
 @synthesize speakers = _speakers;
-@synthesize speakerString = _speakerString;
 @synthesize abstract = _abstract;
 @synthesize track = _track;
 @synthesize location = _location;
@@ -58,10 +57,6 @@
 		}
 	}
 	return self;
-}
-
-- (NSString *)speakerString {
-	return @"Matt Carroll – Berico Technologies";
 }
 
 - (NSString *)formattedDate {

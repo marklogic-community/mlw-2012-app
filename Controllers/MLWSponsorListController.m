@@ -168,6 +168,7 @@
 	self.tableView = nil;
 	self.view = nil;
 	self.sponsors = nil;
+	self.loadingView = nil;
 
 	[super viewDidUnload];
 }
@@ -176,6 +177,7 @@
 	self.tableView = nil;
 	self.view = nil;
 	self.sponsors = nil;
+	self.loadingView = nil;
 
 	[super dealloc];
 }

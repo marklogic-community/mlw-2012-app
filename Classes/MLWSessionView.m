@@ -100,6 +100,8 @@
 	self.titleLabel = nil;
 	self.trackLabel = nil;
 	self.locationLabel = nil;
+	[_session release];
+
 	[super dealloc];
 }
 

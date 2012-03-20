@@ -92,6 +92,7 @@
 }
 
 - (void)dealloc {
+	self.tweet = nil;
 	self.profileImage = nil;
 	self.usernameLabel = nil;
 	self.contentLabel = nil;

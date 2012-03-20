@@ -183,6 +183,7 @@
 - (void)dealloc {
 	self.delegate = nil;
 	self.sessions = nil;
+
 	[super dealloc];
 }
 

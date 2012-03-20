@@ -117,6 +117,8 @@
 */
 
 - (void)dealloc {
+	self.conference = nil;
+
     [_window release];
     [_tabBarController release];
     [super dealloc];

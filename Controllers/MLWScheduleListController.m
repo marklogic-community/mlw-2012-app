@@ -168,6 +168,7 @@
 	self.tableView = nil;
 	self.view = nil;
 	self.sessionBlocks = nil;
+	self.loadingView = nil;
 }
 
 - (void)dealloc {
@@ -175,6 +176,7 @@
 	self.tableView = nil;
 	self.view = nil;
 	self.sessionBlocks = nil;
+	self.loadingView = nil;
 }
 
 @end

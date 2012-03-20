@@ -134,6 +134,8 @@
 	self.view = nil;
 	self.sessionBlocks = nil;
 	self.popover = nil;
+	self.loadingView = nil;
+	self.scrollView = nil;
 }
 
 - (void)dealloc {
@@ -142,6 +144,8 @@
 	self.view = nil;
 	self.sessionBlocks = nil;
 	self.popover = nil;
+	self.loadingView = nil;
+	self.scrollView = nil;
 }
 
 @end

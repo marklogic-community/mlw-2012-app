@@ -37,6 +37,7 @@
 
 - (void) dealloc {
 	[_id release];
+	[_name release];
 	[_title release];
 	[_organization release];
 	[_email release];

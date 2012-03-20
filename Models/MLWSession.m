@@ -92,9 +92,10 @@
 	[_title release];
 	[_abstract release];
 	[_track release];
+	[_speakers release];
+	[_location release];
 
 	[super dealloc];
 }
-
 
 @end

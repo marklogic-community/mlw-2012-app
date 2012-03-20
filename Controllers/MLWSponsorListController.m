@@ -8,10 +8,12 @@
 
 #import "MLWSponsorListController.h"
 #import "MLWAppDelegate.h"
+#import "MLWSponsorView.h"
 #import "UITableView+helpers.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface MLWSponsorListController ()
+- (MLWSponsorView *)sponsorViewForIndexPath:(NSIndexPath *)indexPath;
 @property (nonatomic, retain) UITableView *tableView;
 @property (nonatomic, retain) UIView *loadingView;
 @property (nonatomic, retain) NSArray *sponsors;
@@ -58,7 +60,29 @@
 	MLWAppDelegate *appDelegate = (MLWAppDelegate *)[UIApplication sharedApplication].delegate;
 	MLWConference *conference = appDelegate.conference;
 	BOOL cached = [conference fetchSponsors:^(NSArray *sponsors, NSError *error) {
-		self.sponsors = sponsors;
+		NSMutableArray *sponsorViews = [NSMutableArray arrayWithCapacity:sponsors.count];
+		for(MLWSponsor *sponsor in sponsors) {
+			[sponsorViews addObject:[[[MLWSponsorView alloc] initWithSponsor:sponsor] autorelease]];
+		}
+
+		NSMutableArray *groups = [NSMutableArray arrayWithCapacity:sponsorViews.count];
+		NSString *lastLevel = [((MLWSponsorView *)[sponsorViews objectAtIndex:0]).sponsor.level copy];
+		NSMutableArray *sponsorsInGroup = [NSMutableArray arrayWithCapacity:6];
+
+		for(MLWSponsorView *sponsorView in sponsorViews) {
+			if([sponsorView.sponsor.level isEqualToString:lastLevel] == NO) {
+				[groups addObject:[NSArray arrayWithArray:sponsorsInGroup]];
+				[sponsorsInGroup removeAllObjects];
+				[lastLevel release];
+				lastLevel = [sponsorView.sponsor.level copy];
+			}
+
+			[sponsorsInGroup addObject:sponsorView];
+		}
+
+		[groups addObject:[NSArray arrayWithArray:sponsorsInGroup]];
+		[lastLevel release];
+		self.sponsors = groups;
 
 		[self.tableView reloadData];
 		[UIView transitionWithView:self.loadingView duration:0.5f options:UIViewAnimationOptionCurveLinear animations:^{
@@ -83,24 +107,42 @@
 	return YES;
 }
 
-#pragma mark - View lifecycle
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+	[self.tableView reloadData];
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *) tableView {
-	return 1;
+	return self.sponsors.count;
 }
 
 - (NSInteger)tableView:(UITableView *) tableView numberOfRowsInSection:(NSInteger) section {
-	return self.sponsors.count;
+	NSArray *levelSponsors = [self.sponsors objectAtIndex:section];
+	return levelSponsors.count;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+	NSArray *sponsorViews = [self.sponsors objectAtIndex:section];
+	return ((MLWSponsorView *)[sponsorViews objectAtIndex:0]).sponsor.level;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+	MLWSponsorView *sponsorView = [self sponsorViewForIndexPath:indexPath];
+	return [sponsorView calculatedHeightWithWidth:self.view.frame.size.width];
 }
 
 - (UITableViewCell *)tableView:(UITableView *) tableView cellForRowAtIndexPath:(NSIndexPath *) indexPath {
 	static NSString *cellIdentifier = @"Cell";
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 	if(cell == nil) {
-		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier] autorelease];
-		cell.textLabel.adjustsFontSizeToFitWidth = YES;
-		cell.textLabel.minimumFontSize = 14;
+		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier] autorelease];
 	}
+
+	for(UIView *view in cell.contentView.subviews) {
+		[view removeFromSuperview];
+	}
+	MLWSponsorView *sponsorView = [self sponsorViewForIndexPath:indexPath];
+	sponsorView.frame = cell.contentView.frame;
+	[cell.contentView addSubview:sponsorView];
 
 	return cell;
 }
@@ -115,19 +157,27 @@
 	return nil;
 }
 
+- (MLWSponsorView *)sponsorViewForIndexPath:(NSIndexPath *)indexPath {
+	NSArray *groupSponsors = [self.sponsors objectAtIndex:indexPath.section];
+	MLWSponsorView *view = [groupSponsors objectAtIndex:indexPath.row];
+	return view;
+}
+
 
 - (void)viewDidUnload {
-	[super viewDidUnload];
 	self.tableView = nil;
 	self.view = nil;
 	self.sponsors = nil;
+
+	[super viewDidUnload];
 }
 
 - (void)dealloc {
-	[super dealloc];
 	self.tableView = nil;
 	self.view = nil;
 	self.sponsors = nil;
+
+	[super dealloc];
 }
 
 @end

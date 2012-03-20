@@ -14,12 +14,14 @@
 @interface MLWConference ()
 @property (nonatomic, retain) NSArray *sessions;
 @property (nonatomic, retain) NSArray *speakers;
+@property (nonatomic, retain) NSArray *sponsors;
 @end
 
 @implementation MLWConference
 
 @synthesize sessions = _sessions;
 @synthesize speakers = _speakers;
+@synthesize sponsors = _sponsors;
 
 - (id)init {
 	self = [super init];
@@ -172,6 +174,54 @@
 }
 
 - (BOOL)fetchSponsors:(void (^)(NSArray *sessions, NSError *error)) callback {
+	if(_sponsors != nil) {
+		callback(_sponsors, nil);
+		return YES;
+	}
+
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+		SBJsonParser *parser = [[[SBJsonParser alloc] init] autorelease];
+
+		NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/store?uri=/sponsors.json", CORONABASE]];
+		NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+		request.URL = url;
+
+		NSURLResponse *response = nil;
+		NSError *error = nil;
+		NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+		[request release];
+
+		if(error != nil || data == nil) {
+			NSLog(@"MLWConference: could not fetch sponsors - %@", error);
+			dispatch_async(dispatch_get_main_queue(), ^ {
+				callback(nil, error);
+			});
+			return;
+		}
+
+		NSArray *results = [parser objectWithData:data];
+		if(results == nil) {
+			NSLog(@"MLWConference: JSON parsing error - %@", parser.error);
+			// XXX create NSError
+			dispatch_async(dispatch_get_main_queue(), ^ {
+				callback(nil, nil);
+			});
+			return;
+		}
+
+		NSMutableArray *sponsorObjects = [NSMutableArray arrayWithCapacity:20];
+		MLWSponsor *sponsor;
+		for(NSDictionary *rawSponsor in results) {
+			sponsor = [[MLWSponsor alloc] initWithData:rawSponsor];
+			[sponsorObjects addObject:sponsor];
+			[sponsor release];
+		}
+
+		dispatch_async(dispatch_get_main_queue(), ^ {
+			callback(sponsorObjects, nil);
+		});
+	});
+
 	return YES;
 }
 
@@ -213,6 +263,7 @@
 - (void) dealloc {
 	self.sessions = nil;
 	self.speakers = nil;
+	self.sponsors = nil;
 	[super dealloc];
 }
 

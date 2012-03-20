@@ -8,34 +8,32 @@
 
 #import "MLWSponsor.h"
 
+@interface MLWSponsor ()
+@property (nonatomic, retain) NSURL *logoURL;
+@property (nonatomic, retain) UIView *cachedLogoView;
+@end
+
 @implementation MLWSponsor
+
+@synthesize name = _name;
+@synthesize level = _level;
+@synthesize description = _description;
+@synthesize website = _website;
+@synthesize logo = _logo;
+@synthesize logoURL;
+@synthesize cachedLogoView;
 
 - (id)initWithData:(NSDictionary *) jsonData {
     self = [super init];
     if(self) {
-		name = [[jsonData objectForKey:@"name"] copy];
-		level = [[jsonData objectForKey:@"level"] copy];
-		description = [[jsonData objectForKey:@"description"] copy];
-		website = [[jsonData objectForKey:@"website"] copy];
-		logoURL = [[NSURL alloc] initWithString:[jsonData objectForKey:@"logoURL"]];
+		_name = [[jsonData objectForKey:@"company"] retain];
+		_level = [[jsonData objectForKey:@"level"] retain];
+		_description = [[jsonData objectForKey:@"info"] retain];
+		_website = [[jsonData objectForKey:@"websitePretty"] retain];
+		self.logoURL = [NSURL URLWithString:[jsonData objectForKey:@"imageURL"]];
+		self.cachedLogoView = nil;
     }
     return self;
-}
-
-- (NSString *)name {
-	return name;
-}
-
-- (NSNumber *)level {
-	return level;
-}
-
-- (NSString *)description {
-	return description;
-}
-
-- (NSString *)website {
-	return website;
 }
 
 - (UIView*)logo {
@@ -43,10 +41,15 @@
 		return nil;
 	}
 
-	UIView *view = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 50)] autorelease];
-	UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+	if(self.cachedLogoView != nil) {
+		return self.cachedLogoView;
+	}
+
+	self.cachedLogoView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 50)] autorelease];
+	UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+	spinner.center = self.cachedLogoView.center;
 	[spinner startAnimating];
-	[view addSubview:spinner];
+	[self.cachedLogoView addSubview:spinner];
 
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 		NSData *logoData = [NSData dataWithContentsOfURL:logoURL];
@@ -59,21 +62,22 @@
 
 			UIImage *logoImage = [UIImage imageWithData:logoData];
 			UIImageView *logoImageView = [[UIImageView alloc] initWithImage:logoImage];
-			[view addSubview:logoImageView];
+			[self.cachedLogoView addSubview:logoImageView];
 			[logoImageView release];
 		});
 	});
 
 	[spinner release];
-	return view;
+	return self.cachedLogoView;
 }
 
 - (void)dealloc {
-	[name release];
-	[level release];
-	[description release];
-	[website release];
-	[logoURL release];
+	[_name release];
+	[_level release];
+	[_description release];
+	[_website release];
+	self.logoURL = nil;
+	self.cachedLogoView = nil;
 
 	[super dealloc];
 }

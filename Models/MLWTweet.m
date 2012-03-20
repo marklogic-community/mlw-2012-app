@@ -58,6 +58,8 @@
 	CGImageSourceRef src = CGImageSourceCreateWithURL((CFURLRef)url, NULL);
 	CGImageRef image = CGImageSourceCreateImageAtIndex(src, 0, NULL);
 	self.cachedImage = [UIImage imageWithCGImage:image];
+	CFRelease(src);
+	CGImageRelease(image);
 	return self.cachedImage;
 }
 

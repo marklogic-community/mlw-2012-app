@@ -8,19 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MLWSponsor : NSObject {
-	NSString *name;
-	NSNumber *level;
-	NSString *description;
-	NSString *website;
-	NSURL *logoURL;
-}
+@interface MLWSponsor : NSObject
 
 - (id)initWithData:(NSDictionary *) jsonData;
-- (NSString *)name;
-- (NSNumber *)level;
-- (NSString *)description;
-- (NSString *)website;
-- (UIView *)logo;
+@property (readonly) NSString *name;
+@property (readonly) NSString *level;
+@property (readonly) NSString *description;
+@property (readonly) NSString *website;
+@property (readonly) UIView *logo;
 
 @end

@@ -137,7 +137,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *) tableView cellForRowAtIndexPath:(NSIndexPath *) indexPath {
-	NSString *cellIdentifier;
+	NSString *cellIdentifier = @"DefaultCell";
 	if(indexPath.section == 0) {
 		if(indexPath.row == 0) {
 			cellIdentifier = @"DefaultCell";
@@ -292,7 +292,6 @@
 			[contactView addSubview:contactLabel];
 			[contactLabel release];
 
-			nextYOrigin += contactView.frame.size.height;
 			[speakerView addSubview:contactView];
 			[contactView release];
 		}

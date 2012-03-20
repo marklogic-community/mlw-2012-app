@@ -34,6 +34,7 @@
 		C20CEEB41517B5A9009AA0AD /* MLWTweet.m in Sources */ = {isa = PBXBuildFile; fileRef = C20CEEB31517B5A9009AA0AD /* MLWTweet.m */; };
 		C20CEEB71517D948009AA0AD /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C20CEEB61517D948009AA0AD /* ImageIO.framework */; };
 		C20CEEBA1517E594009AA0AD /* MLWTweetView.m in Sources */ = {isa = PBXBuildFile; fileRef = C20CEEB91517E594009AA0AD /* MLWTweetView.m */; };
+		C20CEEBD1518E357009AA0AD /* MLWSponsorView.m in Sources */ = {isa = PBXBuildFile; fileRef = C20CEEBC1518E357009AA0AD /* MLWSponsorView.m */; };
 		C29A8E24150A560B00320140 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C29A8E23150A560B00320140 /* UIKit.framework */; };
 		C29A8E26150A560B00320140 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C29A8E25150A560B00320140 /* Foundation.framework */; };
 		C29A8E28150A560B00320140 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C29A8E27150A560B00320140 /* CoreGraphics.framework */; };
@@ -99,6 +100,8 @@
 		C20CEEB61517D948009AA0AD /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		C20CEEB81517E594009AA0AD /* MLWTweetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWTweetView.h; path = Classes/MLWTweetView.h; sourceTree = "<group>"; };
 		C20CEEB91517E594009AA0AD /* MLWTweetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWTweetView.m; path = Classes/MLWTweetView.m; sourceTree = "<group>"; };
+		C20CEEBB1518E357009AA0AD /* MLWSponsorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWSponsorView.h; path = Classes/MLWSponsorView.h; sourceTree = "<group>"; };
+		C20CEEBC1518E357009AA0AD /* MLWSponsorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWSponsorView.m; path = Classes/MLWSponsorView.m; sourceTree = "<group>"; };
 		C29A8E1F150A560B00320140 /* MarkLogic World.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MarkLogic World.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C29A8E23150A560B00320140 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C29A8E25150A560B00320140 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -255,6 +258,8 @@
 				C20CEEA715168177009AA0AD /* UITableView+helpers.m */,
 				C20CEEB81517E594009AA0AD /* MLWTweetView.h */,
 				C20CEEB91517E594009AA0AD /* MLWTweetView.m */,
+				C20CEEBB1518E357009AA0AD /* MLWSponsorView.h */,
+				C20CEEBC1518E357009AA0AD /* MLWSponsorView.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -389,6 +394,7 @@
 				C20CEEA815168177009AA0AD /* UITableView+helpers.m in Sources */,
 				C20CEEB41517B5A9009AA0AD /* MLWTweet.m in Sources */,
 				C20CEEBA1517E594009AA0AD /* MLWTweetView.m in Sources */,
+				C20CEEBD1518E357009AA0AD /* MLWSponsorView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

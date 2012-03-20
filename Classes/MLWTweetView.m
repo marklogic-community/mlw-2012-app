@@ -27,8 +27,6 @@
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if(self) {
-		// self.contentMode = UIViewContentModeRedraw;
-		
 		self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 
 		// Profile image view
@@ -85,7 +83,6 @@
 
 	self.dateLabel.frame = CGRectMake(rightFrame.origin.x, totalHeight, rightFrame.size.width - 5, 16);
 	self.dateLabel.text = self.tweet.dateString;
-	totalHeight += self.dateLabel.frame.size.height;
 }
 
 

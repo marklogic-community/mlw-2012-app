@@ -14,6 +14,7 @@
 #import <QuartzCore/QuartzCore.h>
 
 @interface MLWTweetController ()
+- (void)refreshResults:(UIBarButtonItem *)sender;
 @property (nonatomic, retain) UITableView *tableView;
 @property (nonatomic, retain) UIView *loadingView;
 @property (nonatomic, retain) NSArray *tweets;
@@ -36,6 +37,10 @@
 }
 
 - (void)loadView {
+	UIBarButtonItem *refresh = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshResults:)];
+	self.navigationItem.rightBarButtonItem = refresh;
+	[refresh release];
+
 	self.view = [[[UIView alloc] init] autorelease];
 	self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 
@@ -56,10 +61,23 @@
 	self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 	[self.tableView applyBackground];
 	[self.view addSubview:self.tableView];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+	[self refreshResults:nil];
+	[super viewWillAppear:animated];
+}
+
+- (void)refreshResults:(UIBarButtonItem *)sender {
+	self.tweets = nil;
+	[self.tableView reloadData];
+	self.loadingView.frame = self.view.frame;
+	[self.view addSubview:self.loadingView];
+	self.loadingView.alpha = 1.0f;
 
 	MLWAppDelegate *appDelegate = (MLWAppDelegate *)[UIApplication sharedApplication].delegate;
 	MLWConference *conference = appDelegate.conference;
-	BOOL cached = [conference fetchTweets:^(NSArray *tweets, NSError *error) {
+	[conference fetchTweets:^(NSArray *tweets, NSError *error) {
 		self.tweets = tweets;
 
 		[self.tableView reloadData];
@@ -67,14 +85,10 @@
 			self.loadingView.alpha = 0.0f;
 		}
 		completion:^(BOOL finished) {
+			[self.tableView reloadData];
 			[self.loadingView removeFromSuperview];
 		}];
 	}];
-
-	if(!cached) {
-		[self.view addSubview:self.loadingView];
-		self.loadingView.alpha = 1.0f;
-	}
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {

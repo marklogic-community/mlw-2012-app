@@ -8,10 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "MLWSpeaker.h"
+#import "MLWConstraint.h"
 
 @interface MLWConference : NSObject
 
-- (BOOL)fetchSessions:(void (^)(NSArray *sessions, NSError *error)) callback;
+- (BOOL)fetchSessionsWithConstraint:(MLWConstraint *) constraint callback:(void (^)(NSArray *, NSError *)) callback;
 - (BOOL)fetchSponsors:(void (^)(NSArray *sessions, NSError *error)) callback;
 - (BOOL)fetchTweets:(void (^)(NSArray *sessions, NSError *error)) callback;
 - (MLWSpeaker *)speakerWithId:(NSString *)speakerId;

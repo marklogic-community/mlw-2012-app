@@ -11,8 +11,8 @@
 
 @interface MLWAppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>
 
-@property (strong, nonatomic) UIWindow *window;
-@property (strong, nonatomic) MLWConference *conference;
-@property (strong, nonatomic) UITabBarController *tabBarController;
+@property (retain, nonatomic) UIWindow *window;
+@property (retain, nonatomic) MLWConference *conference;
+@property (retain, nonatomic) UITabBarController *tabBarController;
 
 @end

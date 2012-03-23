@@ -11,19 +11,25 @@
 #import "MLWAppDelegate.h"
 #import "MLWSession.h"
 #import "UITableView+helpers.h"
+#import "MLWFilterViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface MLWScheduleListController ()
+@property (nonatomic, retain) MLWFilterViewController *filterController;
+@property (nonatomic, retain) UINavigationController *filterNavController;
 @property (nonatomic, retain) UITableView *tableView;
 @property (nonatomic, retain) UIView *loadingView;
 @property (nonatomic, retain) NSArray *sessionBlocks;
 
+- (void)filterResults:(UIBarButtonItem *)sender;
 - (MLWSession *)sessionForIndexPath:(NSIndexPath *) indexPath;
 @end
 
 
 @implementation MLWScheduleListController
 
+@synthesize filterController = _filterController;
+@synthesize filterNavController = _filterNavController;
 @synthesize tableView = _tableView;
 @synthesize loadingView = _loadingView;
 @synthesize sessionBlocks = _sessionsInBlocks;
@@ -31,6 +37,11 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
 	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
 	if (self) {
+		self.filterController = [[[MLWFilterViewController alloc] init] autorelease];
+		self.filterNavController = [[[UINavigationController alloc] initWithRootViewController:self.filterController] autorelease];
+		self.filterNavController.navigationBar.tintColor = [UIColor colorWithRed:(236.0f/255.0f) green:(125.0f/255.0f) blue:(30.0f/255.0f) alpha:1.0f];
+		self.filterNavController.title = @"Filter Sessions";
+
 		self.navigationItem.title = @"Schedule";
 		self.tabBarItem.title = @"Schedule";
 		self.tabBarItem.image = [UIImage imageNamed:@"calendar"];
@@ -41,6 +52,10 @@
 #pragma mark - View lifecycle
 
 - (void)loadView {
+	UIBarButtonItem *filter = [[UIBarButtonItem alloc] initWithTitle:@"Filter" style:UIBarButtonItemStylePlain target:self action:@selector(filterResults:)];
+	self.navigationItem.rightBarButtonItem = filter;
+	[filter release];
+
 	self.view = [[[UIView alloc] init] autorelease];
 	self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 
@@ -64,7 +79,7 @@
 
 	MLWAppDelegate *appDelegate = (MLWAppDelegate *)[UIApplication sharedApplication].delegate;
 	MLWConference *conference = appDelegate.conference;
-	BOOL cached = [conference fetchSessions:^(NSArray *sessions, NSError *error) {
+	BOOL cached = [conference fetchSessionsWithConstraint:nil callback:^(NSArray *sessions, NSError *error) {
 		self.sessionBlocks = [conference sessionsToBlocks:sessions];
 
 		[self.tableView reloadData];
@@ -165,6 +180,11 @@
 	[viewShowController release];
 }
 
+
+- (void)filterResults:(UIBarButtonItem *)sender {
+	[self presentModalViewController:self.filterNavController animated:YES];
+}
+
 - (MLWSession *)sessionForIndexPath:(NSIndexPath *) indexPath {
 	NSArray *sessionsInBlock = [self.sessionBlocks objectAtIndex:indexPath.section];
 	return [sessionsInBlock objectAtIndex:indexPath.row];
@@ -181,6 +201,8 @@
 
 - (void)dealloc {
 	[super dealloc];
+	self.filterController = nil;
+	self.filterNavController = nil;
 	self.tableView = nil;
 	self.view = nil;
 	self.sessionBlocks = nil;

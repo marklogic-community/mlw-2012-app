@@ -68,7 +68,7 @@
 
 	MLWAppDelegate *appDelegate = (MLWAppDelegate *)[UIApplication sharedApplication].delegate;
 	MLWConference *conference = appDelegate.conference;
-	BOOL cached = [conference fetchSessions:^(NSArray *sessions, NSError *error) {
+	BOOL cached = [conference fetchSessionsWithConstraint:nil callback:^(NSArray *sessions, NSError *error) {
 		self.sessionBlocks = [conference sessionsToBlocks:sessions];
 		self.gridView.sessions = self.sessionBlocks;
 		[self.gridView setNeedsLayout];

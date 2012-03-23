@@ -10,11 +10,16 @@
 #import "MLWSponsor.h"
 #import "MLWTweet.h"
 #import "SBJson.h"
+#import "MLWSearch.h"
+#import "MLWAndConstraint.h"
+#import "MLWKeywordConstraint.h"
 
 @interface MLWConference ()
 @property (nonatomic, retain) NSArray *sessions;
 @property (nonatomic, retain) NSArray *speakers;
 @property (nonatomic, retain) NSArray *sponsors;
+
+- (void)populateSpeakers:(void (^)(NSError *)) callback;
 @end
 
 @implementation MLWConference
@@ -32,84 +37,59 @@
 	return self;
 }
 
-- (BOOL)fetchSessions:(void (^)(NSArray *, NSError *)) callback {
+- (BOOL)fetchSessionsWithConstraint:(MLWConstraint *) constraint callback:(void (^)(NSArray *, NSError *)) callback {
 	if(_sessions != nil && _speakers != nil) {
 		callback(_sessions, nil);
 		return YES;
 	}
 
-	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-		SBJsonParser *parser = [[[SBJsonParser alloc] init] autorelease];
+	MLWAndConstraint *sessionConstraint = [MLWAndConstraint andConstraints:[MLWKeywordConstraint key:@"type" equals:@"session"], constraint, nil];
 
-		NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/kvquery?key=type&value=speaker&length=1000&&outputFormat=json", CORONABASE]];
-		NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-		request.URL = url;
-
-		NSURLResponse *response = nil;
-		NSError *error = nil;
-		NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-		[request release];
-
-		if(error != nil || data == nil) {
-			NSLog(@"MLWConference: could not fetch list of speakers - %@", error);
-			dispatch_async(dispatch_get_main_queue(), ^ {
+	if(self.speakers == nil) {
+		[self populateSpeakers:^(NSError *error) {
+			if(error != nil) {
 				callback(nil, error);
-			});
-			return;
-		}
+				return;
+			}
+			[self populateSessionsWithConstraint:sessionConstraint callback:^(NSError *error) {
+				callback(_sessions, error);
+			}];
+		}];
+	}
+	else {
+		[self populateSessionsWithConstraint:sessionConstraint callback:^(NSError *error) {
+			callback(_sessions, error);
+		}];
+	}
 
-		NSDictionary *results = [parser objectWithData:data];
-		if(results == nil) {
-			NSLog(@"MLWConference: JSON parsing error - %@", parser.error);
-			// XXX create NSError
-			dispatch_async(dispatch_get_main_queue(), ^ {
-				callback(nil, nil);
-			});
-			return;
-		}
+	return NO;
+}
 
+- (void)populateSpeakers:(void (^)(NSError *)) callback {
+	MLWKeywordConstraint *speakerConstraint = [MLWKeywordConstraint key:@"type" equals:@"speaker"];
+	MLWSearch *speakerSearch = [[MLWSearch alloc] initWithConstraint:speakerConstraint];
+	speakerSearch.baseURL = [NSURL URLWithString:CORONABASE];
+	[speakerSearch fetchResults:1 length:1000 callback:^(NSDictionary *results, NSError *error) {
 		NSMutableArray *speakerObjects = [NSMutableArray arrayWithCapacity:100];
-		MLWSpeaker *speaker;
 		for(NSDictionary *rawSpeaker in [results objectForKey:@"results"]) {
-			speaker = [[MLWSpeaker alloc] initWithData:[rawSpeaker objectForKey:@"content"]];
+			MLWSpeaker *speaker = [[MLWSpeaker alloc] initWithData:[rawSpeaker objectForKey:@"content"]];
 			[speakerObjects addObject:speaker];
 			[speaker release];
 		}
 
 		self.speakers = [NSArray arrayWithArray:speakerObjects];
+		callback(error);
+	}];
+	[speakerSearch release];
+};
 
-
-		url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/kvquery?key=type&value=session&length=1000&&outputFormat=json", CORONABASE]];
-		request = [[NSMutableURLRequest alloc] init];
-		request.URL = url;
-
-		response = nil;
-		error = nil;
-		data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-		[request release];
-
-		if(error != nil || data == nil) {
-			NSLog(@"MLWConference: could not fetch list of sessions - %@", error);
-			dispatch_async(dispatch_get_main_queue(), ^ {
-				callback(nil, error);
-			});
-			return;
-		}
-
-		results = [parser objectWithData:data];
-		if(results == nil) {
-			NSLog(@"MLWConference: JSON parsing error - %@", parser.error);
-			// XXX create NSError
-			dispatch_async(dispatch_get_main_queue(), ^ {
-				callback(nil, nil);
-			});
-			return;
-		}
-
+- (void)populateSessionsWithConstraint:(MLWConstraint *) constraint callback:(void (^)(NSError *)) callback {
+	MLWSearch *sessionSearch = [[MLWSearch alloc] initWithConstraint:constraint];
+	sessionSearch.baseURL = [NSURL URLWithString:CORONABASE];
+	[sessionSearch fetchResults:1 length:1000 callback:^(NSDictionary *results, NSError *error) {
 		NSMutableArray *sessionObjects = [NSMutableArray arrayWithCapacity:100];
-		MLWSession *session;
 		for(NSDictionary *rawSession in [results objectForKey:@"results"]) {
-			session = [[MLWSession alloc] initWithData:[rawSession objectForKey:@"content"]];
+			MLWSession *session = [[MLWSession alloc] initWithData:[rawSession objectForKey:@"content"]];
 			[sessionObjects addObject:session];
 			[session release];
 		}
@@ -118,12 +98,9 @@
 			return [session1.startTime compare:session2.startTime];
 		}];
 
-		dispatch_async(dispatch_get_main_queue(), ^ {
-			callback(_sessions, nil);
-		});
-	});
-
-	return NO;
+		callback(error);
+	}];
+	[sessionSearch release];
 }
 
 - (BOOL)fetchTweets:(void (^)(NSArray *sessions, NSError *error)) callback {

@@ -35,6 +35,14 @@
 		C20CEEB71517D948009AA0AD /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C20CEEB61517D948009AA0AD /* ImageIO.framework */; };
 		C20CEEBA1517E594009AA0AD /* MLWTweetView.m in Sources */ = {isa = PBXBuildFile; fileRef = C20CEEB91517E594009AA0AD /* MLWTweetView.m */; };
 		C20CEEBD1518E357009AA0AD /* MLWSponsorView.m in Sources */ = {isa = PBXBuildFile; fileRef = C20CEEBC1518E357009AA0AD /* MLWSponsorView.m */; };
+		C26D897A151B757A00934014 /* MLWFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C26D8979151B757A00934014 /* MLWFilterViewController.m */; };
+		C26D897E151B7B0D00934014 /* MLWSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = C26D897D151B7B0D00934014 /* MLWSearch.m */; };
+		C26D8981151B7B8700934014 /* MLWConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = C26D8980151B7B8700934014 /* MLWConstraint.m */; };
+		C26D8984151B7BA200934014 /* MLWRangeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = C26D8983151B7BA200934014 /* MLWRangeConstraint.m */; };
+		C26D898E151B7E6A00934014 /* MLWAndConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = C26D898D151B7E6A00934014 /* MLWAndConstraint.m */; };
+		C26D8992151B861400934014 /* MLWOrConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = C26D8991151B861400934014 /* MLWOrConstraint.m */; };
+		C26D8995151B87CC00934014 /* MLWKeywordConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = C26D8994151B87CC00934014 /* MLWKeywordConstraint.m */; };
+		C26D8998151BA19E00934014 /* MLWBooleanConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = C26D8997151BA19E00934014 /* MLWBooleanConstraint.m */; };
 		C29A8E24150A560B00320140 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C29A8E23150A560B00320140 /* UIKit.framework */; };
 		C29A8E26150A560B00320140 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C29A8E25150A560B00320140 /* Foundation.framework */; };
 		C29A8E28150A560B00320140 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C29A8E27150A560B00320140 /* CoreGraphics.framework */; };
@@ -102,6 +110,22 @@
 		C20CEEB91517E594009AA0AD /* MLWTweetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWTweetView.m; path = Classes/MLWTweetView.m; sourceTree = "<group>"; };
 		C20CEEBB1518E357009AA0AD /* MLWSponsorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWSponsorView.h; path = Classes/MLWSponsorView.h; sourceTree = "<group>"; };
 		C20CEEBC1518E357009AA0AD /* MLWSponsorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWSponsorView.m; path = Classes/MLWSponsorView.m; sourceTree = "<group>"; };
+		C26D8978151B757A00934014 /* MLWFilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWFilterViewController.h; path = Controllers/MLWFilterViewController.h; sourceTree = "<group>"; };
+		C26D8979151B757A00934014 /* MLWFilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWFilterViewController.m; path = Controllers/MLWFilterViewController.m; sourceTree = "<group>"; };
+		C26D897C151B7B0D00934014 /* MLWSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWSearch.h; path = Classes/MLWSearch.h; sourceTree = "<group>"; };
+		C26D897D151B7B0D00934014 /* MLWSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWSearch.m; path = Classes/MLWSearch.m; sourceTree = "<group>"; };
+		C26D897F151B7B8700934014 /* MLWConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWConstraint.h; path = Classes/MLWConstraint.h; sourceTree = "<group>"; };
+		C26D8980151B7B8700934014 /* MLWConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWConstraint.m; path = Classes/MLWConstraint.m; sourceTree = "<group>"; };
+		C26D8982151B7BA200934014 /* MLWRangeConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWRangeConstraint.h; path = Classes/MLWRangeConstraint.h; sourceTree = "<group>"; };
+		C26D8983151B7BA200934014 /* MLWRangeConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWRangeConstraint.m; path = Classes/MLWRangeConstraint.m; sourceTree = "<group>"; };
+		C26D898C151B7E6A00934014 /* MLWAndConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWAndConstraint.h; path = Classes/MLWAndConstraint.h; sourceTree = "<group>"; };
+		C26D898D151B7E6A00934014 /* MLWAndConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWAndConstraint.m; path = Classes/MLWAndConstraint.m; sourceTree = "<group>"; };
+		C26D8990151B861400934014 /* MLWOrConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWOrConstraint.h; path = Classes/MLWOrConstraint.h; sourceTree = "<group>"; };
+		C26D8991151B861400934014 /* MLWOrConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWOrConstraint.m; path = Classes/MLWOrConstraint.m; sourceTree = "<group>"; };
+		C26D8993151B87CC00934014 /* MLWKeywordConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWKeywordConstraint.h; path = Classes/MLWKeywordConstraint.h; sourceTree = "<group>"; };
+		C26D8994151B87CC00934014 /* MLWKeywordConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWKeywordConstraint.m; path = Classes/MLWKeywordConstraint.m; sourceTree = "<group>"; };
+		C26D8996151BA19E00934014 /* MLWBooleanConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWBooleanConstraint.h; path = Classes/MLWBooleanConstraint.h; sourceTree = "<group>"; };
+		C26D8997151BA19E00934014 /* MLWBooleanConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWBooleanConstraint.m; path = Classes/MLWBooleanConstraint.m; sourceTree = "<group>"; };
 		C29A8E1F150A560B00320140 /* MarkLogic World.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MarkLogic World.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C29A8E23150A560B00320140 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C29A8E25150A560B00320140 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -246,6 +270,8 @@
 		C29A8E54150A5B2900320140 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				C26D8993151B87CC00934014 /* MLWKeywordConstraint.h */,
+				C26D8994151B87CC00934014 /* MLWKeywordConstraint.m */,
 				C29A8E55150A5B3D00320140 /* MLWAppDelegate.h */,
 				C29A8E56150A5B3D00320140 /* MLWAppDelegate.m */,
 				C20CEE8E1513F586009AA0AD /* MLWScheduleGridView.h */,
@@ -260,6 +286,18 @@
 				C20CEEB91517E594009AA0AD /* MLWTweetView.m */,
 				C20CEEBB1518E357009AA0AD /* MLWSponsorView.h */,
 				C20CEEBC1518E357009AA0AD /* MLWSponsorView.m */,
+				C26D897C151B7B0D00934014 /* MLWSearch.h */,
+				C26D897D151B7B0D00934014 /* MLWSearch.m */,
+				C26D897F151B7B8700934014 /* MLWConstraint.h */,
+				C26D8980151B7B8700934014 /* MLWConstraint.m */,
+				C26D8982151B7BA200934014 /* MLWRangeConstraint.h */,
+				C26D8983151B7BA200934014 /* MLWRangeConstraint.m */,
+				C26D898C151B7E6A00934014 /* MLWAndConstraint.h */,
+				C26D898D151B7E6A00934014 /* MLWAndConstraint.m */,
+				C26D8990151B861400934014 /* MLWOrConstraint.h */,
+				C26D8991151B861400934014 /* MLWOrConstraint.m */,
+				C26D8996151BA19E00934014 /* MLWBooleanConstraint.h */,
+				C26D8997151BA19E00934014 /* MLWBooleanConstraint.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -277,6 +315,8 @@
 				C29A8E6E150A637300320140 /* MLWSessionDetailController.m */,
 				C29A8E73150FE50F00320140 /* MLWSponsorListController.h */,
 				C29A8E74150FE50F00320140 /* MLWSponsorListController.m */,
+				C26D8978151B757A00934014 /* MLWFilterViewController.h */,
+				C26D8979151B757A00934014 /* MLWFilterViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -395,6 +435,14 @@
 				C20CEEB41517B5A9009AA0AD /* MLWTweet.m in Sources */,
 				C20CEEBA1517E594009AA0AD /* MLWTweetView.m in Sources */,
 				C20CEEBD1518E357009AA0AD /* MLWSponsorView.m in Sources */,
+				C26D897A151B757A00934014 /* MLWFilterViewController.m in Sources */,
+				C26D897E151B7B0D00934014 /* MLWSearch.m in Sources */,
+				C26D8981151B7B8700934014 /* MLWConstraint.m in Sources */,
+				C26D8984151B7BA200934014 /* MLWRangeConstraint.m in Sources */,
+				C26D898E151B7E6A00934014 /* MLWAndConstraint.m in Sources */,
+				C26D8992151B861400934014 /* MLWOrConstraint.m in Sources */,
+				C26D8995151B87CC00934014 /* MLWKeywordConstraint.m in Sources */,
+				C26D8998151BA19E00934014 /* MLWBooleanConstraint.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

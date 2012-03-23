@@ -6,26 +6,17 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "MLWSearch.h"
+#import "MLWSearchRequest.h"
 #import "SBJSON.h"
 
-@interface MLWSearch ()
-@property (nonatomic, retain) NSMutableDictionary *parameters;
-- (NSData *)dictionaryToPOSTData:(NSDictionary *) parameters;
-@end
-
-@implementation MLWSearch
+@implementation MLWSearchRequest
 
 @synthesize constraint = _constraint;
-@synthesize baseURL;
-@synthesize parameters = _parameters;
 
 - (id)initWithConstraint:(MLWConstraint *) constraint {
 	self = [super init];
 	if(self) {
 		self.constraint = constraint;
-		self.parameters = [NSMutableDictionary dictionaryWithCapacity:20];
-		[self.parameters setObject:@"json" forKey:@"outputFormat"];
 	}
 	return self;
 }
@@ -77,22 +68,9 @@
 	[request release];
 }
 
-- (NSData *)dictionaryToPOSTData:(NSDictionary *) parameters {
-	NSMutableString *POSTParams = [[[NSMutableString alloc] init] autorelease];
-	for(NSString *key in parameters) {
-		NSString *encodedValue = ((NSString *) CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef) [parameters objectForKey:key], NULL, CFSTR("=/:"), kCFStringEncodingUTF8));
-		[POSTParams appendString: key];
-		[POSTParams appendString: @"="];
-		[POSTParams appendString: encodedValue];
-		[POSTParams appendString: @"&"];
-		[encodedValue release];
-	}
-	return [POSTParams dataUsingEncoding:NSUTF8StringEncoding];
-}
-
 - (void)dealloc {
 	self.constraint = nil;
-	self.baseURL = nil;
+
 	[super dealloc];
 }
 

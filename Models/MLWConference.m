@@ -10,9 +10,10 @@
 #import "MLWSponsor.h"
 #import "MLWTweet.h"
 #import "SBJson.h"
-#import "MLWSearch.h"
+#import "MLWSearchRequest.h"
 #import "MLWAndConstraint.h"
 #import "MLWKeywordConstraint.h"
+#import "MLWFacetRequest.h"
 
 @interface MLWConference ()
 @property (nonatomic, retain) NSArray *sessions;
@@ -65,9 +66,19 @@
 	return NO;
 }
 
+- (BOOL)fetchFacetsWithConstraint:(MLWConstraint *) constraint callback:(void (^)(MLWFacetResponse *, NSError *)) callback {
+	MLWAndConstraint *sessionConstraint = [MLWAndConstraint andConstraints:[MLWKeywordConstraint key:@"type" equals:@"session"], constraint, nil];
+
+	MLWFacetRequest *request = [[MLWFacetRequest alloc] initWithConstraint:sessionConstraint];
+	request.baseURL = [NSURL URLWithString:CORONABASE];
+	[request fetchResultsForFacets:[NSArray arrayWithObjects:@"speaker", @"track", nil] length:10000 callback:callback];
+	[request release];
+	return NO;
+}
+
 - (void)populateSpeakers:(void (^)(NSError *)) callback {
 	MLWKeywordConstraint *speakerConstraint = [MLWKeywordConstraint key:@"type" equals:@"speaker"];
-	MLWSearch *speakerSearch = [[MLWSearch alloc] initWithConstraint:speakerConstraint];
+	MLWSearchRequest *speakerSearch = [[MLWSearchRequest alloc] initWithConstraint:speakerConstraint];
 	speakerSearch.baseURL = [NSURL URLWithString:CORONABASE];
 	[speakerSearch fetchResults:1 length:1000 callback:^(NSDictionary *results, NSError *error) {
 		NSMutableArray *speakerObjects = [NSMutableArray arrayWithCapacity:100];
@@ -84,7 +95,7 @@
 };
 
 - (void)populateSessionsWithConstraint:(MLWConstraint *) constraint callback:(void (^)(NSError *)) callback {
-	MLWSearch *sessionSearch = [[MLWSearch alloc] initWithConstraint:constraint];
+	MLWSearchRequest *sessionSearch = [[MLWSearchRequest alloc] initWithConstraint:constraint];
 	sessionSearch.baseURL = [NSURL URLWithString:CORONABASE];
 	[sessionSearch fetchResults:1 length:1000 callback:^(NSDictionary *results, NSError *error) {
 		NSMutableArray *sessionObjects = [NSMutableArray arrayWithCapacity:100];

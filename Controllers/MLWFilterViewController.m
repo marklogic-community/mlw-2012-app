@@ -8,6 +8,8 @@
 
 #import "MLWFilterViewController.h"
 #import "UITableView+helpers.h"
+#import "MLWAppDelegate.h"
+#import "MLWFacetResponse.h"
 
 @interface MLWFilterViewController ()
 @property (nonatomic, retain) UITableView *tableView;
@@ -53,6 +55,22 @@
 	self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 	[self.tableView applyBackground];
 	[self.view addSubview:self.tableView];
+
+	MLWAppDelegate *appDelegate = (MLWAppDelegate *)[UIApplication sharedApplication].delegate;
+	MLWConference *conference = appDelegate.conference;
+	BOOL cached = [conference fetchFacetsWithConstraint:nil callback:^(MLWFacetResponse *response, NSError *error) {
+		[UIView transitionWithView:self.loadingView duration:0.5f options:UIViewAnimationOptionCurveLinear animations:^{
+			self.loadingView.alpha = 0.0f;
+		}
+		completion:^(BOOL finished) {
+			[self.loadingView removeFromSuperview];
+		}];
+	}];
+
+	if(!cached) {
+		[self.view addSubview:self.loadingView];
+		self.loadingView.alpha = 1.0f;
+	}
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {

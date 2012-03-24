@@ -67,6 +67,63 @@
 	[request release];
 }
 
+
+- (NSString *)language {
+	return [self.parameters objectForKey:@"language"];
+}
+
+- (void)setLanguage:(NSString *) language {
+	[self.parameters setObject:language forKey:@"language"];
+}
+
+- (NSString *)order {
+	return [self.parameters objectForKey:@"order"];
+}
+
+- (void)setOrder:(NSString *) order {
+	[self.parameters setObject:order forKey:@"order"];
+}
+
+- (NSString *)frequency {
+	return [self.parameters objectForKey:@"frequency"];
+}
+
+- (void)setFrequency:(NSString *) frequency {
+	[self.parameters setObject:frequency forKey:@"frequency"];
+}
+
+- (BOOL)includeAllValues {
+	return ((NSNumber *)[self.parameters objectForKey:@"includeAllValues"]).boolValue;
+}
+
+- (void)setIncludeAllValues:(BOOL) includeAllValues {
+	[self.parameters setObject:[NSNumber numberWithBool:includeAllValues] forKey:@"includeAllValues"];
+}
+
+- (NSString *)collection {
+	return [self.parameters objectForKey:@"collection"];
+}
+
+- (void)setCollection:(NSString *) collection {
+	[self.parameters setObject:collection forKey:@"collection"];
+}
+
+- (NSString *)underDirectory {
+	return [self.parameters objectForKey:@"underDirectory"];
+}
+
+- (void)setUnderDirectory:(NSString *) underDirectory {
+	[self.parameters setObject:underDirectory forKey:@"underDirectory"];
+}
+
+- (NSString *)inDirectory {
+	return [self.parameters objectForKey:@"inDirectory"];
+}
+
+- (void)setInDirectory:(NSString *) inDirectory {
+	[self.parameters setObject:inDirectory forKey:@"inDirectory"];
+}
+
 - (void)dealloc {
 	self.constraint = nil;
 

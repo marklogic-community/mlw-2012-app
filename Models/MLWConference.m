@@ -73,6 +73,7 @@
 
 	MLWFacetRequest *request = [[MLWFacetRequest alloc] initWithConstraint:sessionConstraint];
 	request.baseURL = [NSURL URLWithString:CORONABASE];
+	request.order = @"ascending";
 	[request fetchResultsForFacets:[NSArray arrayWithObjects:@"speaker", @"track", nil] length:10000 callback:callback];
 	[request release];
 	return NO;

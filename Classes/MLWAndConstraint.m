@@ -10,6 +10,15 @@
 
 @implementation MLWAndConstraint
 
+- (id)init {
+	self = [super init];
+	if(self) {
+		self.dict = [NSMutableDictionary dictionaryWithObject:[NSMutableArray arrayWithCapacity:20] forKey:@"and"];
+	}
+
+	return self;
+}
+
 + (MLWAndConstraint *)andConstraints:(MLWConstraint *) firstConstraint, ... {
 	MLWConstraint *eachConstraint;
 	va_list constraintList;
@@ -26,7 +35,7 @@
 	}
 
 	MLWAndConstraint *constraint = [[[MLWAndConstraint alloc] init] autorelease];
-	constraint.dict = [NSMutableDictionary dictionaryWithObject:constraints forKey:@"and"];
+	[constraint.dict setObject:constraints forKey:@"and"];
 	return constraint;
 }
 

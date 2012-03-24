@@ -7,10 +7,15 @@
 //
 
 #import "MLWRangeConstraint.h"
+#import "MLWFacetResult.h"
 
 @implementation MLWRangeConstraint
 
 + (MLWRangeConstraint *) rangeNamed:(NSString *) rangeName value:(id) value {
+	if([value isKindOfClass:[MLWFacetResult class]]) {
+		value = ((MLWFacetResult *)value).label;
+	}
+
 	MLWRangeConstraint *constraint = [[[MLWRangeConstraint alloc] init] autorelease];
 	constraint.dict = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:rangeName, value, nil] forKeys:[NSArray arrayWithObjects:@"range", @"value", nil]];
 	return constraint;
@@ -21,11 +26,18 @@
 	va_list valueList;
 	NSMutableArray *values = [NSMutableArray arrayWithCapacity:20];
 
+	if([firstValue isKindOfClass:[MLWFacetResult class]]) {
+		firstValue = ((MLWFacetResult *)firstValue).label;
+	}
+
 	if(firstValue != nil) {
 		[values addObject:firstValue];
 
 		va_start(valueList, firstValue);
 		while((eachValue = va_arg(valueList, id))) {
+			if([eachValue isKindOfClass:[MLWFacetResult class]]) {
+				eachValue = ((MLWFacetResult *)eachValue).label;
+			}
 			[values addObject:eachValue];
 		}
 		va_end(valueList);
@@ -69,7 +81,7 @@
 }
 
 - (NSString *)name {
-	return [self.dict objectForKey:@"name"];
+	return [self.dict objectForKey:@"range"];
 }
 
 - (id)value {
@@ -143,32 +155,36 @@
 }
 
 - (void)addValue:(id) value {
-	NSMutableArray *values = (NSMutableArray *)[self values];
-	[values addObject:value];
+	if([value isKindOfClass:[MLWFacetResult class]]) {
+		value = ((MLWFacetResult *)value).label;
+	}
+
+	id currentValue = [self.dict objectForKey:@"value"];
+	if(currentValue == nil) {
+		[self.dict setObject:value forKey:@"value"];
+		return;
+	}
+	if([currentValue isKindOfClass:[NSMutableArray class]]) {
+		[currentValue addObject:value];
+		return;
+	}
+	else {
+		[self.dict setObject:[NSMutableArray arrayWithObjects:currentValue, value, nil] forKey:@"value"];
+		return;
+	}
 }
 
 - (void)removeValue:(id) value {
 	NSMutableArray *values = (NSMutableArray *)[self values];
 	for(id aValue in values) {
-		if([aValue isKindOfClass:[NSString class]] && [(NSString *)aValue isEqualToString:value]) {
+		if([aValue isKindOfClass:[MLWFacetResult class]] && [((MLWFacetResult *)aValue).label isEqualToString:value]) {
+			[values removeObject:((MLWFacetResult *)aValue).label];
+		}
+		else if([aValue isKindOfClass:[NSString class]] && [(NSString *)aValue isEqualToString:value]) {
 			[values removeObject:aValue];
 		}
 		else if([aValue isKindOfClass:[NSNumber class]] && [(NSNumber *)aValue isEqualToNumber:value]) {
 			[values removeObject:aValue];
-		}
-	}
-}
-
-- (void)addBucketLabel:(NSString *) bucketLabel {
-	NSMutableArray *labels = (NSMutableArray *)[self bucketLabels];
-	[labels addObject:bucketLabel];
-}
-
-- (void)removeBucketLabel:(NSString *) bucketLabel {
-	NSMutableArray *labels = (NSMutableArray *)[self bucketLabels];
-	for(NSString *label in labels) {
-		if([label isEqualToString:bucketLabel]) {
-			[labels removeObject:label];
 		}
 	}
 }

@@ -39,10 +39,12 @@
 }
 
 - (BOOL)fetchSessionsWithConstraint:(MLWConstraint *) constraint callback:(void (^)(NSArray *, NSError *)) callback {
+	/*
 	if(_sessions != nil && _speakers != nil) {
 		callback(_sessions, nil);
 		return YES;
 	}
+	*/
 
 	MLWAndConstraint *sessionConstraint = [MLWAndConstraint andConstraints:[MLWKeywordConstraint key:@"type" equals:@"session"], constraint, nil];
 

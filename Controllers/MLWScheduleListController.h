@@ -6,8 +6,8 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "MLWFilterViewController.h"
 
-@interface MLWScheduleListController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface MLWScheduleListController : UIViewController <UITableViewDelegate, UITableViewDataSource, MLWFilterViewControllerDelegate>
 
 @end

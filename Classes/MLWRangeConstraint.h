@@ -25,9 +25,6 @@
 - (void)addValue:(id) value;
 - (void)removeValue:(id) value;
 
-- (void)addBucketLabel:(id) bucketLabel;
-- (void)removeBucketLabel:(id) bucketLabel;
-
 @property (nonatomic, copy) NSString *operator;
 @property int minimumOccurances;
 @property int maximumOccurances;

@@ -12,6 +12,7 @@
 #import "MLWSession.h"
 #import "UITableView+helpers.h"
 #import "MLWFilterViewController.h"
+#import "MLWAndConstraint.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface MLWScheduleListController ()
@@ -20,7 +21,9 @@
 @property (nonatomic, retain) UITableView *tableView;
 @property (nonatomic, retain) UIView *loadingView;
 @property (nonatomic, retain) NSArray *sessionBlocks;
+@property (nonatomic, retain) MLWAndConstraint *filterConstraint;
 
+- (void)fetchSessions;
 - (void)filterResults:(UIBarButtonItem *)sender;
 - (MLWSession *)sessionForIndexPath:(NSIndexPath *) indexPath;
 @end
@@ -33,11 +36,14 @@
 @synthesize tableView = _tableView;
 @synthesize loadingView = _loadingView;
 @synthesize sessionBlocks = _sessionsInBlocks;
+@synthesize filterConstraint = _filterConstraint;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
 	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
 	if (self) {
+		self.filterConstraint = nil;
 		self.filterController = [[[MLWFilterViewController alloc] init] autorelease];
+		self.filterController.delegate = self;
 		self.filterNavController = [[[UINavigationController alloc] initWithRootViewController:self.filterController] autorelease];
 		self.filterNavController.navigationBar.tintColor = [UIColor colorWithRed:(236.0f/255.0f) green:(125.0f/255.0f) blue:(30.0f/255.0f) alpha:1.0f];
 		self.filterNavController.title = @"Filter Sessions";
@@ -77,9 +83,13 @@
 	[self.tableView applyBackground];
 	[self.view addSubview:self.tableView];
 
+	[self fetchSessions];
+}
+
+- (void)fetchSessions {
 	MLWAppDelegate *appDelegate = (MLWAppDelegate *)[UIApplication sharedApplication].delegate;
 	MLWConference *conference = appDelegate.conference;
-	BOOL cached = [conference fetchSessionsWithConstraint:nil callback:^(NSArray *sessions, NSError *error) {
+	BOOL cached = [conference fetchSessionsWithConstraint:self.filterConstraint callback:^(NSArray *sessions, NSError *error) {
 		self.sessionBlocks = [conference sessionsToBlocks:sessions];
 
 		[self.tableView reloadData];
@@ -180,6 +190,10 @@
 	[viewShowController release];
 }
 
+- (void)filterView:(MLWFilterViewController *) filterViewController constructedConstraint:(MLWAndConstraint *) constraint {
+	self.filterConstraint = constraint;
+	[self fetchSessions];
+}
 
 - (void)filterResults:(UIBarButtonItem *)sender {
 	[self presentModalViewController:self.filterNavController animated:YES];
@@ -201,6 +215,7 @@
 
 - (void)dealloc {
 	[super dealloc];
+	self.filterConstraint = nil;
 	self.filterController = nil;
 	self.filterNavController = nil;
 	self.tableView = nil;

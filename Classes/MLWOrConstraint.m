@@ -10,6 +10,15 @@
 
 @implementation MLWOrConstraint
 
+- (id)init {
+	self = [super init];
+	if(self) {
+		self.dict = [NSMutableDictionary dictionaryWithObject:[NSMutableArray arrayWithCapacity:20] forKey:@"or"];
+	}
+
+	return self;
+}
+
 + (MLWOrConstraint *)orConstraints:(MLWConstraint *)firstConstraint, ... {
 	MLWConstraint *eachConstraint;
 	va_list constraintList;
@@ -26,7 +35,7 @@
 	}
 
 	MLWOrConstraint *constraint = [[[MLWOrConstraint alloc] init] autorelease];
-	constraint.dict = [NSMutableDictionary dictionaryWithObject:constraints forKey:@"or"];
+	[constraint.dict setObject:constraints forKey:@"or"];
 	return constraint;
 }
 

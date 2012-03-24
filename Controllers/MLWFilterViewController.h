@@ -6,8 +6,19 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "MLWAndConstraint.h"
 
-@interface MLWFilterViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@class MLWFilterViewController;
+
+@protocol MLWFilterViewControllerDelegate <NSObject>
+@optional
+- (void)filterView:(MLWFilterViewController *) filterViewController constructedConstraint:(MLWAndConstraint *) constraint;
+@end
+
+@interface MLWFilterViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
+	id<MLWFilterViewControllerDelegate>delegate;
+}
+
+@property (nonatomic, assign) id<MLWFilterViewControllerDelegate> delegate;
 
 @end

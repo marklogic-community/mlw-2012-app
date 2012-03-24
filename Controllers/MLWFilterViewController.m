@@ -13,6 +13,7 @@
 #import "CCFacetResult.h"
 #import "CCAndConstraint.h"
 #import "CCRangeConstraint.h"
+#import "CCStringQueryConstraint.h"
 
 @interface MLWFilterViewController ()
 @property (nonatomic, retain) UITableView *tableView;
@@ -20,6 +21,7 @@
 @property (nonatomic, retain) UISegmentedControl *tabs;
 @property (nonatomic, retain) CCFacetResponse *facetResponse;
 @property (nonatomic, retain) CCAndConstraint *constraint;
+@property (nonatomic, retain) UITextField *searchField;
 
 - (void)changeTab:(UISegmentedControl *)sender;
 - (void)doneFiltering:(UIBarButtonItem *)sender;
@@ -36,12 +38,17 @@
 @synthesize tabs = _tabs;
 @synthesize facetResponse = _facetResponse;
 @synthesize constraint = _constraint;
+@synthesize searchField = _searchField;
 
 - (id)init {
     self = [super init];
     if(self) {
 		self.navigationItem.title = @"Filter Sessions";
 		self.constraint = [[[CCAndConstraint alloc] init] autorelease];
+		self.searchField = [[[UITextField alloc] init] autorelease];
+		self.searchField.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+		self.searchField.clearButtonMode = UITextFieldViewModeAlways;
+		self.searchField.keyboardAppearance = UIKeyboardAppearanceAlert;
     }
     return self;
 }
@@ -122,7 +129,11 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *) tableView cellForRowAtIndexPath:(NSIndexPath *) indexPath {
-	static NSString *cellIdentifier = @"Cell";
+	NSString *cellIdentifier = @"Cell";
+	if(self.tabs.selectedSegmentIndex == 2) {
+		cellIdentifier = @"SearchCell";
+	}
+
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 	if(cell == nil) {
 		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier] autorelease];
@@ -146,6 +157,13 @@
 				cell.accessoryType = UITableViewCellAccessoryCheckmark;
 			}
 		}
+	}
+	else {
+		CCStringQueryConstraint *constraint = (CCStringQueryConstraint *)[[self.constraint stringQueryConstraints] lastObject];
+		self.searchField.text = constraint.query;
+		self.searchField.frame = CGRectInset(cell.contentView.bounds, 7, 9);
+		[self.searchField becomeFirstResponder];
+		[cell.contentView addSubview:self.searchField];
 	}
 
 	return cell;
@@ -184,6 +202,19 @@
 }
 
 - (void)doneFiltering:(UIBarButtonItem *)sender {
+	CCStringQueryConstraint *constraint = (CCStringQueryConstraint *)[[self.constraint stringQueryConstraints] lastObject];
+	if(self.searchField.text.length != 0) {
+		if(constraint != nil) {
+			constraint.query = self.searchField.text;
+		}
+		else {
+			[self.constraint addConstraint:[CCStringQueryConstraint stringQuery:self.searchField.text]];
+		}
+	}
+	else if(constraint != nil) {
+		[self.constraint removeStringQueryConstraints];
+	}
+
 	if(delegate != nil && [delegate respondsToSelector:@selector(filterView:constructedConstraint:)]) {
 		[delegate filterView:self constructedConstraint:self.constraint];
 	}

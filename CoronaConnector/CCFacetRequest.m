@@ -1,5 +1,5 @@
 //
-//  MLWFacet.m
+//  CCFacet.m
 //  MarkLogic World
 //
 //  Created by Ryan Grimm on 3/23/12.
@@ -41,7 +41,7 @@
 		NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
 
 		if(error != nil || data == nil) {
-			NSLog(@"MLWQuery: could not fetch facet results - %@", error);
+			NSLog(@"CCFacetRequest: could not fetch facet results - %@", error);
 			dispatch_async(dispatch_get_main_queue(), ^ {
 				callback(nil, error);
 			});
@@ -51,7 +51,7 @@
 		SBJsonParser *parser = [[[SBJsonParser alloc] init] autorelease];
 		NSDictionary *results = [parser objectWithData:data];
 		if(results == nil) {
-			NSLog(@"MLWConference: JSON parsing error - %@", parser.error);
+			NSLog(@"CCFacetRequest: JSON parsing error - %@", parser.error);
 			// XXX create NSError
 			dispatch_async(dispatch_get_main_queue(), ^ {
 				callback(nil, nil);

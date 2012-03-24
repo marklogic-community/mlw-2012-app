@@ -1,5 +1,5 @@
 //
-//  MLWFacet.h
+//  CCFacet.h
 //  MarkLogic World
 //
 //  Created by Ryan Grimm on 3/23/12.

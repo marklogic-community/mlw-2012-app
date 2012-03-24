@@ -1,5 +1,5 @@
 //
-//  MLWFacetResult.m
+//  CCFacetResult.m
 //  MarkLogic World
 //
 //  Created by Ryan Grimm on 3/23/12.

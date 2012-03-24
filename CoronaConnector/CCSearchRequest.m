@@ -1,5 +1,5 @@
 //
-//  MLWQuery.m
+//  CCSearchRequest.m
 //  MarkLogic World
 //
 //  Created by Ryan Grimm on 3/22/12.
@@ -42,7 +42,7 @@
 		NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
 
 		if(error != nil || data == nil) {
-			NSLog(@"MLWQuery: could not fetch results - %@", error);
+			NSLog(@"CCSearchRequest: could not fetch results - %@", error);
 			dispatch_async(dispatch_get_main_queue(), ^ {
 				callback(nil, error);
 			});
@@ -52,7 +52,7 @@
 		SBJsonParser *parser = [[[SBJsonParser alloc] init] autorelease];
 		id results = [parser objectWithData:data];
 		if(results == nil) {
-			NSLog(@"MLWConference: JSON parsing error - %@", parser.error);
+			NSLog(@"CCSearchRequest: JSON parsing error - %@", parser.error);
 			// XXX create NSError
 			dispatch_async(dispatch_get_main_queue(), ^ {
 				callback(nil, nil);

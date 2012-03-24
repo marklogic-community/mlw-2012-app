@@ -48,6 +48,7 @@
 		C26D89CA151E3F5400934014 /* CCRangeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = C26D89BC151E3F5400934014 /* CCRangeConstraint.m */; };
 		C26D89CB151E3F5400934014 /* CCRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C26D89BE151E3F5400934014 /* CCRequest.m */; };
 		C26D89CC151E3F5400934014 /* CCSearchRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C26D89C0151E3F5400934014 /* CCSearchRequest.m */; };
+		C26D89CF151E447200934014 /* CCStringQueryConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = C26D89CE151E447200934014 /* CCStringQueryConstraint.m */; };
 		C29A8E24150A560B00320140 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C29A8E23150A560B00320140 /* UIKit.framework */; };
 		C29A8E26150A560B00320140 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C29A8E25150A560B00320140 /* Foundation.framework */; };
 		C29A8E28150A560B00320140 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C29A8E27150A560B00320140 /* CoreGraphics.framework */; };
@@ -141,6 +142,8 @@
 		C26D89BE151E3F5400934014 /* CCRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCRequest.m; path = CoronaConnector/CCRequest.m; sourceTree = "<group>"; };
 		C26D89BF151E3F5400934014 /* CCSearchRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCSearchRequest.h; path = CoronaConnector/CCSearchRequest.h; sourceTree = "<group>"; };
 		C26D89C0151E3F5400934014 /* CCSearchRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCSearchRequest.m; path = CoronaConnector/CCSearchRequest.m; sourceTree = "<group>"; };
+		C26D89CD151E447100934014 /* CCStringQueryConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCStringQueryConstraint.h; path = CoronaConnector/CCStringQueryConstraint.h; sourceTree = "<group>"; };
+		C26D89CE151E447200934014 /* CCStringQueryConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCStringQueryConstraint.m; path = CoronaConnector/CCStringQueryConstraint.m; sourceTree = "<group>"; };
 		C29A8E1F150A560B00320140 /* MarkLogic World.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MarkLogic World.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C29A8E23150A560B00320140 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C29A8E25150A560B00320140 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -277,6 +280,8 @@
 				C26D89BE151E3F5400934014 /* CCRequest.m */,
 				C26D89BF151E3F5400934014 /* CCSearchRequest.h */,
 				C26D89C0151E3F5400934014 /* CCSearchRequest.m */,
+				C26D89CD151E447100934014 /* CCStringQueryConstraint.h */,
+				C26D89CE151E447200934014 /* CCStringQueryConstraint.m */,
 			);
 			name = CoronaConnector;
 			sourceTree = "<group>";
@@ -481,6 +486,7 @@
 				C26D89CA151E3F5400934014 /* CCRangeConstraint.m in Sources */,
 				C26D89CB151E3F5400934014 /* CCRequest.m in Sources */,
 				C26D89CC151E3F5400934014 /* CCSearchRequest.m in Sources */,
+				C26D89CF151E447200934014 /* CCStringQueryConstraint.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

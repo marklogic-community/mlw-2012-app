@@ -15,9 +15,11 @@
 - (NSArray *)constraints;
 - (NSArray *)rangeConstraintsNamed:(NSString *) name;
 - (NSArray *)keywordConstraints;
+- (NSArray *)stringQueryConstraints;
 
 - (void)removeConstraint:(CCConstraint *) constraint;
 - (void)removeRangeConstraintsNamed:(NSString *) name;
 - (void)removeKeywordConstraints;
+- (void)removeStringQueryConstraints;
 
 @end

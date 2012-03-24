@@ -11,6 +11,7 @@
 #import "CCOrConstraint.h"
 #import "CCRangeConstraint.h"
 #import "CCKeywordConstraint.h"
+#import "CCStringQueryConstraint.h"
 
 @interface CCBooleanConstraint ()
 - (NSString *)type;
@@ -50,6 +51,17 @@
 	return keywordConstraints;
 }
 
+- (NSArray *)stringQueryConstraints {
+	NSMutableArray *constraints = [self.dict objectForKey:[self type]];
+	NSMutableArray *stringQueryConstraints = [NSMutableArray arrayWithCapacity:10];
+	for(CCConstraint *constraint in constraints) {
+		if([constraint isKindOfClass:[CCStringQueryConstraint class]]) {
+			[stringQueryConstraints addObject:constraint];
+		}
+	}
+	return stringQueryConstraints;
+}
+
 
 - (void)removeConstraint:(CCConstraint *) constraint {
 	NSMutableArray *constraints = [self.dict objectForKey:[self type]];
@@ -58,19 +70,40 @@
 
 - (void)removeRangeConstraintsNamed:(NSString *) name {
 	NSMutableArray *constraints = [self.dict objectForKey:[self type]];
+	NSMutableArray *constraintsToRemove = [NSMutableArray arrayWithCapacity:10];
 	for(CCConstraint *constraint in constraints) {
 		if([constraint isKindOfClass:[CCRangeConstraint class]] && [((CCRangeConstraint *)constraint).name isEqualToString:name]) {
-			[constraints addObject:constraint];
+			[constraintsToRemove addObject:constraint];
 		}
+	}
+	for(CCConstraint *constraint in constraintsToRemove) {
+		[constraints removeObject:constraint];
 	}
 }
 
 - (void)removeKeywordConstraints {
 	NSMutableArray *constraints = [self.dict objectForKey:[self type]];
+	NSMutableArray *constraintsToRemove = [NSMutableArray arrayWithCapacity:10];
 	for(CCConstraint *constraint in constraints) {
 		if([constraint isKindOfClass:[CCKeywordConstraint class]]) {
-			[constraints removeObject:constraint];
+			[constraintsToRemove addObject:constraint];
 		}
+	}
+	for(CCConstraint *constraint in constraintsToRemove) {
+		[constraints removeObject:constraint];
+	}
+}
+
+- (void)removeStringQueryConstraints {
+	NSMutableArray *constraints = [self.dict objectForKey:[self type]];
+	NSMutableArray *constraintsToRemove = [NSMutableArray arrayWithCapacity:10];
+	for(CCConstraint *constraint in constraints) {
+		if([constraint isKindOfClass:[CCStringQueryConstraint class]]) {
+			[constraintsToRemove addObject:constraint];
+		}
+	}
+	for(CCConstraint *constraint in constraintsToRemove) {
+		[constraints removeObject:constraint];
 	}
 }
 

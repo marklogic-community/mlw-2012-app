@@ -184,7 +184,6 @@
 				[rangeConstraint addValue:cell.textLabel.text];
 			}
 			else {
-				NSLog(@"adding constraint");
 				[self.constraint addConstraint:[CCRangeConstraint rangeNamed:[self facetNameForCurrentFacet] value:cell.textLabel.text]];
 			}
 		}
@@ -218,7 +217,6 @@
 	if(delegate != nil && [delegate respondsToSelector:@selector(filterView:constructedConstraint:)]) {
 		[delegate filterView:self constructedConstraint:self.constraint];
 	}
-	NSLog(@"self.constraint: %@", [self.constraint serialize]);
 	[self dismissModalViewControllerAnimated:YES];
 }
 

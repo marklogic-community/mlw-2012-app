@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "MLWRequest.h"
+#import "CCRequest.h"
 
-@implementation MLWRequest
+@implementation CCRequest
 
 @synthesize baseURL;
 @synthesize parameters = _parameters;

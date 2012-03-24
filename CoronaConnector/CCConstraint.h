@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MLWConstraint : NSObject
+@interface CCConstraint : NSObject
 
 @property (nonatomic, retain) NSMutableDictionary *dict;
 - (NSString *)serialize;

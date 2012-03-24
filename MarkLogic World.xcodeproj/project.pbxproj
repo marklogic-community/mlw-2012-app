@@ -36,18 +36,18 @@
 		C20CEEBA1517E594009AA0AD /* MLWTweetView.m in Sources */ = {isa = PBXBuildFile; fileRef = C20CEEB91517E594009AA0AD /* MLWTweetView.m */; };
 		C20CEEBD1518E357009AA0AD /* MLWSponsorView.m in Sources */ = {isa = PBXBuildFile; fileRef = C20CEEBC1518E357009AA0AD /* MLWSponsorView.m */; };
 		C26D897A151B757A00934014 /* MLWFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C26D8979151B757A00934014 /* MLWFilterViewController.m */; };
-		C26D897E151B7B0D00934014 /* MLWSearchRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C26D897D151B7B0D00934014 /* MLWSearchRequest.m */; };
-		C26D8981151B7B8700934014 /* MLWConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = C26D8980151B7B8700934014 /* MLWConstraint.m */; };
-		C26D8984151B7BA200934014 /* MLWRangeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = C26D8983151B7BA200934014 /* MLWRangeConstraint.m */; };
-		C26D898E151B7E6A00934014 /* MLWAndConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = C26D898D151B7E6A00934014 /* MLWAndConstraint.m */; };
-		C26D8992151B861400934014 /* MLWOrConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = C26D8991151B861400934014 /* MLWOrConstraint.m */; };
-		C26D8995151B87CC00934014 /* MLWKeywordConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = C26D8994151B87CC00934014 /* MLWKeywordConstraint.m */; };
-		C26D8998151BA19E00934014 /* MLWBooleanConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = C26D8997151BA19E00934014 /* MLWBooleanConstraint.m */; };
-		C26D899B151CD68400934014 /* MLWRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C26D899A151CD68400934014 /* MLWRequest.m */; };
-		C26D899E151CD83600934014 /* MLWFacetRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C26D899D151CD83600934014 /* MLWFacetRequest.m */; };
-		C26D89A1151CDE8500934014 /* MLWFacetResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C26D89A0151CDE8500934014 /* MLWFacetResponse.m */; };
-		C26D89A4151CDE9400934014 /* MLWFacet.m in Sources */ = {isa = PBXBuildFile; fileRef = C26D89A3151CDE9400934014 /* MLWFacet.m */; };
-		C26D89A7151CDEB700934014 /* MLWFacetResult.m in Sources */ = {isa = PBXBuildFile; fileRef = C26D89A6151CDEB600934014 /* MLWFacetResult.m */; };
+		C26D89C1151E3F5400934014 /* CCAndConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = C26D89AA151E3F5400934014 /* CCAndConstraint.m */; };
+		C26D89C2151E3F5400934014 /* CCBooleanConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = C26D89AC151E3F5400934014 /* CCBooleanConstraint.m */; };
+		C26D89C3151E3F5400934014 /* CCConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = C26D89AE151E3F5400934014 /* CCConstraint.m */; };
+		C26D89C4151E3F5400934014 /* CCFacet.m in Sources */ = {isa = PBXBuildFile; fileRef = C26D89B0151E3F5400934014 /* CCFacet.m */; };
+		C26D89C5151E3F5400934014 /* CCFacetRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C26D89B2151E3F5400934014 /* CCFacetRequest.m */; };
+		C26D89C6151E3F5400934014 /* CCFacetResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = C26D89B4151E3F5400934014 /* CCFacetResponse.m */; };
+		C26D89C7151E3F5400934014 /* CCFacetResult.m in Sources */ = {isa = PBXBuildFile; fileRef = C26D89B6151E3F5400934014 /* CCFacetResult.m */; };
+		C26D89C8151E3F5400934014 /* CCKeywordConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = C26D89B8151E3F5400934014 /* CCKeywordConstraint.m */; };
+		C26D89C9151E3F5400934014 /* CCOrConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = C26D89BA151E3F5400934014 /* CCOrConstraint.m */; };
+		C26D89CA151E3F5400934014 /* CCRangeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = C26D89BC151E3F5400934014 /* CCRangeConstraint.m */; };
+		C26D89CB151E3F5400934014 /* CCRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C26D89BE151E3F5400934014 /* CCRequest.m */; };
+		C26D89CC151E3F5400934014 /* CCSearchRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = C26D89C0151E3F5400934014 /* CCSearchRequest.m */; };
 		C29A8E24150A560B00320140 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C29A8E23150A560B00320140 /* UIKit.framework */; };
 		C29A8E26150A560B00320140 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C29A8E25150A560B00320140 /* Foundation.framework */; };
 		C29A8E28150A560B00320140 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C29A8E27150A560B00320140 /* CoreGraphics.framework */; };
@@ -117,30 +117,30 @@
 		C20CEEBC1518E357009AA0AD /* MLWSponsorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWSponsorView.m; path = Classes/MLWSponsorView.m; sourceTree = "<group>"; };
 		C26D8978151B757A00934014 /* MLWFilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWFilterViewController.h; path = Controllers/MLWFilterViewController.h; sourceTree = "<group>"; };
 		C26D8979151B757A00934014 /* MLWFilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWFilterViewController.m; path = Controllers/MLWFilterViewController.m; sourceTree = "<group>"; };
-		C26D897C151B7B0D00934014 /* MLWSearchRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWSearchRequest.h; path = Classes/MLWSearchRequest.h; sourceTree = "<group>"; };
-		C26D897D151B7B0D00934014 /* MLWSearchRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWSearchRequest.m; path = Classes/MLWSearchRequest.m; sourceTree = "<group>"; };
-		C26D897F151B7B8700934014 /* MLWConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWConstraint.h; path = Classes/MLWConstraint.h; sourceTree = "<group>"; };
-		C26D8980151B7B8700934014 /* MLWConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWConstraint.m; path = Classes/MLWConstraint.m; sourceTree = "<group>"; };
-		C26D8982151B7BA200934014 /* MLWRangeConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWRangeConstraint.h; path = Classes/MLWRangeConstraint.h; sourceTree = "<group>"; };
-		C26D8983151B7BA200934014 /* MLWRangeConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWRangeConstraint.m; path = Classes/MLWRangeConstraint.m; sourceTree = "<group>"; };
-		C26D898C151B7E6A00934014 /* MLWAndConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWAndConstraint.h; path = Classes/MLWAndConstraint.h; sourceTree = "<group>"; };
-		C26D898D151B7E6A00934014 /* MLWAndConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWAndConstraint.m; path = Classes/MLWAndConstraint.m; sourceTree = "<group>"; };
-		C26D8990151B861400934014 /* MLWOrConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWOrConstraint.h; path = Classes/MLWOrConstraint.h; sourceTree = "<group>"; };
-		C26D8991151B861400934014 /* MLWOrConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWOrConstraint.m; path = Classes/MLWOrConstraint.m; sourceTree = "<group>"; };
-		C26D8993151B87CC00934014 /* MLWKeywordConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWKeywordConstraint.h; path = Classes/MLWKeywordConstraint.h; sourceTree = "<group>"; };
-		C26D8994151B87CC00934014 /* MLWKeywordConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWKeywordConstraint.m; path = Classes/MLWKeywordConstraint.m; sourceTree = "<group>"; };
-		C26D8996151BA19E00934014 /* MLWBooleanConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWBooleanConstraint.h; path = Classes/MLWBooleanConstraint.h; sourceTree = "<group>"; };
-		C26D8997151BA19E00934014 /* MLWBooleanConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWBooleanConstraint.m; path = Classes/MLWBooleanConstraint.m; sourceTree = "<group>"; };
-		C26D8999151CD68400934014 /* MLWRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWRequest.h; path = Classes/MLWRequest.h; sourceTree = "<group>"; };
-		C26D899A151CD68400934014 /* MLWRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWRequest.m; path = Classes/MLWRequest.m; sourceTree = "<group>"; };
-		C26D899C151CD83600934014 /* MLWFacetRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWFacetRequest.h; path = Classes/MLWFacetRequest.h; sourceTree = "<group>"; };
-		C26D899D151CD83600934014 /* MLWFacetRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWFacetRequest.m; path = Classes/MLWFacetRequest.m; sourceTree = "<group>"; };
-		C26D899F151CDE8500934014 /* MLWFacetResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWFacetResponse.h; path = Classes/MLWFacetResponse.h; sourceTree = "<group>"; };
-		C26D89A0151CDE8500934014 /* MLWFacetResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWFacetResponse.m; path = Classes/MLWFacetResponse.m; sourceTree = "<group>"; };
-		C26D89A2151CDE9400934014 /* MLWFacet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWFacet.h; path = Classes/MLWFacet.h; sourceTree = "<group>"; };
-		C26D89A3151CDE9400934014 /* MLWFacet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWFacet.m; path = Classes/MLWFacet.m; sourceTree = "<group>"; };
-		C26D89A5151CDEB600934014 /* MLWFacetResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWFacetResult.h; path = Classes/MLWFacetResult.h; sourceTree = "<group>"; };
-		C26D89A6151CDEB600934014 /* MLWFacetResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWFacetResult.m; path = Classes/MLWFacetResult.m; sourceTree = "<group>"; };
+		C26D89A9151E3F5400934014 /* CCAndConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCAndConstraint.h; path = CoronaConnector/CCAndConstraint.h; sourceTree = "<group>"; };
+		C26D89AA151E3F5400934014 /* CCAndConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCAndConstraint.m; path = CoronaConnector/CCAndConstraint.m; sourceTree = "<group>"; };
+		C26D89AB151E3F5400934014 /* CCBooleanConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCBooleanConstraint.h; path = CoronaConnector/CCBooleanConstraint.h; sourceTree = "<group>"; };
+		C26D89AC151E3F5400934014 /* CCBooleanConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCBooleanConstraint.m; path = CoronaConnector/CCBooleanConstraint.m; sourceTree = "<group>"; };
+		C26D89AD151E3F5400934014 /* CCConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCConstraint.h; path = CoronaConnector/CCConstraint.h; sourceTree = "<group>"; };
+		C26D89AE151E3F5400934014 /* CCConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCConstraint.m; path = CoronaConnector/CCConstraint.m; sourceTree = "<group>"; };
+		C26D89AF151E3F5400934014 /* CCFacet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCFacet.h; path = CoronaConnector/CCFacet.h; sourceTree = "<group>"; };
+		C26D89B0151E3F5400934014 /* CCFacet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCFacet.m; path = CoronaConnector/CCFacet.m; sourceTree = "<group>"; };
+		C26D89B1151E3F5400934014 /* CCFacetRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCFacetRequest.h; path = CoronaConnector/CCFacetRequest.h; sourceTree = "<group>"; };
+		C26D89B2151E3F5400934014 /* CCFacetRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCFacetRequest.m; path = CoronaConnector/CCFacetRequest.m; sourceTree = "<group>"; };
+		C26D89B3151E3F5400934014 /* CCFacetResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCFacetResponse.h; path = CoronaConnector/CCFacetResponse.h; sourceTree = "<group>"; };
+		C26D89B4151E3F5400934014 /* CCFacetResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCFacetResponse.m; path = CoronaConnector/CCFacetResponse.m; sourceTree = "<group>"; };
+		C26D89B5151E3F5400934014 /* CCFacetResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCFacetResult.h; path = CoronaConnector/CCFacetResult.h; sourceTree = "<group>"; };
+		C26D89B6151E3F5400934014 /* CCFacetResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCFacetResult.m; path = CoronaConnector/CCFacetResult.m; sourceTree = "<group>"; };
+		C26D89B7151E3F5400934014 /* CCKeywordConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCKeywordConstraint.h; path = CoronaConnector/CCKeywordConstraint.h; sourceTree = "<group>"; };
+		C26D89B8151E3F5400934014 /* CCKeywordConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCKeywordConstraint.m; path = CoronaConnector/CCKeywordConstraint.m; sourceTree = "<group>"; };
+		C26D89B9151E3F5400934014 /* CCOrConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCOrConstraint.h; path = CoronaConnector/CCOrConstraint.h; sourceTree = "<group>"; };
+		C26D89BA151E3F5400934014 /* CCOrConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCOrConstraint.m; path = CoronaConnector/CCOrConstraint.m; sourceTree = "<group>"; };
+		C26D89BB151E3F5400934014 /* CCRangeConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCRangeConstraint.h; path = CoronaConnector/CCRangeConstraint.h; sourceTree = "<group>"; };
+		C26D89BC151E3F5400934014 /* CCRangeConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCRangeConstraint.m; path = CoronaConnector/CCRangeConstraint.m; sourceTree = "<group>"; };
+		C26D89BD151E3F5400934014 /* CCRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCRequest.h; path = CoronaConnector/CCRequest.h; sourceTree = "<group>"; };
+		C26D89BE151E3F5400934014 /* CCRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCRequest.m; path = CoronaConnector/CCRequest.m; sourceTree = "<group>"; };
+		C26D89BF151E3F5400934014 /* CCSearchRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCSearchRequest.h; path = CoronaConnector/CCSearchRequest.h; sourceTree = "<group>"; };
+		C26D89C0151E3F5400934014 /* CCSearchRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCSearchRequest.m; path = CoronaConnector/CCSearchRequest.m; sourceTree = "<group>"; };
 		C29A8E1F150A560B00320140 /* MarkLogic World.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MarkLogic World.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C29A8E23150A560B00320140 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C29A8E25150A560B00320140 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -250,9 +250,41 @@
 			path = Resources/images;
 			sourceTree = "<group>";
 		};
+		C26D89A8151E3EAB00934014 /* CoronaConnector */ = {
+			isa = PBXGroup;
+			children = (
+				C26D89A9151E3F5400934014 /* CCAndConstraint.h */,
+				C26D89AA151E3F5400934014 /* CCAndConstraint.m */,
+				C26D89AB151E3F5400934014 /* CCBooleanConstraint.h */,
+				C26D89AC151E3F5400934014 /* CCBooleanConstraint.m */,
+				C26D89AD151E3F5400934014 /* CCConstraint.h */,
+				C26D89AE151E3F5400934014 /* CCConstraint.m */,
+				C26D89AF151E3F5400934014 /* CCFacet.h */,
+				C26D89B0151E3F5400934014 /* CCFacet.m */,
+				C26D89B1151E3F5400934014 /* CCFacetRequest.h */,
+				C26D89B2151E3F5400934014 /* CCFacetRequest.m */,
+				C26D89B3151E3F5400934014 /* CCFacetResponse.h */,
+				C26D89B4151E3F5400934014 /* CCFacetResponse.m */,
+				C26D89B5151E3F5400934014 /* CCFacetResult.h */,
+				C26D89B6151E3F5400934014 /* CCFacetResult.m */,
+				C26D89B7151E3F5400934014 /* CCKeywordConstraint.h */,
+				C26D89B8151E3F5400934014 /* CCKeywordConstraint.m */,
+				C26D89B9151E3F5400934014 /* CCOrConstraint.h */,
+				C26D89BA151E3F5400934014 /* CCOrConstraint.m */,
+				C26D89BB151E3F5400934014 /* CCRangeConstraint.h */,
+				C26D89BC151E3F5400934014 /* CCRangeConstraint.m */,
+				C26D89BD151E3F5400934014 /* CCRequest.h */,
+				C26D89BE151E3F5400934014 /* CCRequest.m */,
+				C26D89BF151E3F5400934014 /* CCSearchRequest.h */,
+				C26D89C0151E3F5400934014 /* CCSearchRequest.m */,
+			);
+			name = CoronaConnector;
+			sourceTree = "<group>";
+		};
 		C29A8E14150A560B00320140 = {
 			isa = PBXGroup;
 			children = (
+				C26D89A8151E3EAB00934014 /* CoronaConnector */,
 				C20CEE5815129049009AA0AD /* SBJSON */,
 				C20CEE2D151287C1009AA0AD /* Resources */,
 				C29A8E7C151101B500320140 /* Models */,
@@ -285,8 +317,6 @@
 		C29A8E54150A5B2900320140 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				C26D8993151B87CC00934014 /* MLWKeywordConstraint.h */,
-				C26D8994151B87CC00934014 /* MLWKeywordConstraint.m */,
 				C29A8E55150A5B3D00320140 /* MLWAppDelegate.h */,
 				C29A8E56150A5B3D00320140 /* MLWAppDelegate.m */,
 				C20CEE8E1513F586009AA0AD /* MLWScheduleGridView.h */,
@@ -301,28 +331,6 @@
 				C20CEEB91517E594009AA0AD /* MLWTweetView.m */,
 				C20CEEBB1518E357009AA0AD /* MLWSponsorView.h */,
 				C20CEEBC1518E357009AA0AD /* MLWSponsorView.m */,
-				C26D897C151B7B0D00934014 /* MLWSearchRequest.h */,
-				C26D897D151B7B0D00934014 /* MLWSearchRequest.m */,
-				C26D897F151B7B8700934014 /* MLWConstraint.h */,
-				C26D8980151B7B8700934014 /* MLWConstraint.m */,
-				C26D8982151B7BA200934014 /* MLWRangeConstraint.h */,
-				C26D8983151B7BA200934014 /* MLWRangeConstraint.m */,
-				C26D898C151B7E6A00934014 /* MLWAndConstraint.h */,
-				C26D898D151B7E6A00934014 /* MLWAndConstraint.m */,
-				C26D8990151B861400934014 /* MLWOrConstraint.h */,
-				C26D8991151B861400934014 /* MLWOrConstraint.m */,
-				C26D8996151BA19E00934014 /* MLWBooleanConstraint.h */,
-				C26D8997151BA19E00934014 /* MLWBooleanConstraint.m */,
-				C26D8999151CD68400934014 /* MLWRequest.h */,
-				C26D899A151CD68400934014 /* MLWRequest.m */,
-				C26D899C151CD83600934014 /* MLWFacetRequest.h */,
-				C26D899D151CD83600934014 /* MLWFacetRequest.m */,
-				C26D899F151CDE8500934014 /* MLWFacetResponse.h */,
-				C26D89A0151CDE8500934014 /* MLWFacetResponse.m */,
-				C26D89A2151CDE9400934014 /* MLWFacet.h */,
-				C26D89A3151CDE9400934014 /* MLWFacet.m */,
-				C26D89A5151CDEB600934014 /* MLWFacetResult.h */,
-				C26D89A6151CDEB600934014 /* MLWFacetResult.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -461,18 +469,18 @@
 				C20CEEBA1517E594009AA0AD /* MLWTweetView.m in Sources */,
 				C20CEEBD1518E357009AA0AD /* MLWSponsorView.m in Sources */,
 				C26D897A151B757A00934014 /* MLWFilterViewController.m in Sources */,
-				C26D897E151B7B0D00934014 /* MLWSearchRequest.m in Sources */,
-				C26D8981151B7B8700934014 /* MLWConstraint.m in Sources */,
-				C26D8984151B7BA200934014 /* MLWRangeConstraint.m in Sources */,
-				C26D898E151B7E6A00934014 /* MLWAndConstraint.m in Sources */,
-				C26D8992151B861400934014 /* MLWOrConstraint.m in Sources */,
-				C26D8995151B87CC00934014 /* MLWKeywordConstraint.m in Sources */,
-				C26D8998151BA19E00934014 /* MLWBooleanConstraint.m in Sources */,
-				C26D899B151CD68400934014 /* MLWRequest.m in Sources */,
-				C26D899E151CD83600934014 /* MLWFacetRequest.m in Sources */,
-				C26D89A1151CDE8500934014 /* MLWFacetResponse.m in Sources */,
-				C26D89A4151CDE9400934014 /* MLWFacet.m in Sources */,
-				C26D89A7151CDEB700934014 /* MLWFacetResult.m in Sources */,
+				C26D89C1151E3F5400934014 /* CCAndConstraint.m in Sources */,
+				C26D89C2151E3F5400934014 /* CCBooleanConstraint.m in Sources */,
+				C26D89C3151E3F5400934014 /* CCConstraint.m in Sources */,
+				C26D89C4151E3F5400934014 /* CCFacet.m in Sources */,
+				C26D89C5151E3F5400934014 /* CCFacetRequest.m in Sources */,
+				C26D89C6151E3F5400934014 /* CCFacetResponse.m in Sources */,
+				C26D89C7151E3F5400934014 /* CCFacetResult.m in Sources */,
+				C26D89C8151E3F5400934014 /* CCKeywordConstraint.m in Sources */,
+				C26D89C9151E3F5400934014 /* CCOrConstraint.m in Sources */,
+				C26D89CA151E3F5400934014 /* CCRangeConstraint.m in Sources */,
+				C26D89CB151E3F5400934014 /* CCRequest.m in Sources */,
+				C26D89CC151E3F5400934014 /* CCSearchRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

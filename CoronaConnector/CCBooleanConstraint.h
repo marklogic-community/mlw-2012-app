@@ -6,17 +6,17 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "MLWConstraint.h"
+#import "CCConstraint.h"
 
-@interface MLWBooleanConstraint : MLWConstraint
+@interface CCBooleanConstraint : CCConstraint
 
-- (void)addConstraint:(MLWConstraint *) constraint;
+- (void)addConstraint:(CCConstraint *) constraint;
 
 - (NSArray *)constraints;
 - (NSArray *)rangeConstraintsNamed:(NSString *) name;
 - (NSArray *)keywordConstraints;
 
-- (void)removeConstraint:(MLWConstraint *) constraint;
+- (void)removeConstraint:(CCConstraint *) constraint;
 - (void)removeRangeConstraintsNamed:(NSString *) name;
 - (void)removeKeywordConstraints;
 

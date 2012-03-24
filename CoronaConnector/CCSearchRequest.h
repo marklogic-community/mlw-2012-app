@@ -7,14 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MLWRequest.h"
-#import "MLWConstraint.h"
+#import "CCRequest.h"
+#import "CCConstraint.h"
 
-@interface MLWSearchRequest : MLWRequest
+@interface CCSearchRequest : CCRequest
 
-- (id)initWithConstraint:(MLWConstraint *) constraint;
+- (id)initWithConstraint:(CCConstraint *) constraint;
 - (void)fetchResults:(NSUInteger) start length:(NSUInteger) length callback:(void (^)(id, NSError *)) callback;
 
-@property (nonatomic, retain) MLWConstraint *constraint;
+@property (nonatomic, retain) CCConstraint *constraint;
 
 @end

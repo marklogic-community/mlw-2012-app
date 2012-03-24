@@ -6,14 +6,14 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "MLWSearchRequest.h"
+#import "CCSearchRequest.h"
 #import "SBJSON.h"
 
-@implementation MLWSearchRequest
+@implementation CCSearchRequest
 
 @synthesize constraint = _constraint;
 
-- (id)initWithConstraint:(MLWConstraint *) constraint {
+- (id)initWithConstraint:(CCConstraint *) constraint {
 	self = [super init];
 	if(self) {
 		self.constraint = constraint;

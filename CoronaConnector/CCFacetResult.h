@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MLWFacetResult : NSObject
+@interface CCFacetResult : NSObject
 
 - (id)initWithLabel:(NSString *) label count:(NSUInteger ) count;
 

@@ -6,14 +6,14 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "MLWFacetRequest.h"
+#import "CCFacetRequest.h"
 #import "SBJSON.h"
 
-@implementation MLWFacetRequest
+@implementation CCFacetRequest
 
 @synthesize constraint = _constraint;
 
-- (id)initWithConstraint:(MLWConstraint *) constraint {
+- (id)initWithConstraint:(CCConstraint *) constraint {
 	self = [super init];
 	if(self) {
 		self.constraint = constraint;
@@ -21,7 +21,7 @@
 	return self;
 }
 
-- (void)fetchResultsForFacets:(NSArray *) facets length:(NSUInteger) length callback:(void (^)(MLWFacetResponse *, NSError *)) callback {
+- (void)fetchResultsForFacets:(NSArray *) facets length:(NSUInteger) length callback:(void (^)(CCFacetResponse *, NSError *)) callback {
 	[self.parameters setObject:[NSString stringWithFormat:@"%i", length] forKey:@"limit"];
 
 	if(self.constraint != nil) {
@@ -60,7 +60,7 @@
 		}
 
 		dispatch_async(dispatch_get_main_queue(), ^ {
-			callback([MLWFacetResponse responseFromData:results], nil);
+			callback([CCFacetResponse responseFromData:results], nil);
 		});
 	});
 

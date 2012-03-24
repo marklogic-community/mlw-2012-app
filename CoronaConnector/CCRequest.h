@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MLWRequest : NSObject
+@interface CCRequest : NSObject
 
 - (NSData *)dictionaryToPOSTData:(NSDictionary *) parameters;
 

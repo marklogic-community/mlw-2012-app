@@ -12,7 +12,7 @@
 #import "MLWSession.h"
 #import "UITableView+helpers.h"
 #import "MLWFilterViewController.h"
-#import "MLWAndConstraint.h"
+#import "CCAndConstraint.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface MLWScheduleListController ()
@@ -21,7 +21,7 @@
 @property (nonatomic, retain) UITableView *tableView;
 @property (nonatomic, retain) UIView *loadingView;
 @property (nonatomic, retain) NSArray *sessionBlocks;
-@property (nonatomic, retain) MLWAndConstraint *filterConstraint;
+@property (nonatomic, retain) CCAndConstraint *filterConstraint;
 
 - (void)fetchSessions;
 - (void)filterResults:(UIBarButtonItem *)sender;
@@ -190,7 +190,7 @@
 	[viewShowController release];
 }
 
-- (void)filterView:(MLWFilterViewController *) filterViewController constructedConstraint:(MLWAndConstraint *) constraint {
+- (void)filterView:(MLWFilterViewController *) filterViewController constructedConstraint:(CCAndConstraint *) constraint {
 	self.filterConstraint = constraint;
 	[self fetchSessions];
 }

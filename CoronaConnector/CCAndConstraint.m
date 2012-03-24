@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "MLWAndConstraint.h"
+#import "CCAndConstraint.h"
 
-@implementation MLWAndConstraint
+@implementation CCAndConstraint
 
 - (id)init {
 	self = [super init];
@@ -19,8 +19,8 @@
 	return self;
 }
 
-+ (MLWAndConstraint *)andConstraints:(MLWConstraint *) firstConstraint, ... {
-	MLWConstraint *eachConstraint;
++ (CCAndConstraint *)andConstraints:(CCConstraint *) firstConstraint, ... {
+	CCConstraint *eachConstraint;
 	va_list constraintList;
 	NSMutableArray *constraints = [NSMutableArray arrayWithCapacity:20];
 
@@ -28,13 +28,13 @@
 		[constraints addObject:firstConstraint];
 
 		va_start(constraintList, firstConstraint);
-		while((eachConstraint = va_arg(constraintList, MLWConstraint *))) {
+		while((eachConstraint = va_arg(constraintList, CCConstraint *))) {
 			[constraints addObject:eachConstraint];
 		}
 		va_end(constraintList);
 	}
 
-	MLWAndConstraint *constraint = [[[MLWAndConstraint alloc] init] autorelease];
+	CCAndConstraint *constraint = [[[CCAndConstraint alloc] init] autorelease];
 	[constraint.dict setObject:constraints forKey:@"and"];
 	return constraint;
 }

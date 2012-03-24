@@ -9,23 +9,23 @@
 #import "MLWFilterViewController.h"
 #import "UITableView+helpers.h"
 #import "MLWAppDelegate.h"
-#import "MLWFacetResponse.h"
-#import "MLWFacetResult.h"
-#import "MLWAndConstraint.h"
-#import "MLWRangeConstraint.h"
+#import "CCFacetResponse.h"
+#import "CCFacetResult.h"
+#import "CCAndConstraint.h"
+#import "CCRangeConstraint.h"
 
 @interface MLWFilterViewController ()
 @property (nonatomic, retain) UITableView *tableView;
 @property (nonatomic, retain) UIView *loadingView;
 @property (nonatomic, retain) UISegmentedControl *tabs;
-@property (nonatomic, retain) MLWFacetResponse *facetResponse;
-@property (nonatomic, retain) MLWAndConstraint *constraint;
+@property (nonatomic, retain) CCFacetResponse *facetResponse;
+@property (nonatomic, retain) CCAndConstraint *constraint;
 
 - (void)changeTab:(UISegmentedControl *)sender;
 - (void)doneFiltering:(UIBarButtonItem *)sender;
 - (NSString *)facetNameForCurrentFacet;
 - (NSArray *)resultsForCurrentFacet;
-- (MLWRangeConstraint *)rangeConstraintForCurrentFacet;
+- (CCRangeConstraint *)rangeConstraintForCurrentFacet;
 @end
 
 @implementation MLWFilterViewController
@@ -41,7 +41,7 @@
     self = [super init];
     if(self) {
 		self.navigationItem.title = @"Filter Sessions";
-		self.constraint = [[[MLWAndConstraint alloc] init] autorelease];
+		self.constraint = [[[CCAndConstraint alloc] init] autorelease];
     }
     return self;
 }
@@ -84,7 +84,7 @@
 
 	MLWAppDelegate *appDelegate = (MLWAppDelegate *)[UIApplication sharedApplication].delegate;
 	MLWConference *conference = appDelegate.conference;
-	BOOL cached = [conference fetchFacetsWithConstraint:nil callback:^(MLWFacetResponse *response, NSError *error) {
+	BOOL cached = [conference fetchFacetsWithConstraint:nil callback:^(CCFacetResponse *response, NSError *error) {
 		self.facetResponse = response;
 		[self.tableView reloadData];
 		[UIView transitionWithView:self.loadingView duration:0.5f options:UIViewAnimationOptionCurveLinear animations:^{
@@ -134,7 +134,7 @@
 
 	if(self.tabs.selectedSegmentIndex != 2) {
 		NSArray *results = [self resultsForCurrentFacet];
-		MLWFacetResult *facetResult = [results objectAtIndex:indexPath.row];
+		CCFacetResult *facetResult = [results objectAtIndex:indexPath.row];
 		cell.textLabel.text = facetResult.label;
 		if(self.tabs.selectedSegmentIndex == 0 && [facetResult.label isEqualToString:@""]) {
 			// cell.textLabel.text = @"Unspecified";
@@ -157,7 +157,7 @@
 
 - (void)tableView:(UITableView *) tableView didSelectRowAtIndexPath:(NSIndexPath *) indexPath {
 	if(indexPath.section != 2) {
-		MLWRangeConstraint *rangeConstraint = [self rangeConstraintForCurrentFacet];
+		CCRangeConstraint *rangeConstraint = [self rangeConstraintForCurrentFacet];
 
 		UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
 		if(cell.accessoryType == UITableViewCellAccessoryNone) {
@@ -167,7 +167,7 @@
 			}
 			else {
 				NSLog(@"adding constraint");
-				[self.constraint addConstraint:[MLWRangeConstraint rangeNamed:[self facetNameForCurrentFacet] value:cell.textLabel.text]];
+				[self.constraint addConstraint:[CCRangeConstraint rangeNamed:[self facetNameForCurrentFacet] value:cell.textLabel.text]];
 			}
 		}
 		else {
@@ -205,8 +205,8 @@
 	return [self.facetResponse facetNamed:[self facetNameForCurrentFacet]].results;
 }
 
-- (MLWRangeConstraint *)rangeConstraintForCurrentFacet {
-	return (MLWRangeConstraint *)[[self.constraint rangeConstraintsNamed:[self facetNameForCurrentFacet]] lastObject];
+- (CCRangeConstraint *)rangeConstraintForCurrentFacet {
+	return (CCRangeConstraint *)[[self.constraint rangeConstraintsNamed:[self facetNameForCurrentFacet]] lastObject];
 }
 
 - (void)viewDidUnload {

@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "MLWFacetResult.h"
+#import "CCFacetResult.h"
 
-@implementation MLWFacetResult
+@implementation CCFacetResult
 
 @synthesize label = _label;
 @synthesize count = _count;

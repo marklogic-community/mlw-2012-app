@@ -6,10 +6,10 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "MLWFacet.h"
-#import "MLWFacetResult.h"
+#import "CCFacet.h"
+#import "CCFacetResult.h"
 
-@implementation MLWFacet
+@implementation CCFacet
 
 @synthesize name = _name;
 @synthesize results = _results;
@@ -21,7 +21,7 @@
 
 		NSMutableArray *results = [NSMutableArray arrayWithCapacity:data.count];
 		for(NSDictionary *result in data) {
-			MLWFacetResult *facetResult = [[MLWFacetResult alloc] initWithLabel:[result objectForKey:@"value"] count:((NSNumber *)[result objectForKey:@"count"]).integerValue];
+			CCFacetResult *facetResult = [[CCFacetResult alloc] initWithLabel:[result objectForKey:@"value"] count:((NSNumber *)[result objectForKey:@"count"]).integerValue];
 			[results addObject:facetResult];
 			[facetResult release];
 		}
@@ -32,8 +32,8 @@
 	return self;
 }
 
-+ (MLWFacet *)facetNamed:(NSString *) name fromData:(NSArray *) data {
-	return [[[MLWFacet alloc] initFacetNamed:name fromData:data] autorelease];
++ (CCFacet *)facetNamed:(NSString *) name fromData:(NSArray *) data {
+	return [[[CCFacet alloc] initFacetNamed:name fromData:data] autorelease];
 }
 
 - (void)dealloc {

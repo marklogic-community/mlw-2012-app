@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MLWFacet : NSObject
+@interface CCFacet : NSObject
 
 - (id)initFacetNamed:(NSString *) name fromData:(NSArray *) data;
-+ (MLWFacet *)facetNamed:(NSString *) name fromData:(NSArray *) data;
++ (CCFacet *)facetNamed:(NSString *) name fromData:(NSArray *) data;
 
 @property (readonly) NSString *name;
 @property (readonly) NSArray *results;

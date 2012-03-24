@@ -6,13 +6,13 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "MLWFacet.h"
+#import "CCFacet.h"
 
-@interface MLWFacetResponse : NSObject
+@interface CCFacetResponse : NSObject
 
-+ (MLWFacetResponse *)responseFromData:(NSDictionary *) data;
++ (CCFacetResponse *)responseFromData:(NSDictionary *) data;
 
-- (MLWFacet *)facetNamed:(NSString *) name;
+- (CCFacet *)facetNamed:(NSString *) name;
 
 @property (readonly) NSArray *facets;
 

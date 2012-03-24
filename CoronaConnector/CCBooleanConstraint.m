@@ -6,19 +6,19 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "MLWBooleanConstraint.h"
-#import "MLWAndConstraint.h"
-#import "MLWOrConstraint.h"
-#import "MLWRangeConstraint.h"
-#import "MLWKeywordConstraint.h"
+#import "CCBooleanConstraint.h"
+#import "CCAndConstraint.h"
+#import "CCOrConstraint.h"
+#import "CCRangeConstraint.h"
+#import "CCKeywordConstraint.h"
 
-@interface MLWBooleanConstraint ()
+@interface CCBooleanConstraint ()
 - (NSString *)type;
 @end
 
-@implementation MLWBooleanConstraint
+@implementation CCBooleanConstraint
 
-- (void)addConstraint:(MLWConstraint *) constraint {
+- (void)addConstraint:(CCConstraint *) constraint {
 	NSMutableArray *constraints = [self.dict objectForKey:[self type]];
 	[constraints addObject:constraint];
 }
@@ -31,8 +31,8 @@
 - (NSArray *)rangeConstraintsNamed:(NSString *) name {
 	NSMutableArray *constraints = [self.dict objectForKey:[self type]];
 	NSMutableArray *rangeConstraints = [NSMutableArray arrayWithCapacity:10];
-	for(MLWConstraint *constraint in constraints) {
-		if([constraint isKindOfClass:[MLWRangeConstraint class]] && [((MLWRangeConstraint *)constraint).name isEqualToString:name]) {
+	for(CCConstraint *constraint in constraints) {
+		if([constraint isKindOfClass:[CCRangeConstraint class]] && [((CCRangeConstraint *)constraint).name isEqualToString:name]) {
 			[rangeConstraints addObject:constraint];
 		}
 	}
@@ -42,8 +42,8 @@
 - (NSArray *)keywordConstraints {
 	NSMutableArray *constraints = [self.dict objectForKey:[self type]];
 	NSMutableArray *keywordConstraints = [NSMutableArray arrayWithCapacity:10];
-	for(MLWConstraint *constraint in constraints) {
-		if([constraint isKindOfClass:[MLWKeywordConstraint class]]) {
+	for(CCConstraint *constraint in constraints) {
+		if([constraint isKindOfClass:[CCKeywordConstraint class]]) {
 			[keywordConstraints addObject:constraint];
 		}
 	}
@@ -51,15 +51,15 @@
 }
 
 
-- (void)removeConstraint:(MLWConstraint *) constraint {
+- (void)removeConstraint:(CCConstraint *) constraint {
 	NSMutableArray *constraints = [self.dict objectForKey:[self type]];
 	[constraints removeObject:constraint];
 }
 
 - (void)removeRangeConstraintsNamed:(NSString *) name {
 	NSMutableArray *constraints = [self.dict objectForKey:[self type]];
-	for(MLWConstraint *constraint in constraints) {
-		if([constraint isKindOfClass:[MLWRangeConstraint class]] && [((MLWRangeConstraint *)constraint).name isEqualToString:name]) {
+	for(CCConstraint *constraint in constraints) {
+		if([constraint isKindOfClass:[CCRangeConstraint class]] && [((CCRangeConstraint *)constraint).name isEqualToString:name]) {
 			[constraints addObject:constraint];
 		}
 	}
@@ -67,8 +67,8 @@
 
 - (void)removeKeywordConstraints {
 	NSMutableArray *constraints = [self.dict objectForKey:[self type]];
-	for(MLWConstraint *constraint in constraints) {
-		if([constraint isKindOfClass:[MLWKeywordConstraint class]]) {
+	for(CCConstraint *constraint in constraints) {
+		if([constraint isKindOfClass:[CCKeywordConstraint class]]) {
 			[constraints removeObject:constraint];
 		}
 	}
@@ -81,7 +81,7 @@
 	[serializedValue appendFormat:@"{\"%@\":", [self type]];
 	[serializedValue appendString:@"["];
 	int i = 0;
-	for(MLWConstraint *constraint in constraints) {
+	for(CCConstraint *constraint in constraints) {
 		[serializedValue appendString:[constraint serialize]];
 		i++;
 
@@ -96,10 +96,10 @@
 
 
 - (NSString *)type {
-	if([self isKindOfClass:[MLWAndConstraint class]]) {
+	if([self isKindOfClass:[CCAndConstraint class]]) {
 		return @"and";
 	}
-	if([self isKindOfClass:[MLWOrConstraint class]]) {
+	if([self isKindOfClass:[CCOrConstraint class]]) {
 		return @"or";
 	}
 

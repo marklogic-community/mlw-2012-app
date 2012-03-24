@@ -6,10 +6,10 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "MLWConstraint.h"
+#import "CCConstraint.h"
 #import "SBJSON.h"
 
-@implementation MLWConstraint
+@implementation CCConstraint
 
 @synthesize dict;
 

@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "MLWOrConstraint.h"
+#import "CCOrConstraint.h"
 
-@implementation MLWOrConstraint
+@implementation CCOrConstraint
 
 - (id)init {
 	self = [super init];
@@ -19,8 +19,8 @@
 	return self;
 }
 
-+ (MLWOrConstraint *)orConstraints:(MLWConstraint *)firstConstraint, ... {
-	MLWConstraint *eachConstraint;
++ (CCOrConstraint *)orConstraints:(CCConstraint *)firstConstraint, ... {
+	CCConstraint *eachConstraint;
 	va_list constraintList;
 	NSMutableArray *constraints = [NSMutableArray arrayWithCapacity:20];
 
@@ -28,13 +28,13 @@
 		[constraints addObject:firstConstraint];
 
 		va_start(constraintList, firstConstraint);
-		while((eachConstraint = va_arg(constraintList, MLWConstraint *))) {
+		while((eachConstraint = va_arg(constraintList, CCConstraint *))) {
 			[constraints addObject:eachConstraint];
 		}
 		va_end(constraintList);
 	}
 
-	MLWOrConstraint *constraint = [[[MLWOrConstraint alloc] init] autorelease];
+	CCOrConstraint *constraint = [[[CCOrConstraint alloc] init] autorelease];
 	[constraint.dict setObject:constraints forKey:@"or"];
 	return constraint;
 }

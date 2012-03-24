@@ -6,66 +6,66 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "MLWKeywordConstraint.h"
+#import "CCKeywordConstraint.h"
 
-@implementation MLWKeywordConstraint
+@implementation CCKeywordConstraint
 
-+ (MLWKeywordConstraint *) key:(NSString *) keyName equals:(NSString *) value {
-	MLWKeywordConstraint *constraint = [[[MLWKeywordConstraint alloc] init] autorelease];
++ (CCKeywordConstraint *) key:(NSString *) keyName equals:(NSString *) value {
+	CCKeywordConstraint *constraint = [[[CCKeywordConstraint alloc] init] autorelease];
 	constraint.dict = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:keyName, value, nil] forKeys:[NSArray arrayWithObjects:@"key", @"equals", nil]];
 	return constraint;
 }
 
-+ (MLWKeywordConstraint *) key:(NSString *) keyName contains:(NSString *) value {
-	MLWKeywordConstraint *constraint = [[[MLWKeywordConstraint alloc] init] autorelease];
++ (CCKeywordConstraint *) key:(NSString *) keyName contains:(NSString *) value {
+	CCKeywordConstraint *constraint = [[[CCKeywordConstraint alloc] init] autorelease];
 	constraint.dict = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:keyName, value, nil] forKeys:[NSArray arrayWithObjects:@"key", @"equals", nil]];
 	return constraint;
 }
 
-+ (MLWKeywordConstraint *) element:(NSString *) elementName equals:(NSString *) value {
-	MLWKeywordConstraint *constraint = [[[MLWKeywordConstraint alloc] init] autorelease];
++ (CCKeywordConstraint *) element:(NSString *) elementName equals:(NSString *) value {
+	CCKeywordConstraint *constraint = [[[CCKeywordConstraint alloc] init] autorelease];
 	constraint.dict = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:elementName, value, nil] forKeys:[NSArray arrayWithObjects:@"element", @"equals", nil]];
 	return constraint;
 }
 
-+ (MLWKeywordConstraint *) element:(NSString *) elementName contains:(NSString *) value {
-	MLWKeywordConstraint *constraint = [[[MLWKeywordConstraint alloc] init] autorelease];
++ (CCKeywordConstraint *) element:(NSString *) elementName contains:(NSString *) value {
+	CCKeywordConstraint *constraint = [[[CCKeywordConstraint alloc] init] autorelease];
 	constraint.dict = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:elementName, value, nil] forKeys:[NSArray arrayWithObjects:@"element", @"contains", nil]];
 	return constraint;
 }
 
-+ (MLWKeywordConstraint *) attribute:(NSString *) attributeName onElement:(NSString *) elementName equals:(NSString *) value {
-	MLWKeywordConstraint *constraint = [[[MLWKeywordConstraint alloc] init] autorelease];
++ (CCKeywordConstraint *) attribute:(NSString *) attributeName onElement:(NSString *) elementName equals:(NSString *) value {
+	CCKeywordConstraint *constraint = [[[CCKeywordConstraint alloc] init] autorelease];
 	constraint.dict = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:elementName, attributeName, value, nil] forKeys:[NSArray arrayWithObjects:@"element", @"attribute", @"equals", nil]];
 	return constraint;
 }
 
-+ (MLWKeywordConstraint *) attribute:(NSString *) attributeName onElement:(NSString *) elementName contains:(NSString *) value {
-	MLWKeywordConstraint *constraint = [[[MLWKeywordConstraint alloc] init] autorelease];
++ (CCKeywordConstraint *) attribute:(NSString *) attributeName onElement:(NSString *) elementName contains:(NSString *) value {
+	CCKeywordConstraint *constraint = [[[CCKeywordConstraint alloc] init] autorelease];
 	constraint.dict = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:elementName, attributeName, value, nil] forKeys:[NSArray arrayWithObjects:@"element", @"attribute", @"contains", nil]];
 	return constraint;
 }
 
-+ (MLWKeywordConstraint *) property:(NSString *) propertyName equals:(NSString *) value {
-	MLWKeywordConstraint *constraint = [[[MLWKeywordConstraint alloc] init] autorelease];
++ (CCKeywordConstraint *) property:(NSString *) propertyName equals:(NSString *) value {
+	CCKeywordConstraint *constraint = [[[CCKeywordConstraint alloc] init] autorelease];
 	constraint.dict = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:propertyName, value, nil] forKeys:[NSArray arrayWithObjects:@"property", @"equals", nil]];
 	return constraint;
 }
 
-+ (MLWKeywordConstraint *) property:(NSString *) propertyName contains:(NSString *) value {
-	MLWKeywordConstraint *constraint = [[[MLWKeywordConstraint alloc] init] autorelease];
++ (CCKeywordConstraint *) property:(NSString *) propertyName contains:(NSString *) value {
+	CCKeywordConstraint *constraint = [[[CCKeywordConstraint alloc] init] autorelease];
 	constraint.dict = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:propertyName, value, nil] forKeys:[NSArray arrayWithObjects:@"property", @"contains", nil]];
 	return constraint;
 }
 
-+ (MLWKeywordConstraint *) wordAnywhere:(NSString *) word {
-	MLWKeywordConstraint *constraint = [[[MLWKeywordConstraint alloc] init] autorelease];
++ (CCKeywordConstraint *) wordAnywhere:(NSString *) word {
+	CCKeywordConstraint *constraint = [[[CCKeywordConstraint alloc] init] autorelease];
 	constraint.dict = [NSMutableDictionary dictionaryWithObject:word forKey:@"wordAnywhere"];
 	return constraint;
 }
 
-+ (MLWKeywordConstraint *) wordInBinary:(NSString *) word {
-	MLWKeywordConstraint *constraint = [[[MLWKeywordConstraint alloc] init] autorelease];
++ (CCKeywordConstraint *) wordInBinary:(NSString *) word {
+	CCKeywordConstraint *constraint = [[[CCKeywordConstraint alloc] init] autorelease];
 	constraint.dict = [NSMutableDictionary dictionaryWithObject:word forKey:@"wordInBinary"];
 	return constraint;
 }

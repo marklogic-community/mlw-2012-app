@@ -6,23 +6,23 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "MLWRangeConstraint.h"
-#import "MLWFacetResult.h"
+#import "CCRangeConstraint.h"
+#import "CCFacetResult.h"
 
 
-@interface MLWRangeConstraint ()
+@interface CCRangeConstraint ()
 - (BOOL)checkValue:(id) value placeIntoArray:(NSMutableArray *)array;
 @end
 
 
-@implementation MLWRangeConstraint
+@implementation CCRangeConstraint
 
-+ (MLWRangeConstraint *) rangeNamed:(NSString *) rangeName value:(id) value {
-	return [MLWRangeConstraint rangeNamed:rangeName values:value, nil];
++ (CCRangeConstraint *) rangeNamed:(NSString *) rangeName value:(id) value {
+	return [CCRangeConstraint rangeNamed:rangeName values:value, nil];
 }
 
-+ (MLWRangeConstraint *)rangeNamed:(NSString *) rangeName values:(id) firstValue, ... {
-	MLWRangeConstraint *constraint = [[[MLWRangeConstraint alloc] init] autorelease];
++ (CCRangeConstraint *)rangeNamed:(NSString *) rangeName values:(id) firstValue, ... {
+	CCRangeConstraint *constraint = [[[CCRangeConstraint alloc] init] autorelease];
 	id eachValue;
 	va_list valueList;
 	NSMutableArray *values = [NSMutableArray arrayWithCapacity:20];
@@ -41,11 +41,11 @@
 	return constraint;
 }
 
-+ (MLWRangeConstraint *) rangeNamed:(NSString *) rangeName bucketLabel:(NSString *)bucketLabel {
-	return [MLWRangeConstraint rangeNamed:rangeName bucketLabels:bucketLabel, nil];
++ (CCRangeConstraint *) rangeNamed:(NSString *) rangeName bucketLabel:(NSString *)bucketLabel {
+	return [CCRangeConstraint rangeNamed:rangeName bucketLabels:bucketLabel, nil];
 }
 
-+ (MLWRangeConstraint *)rangeNamed:(NSString *) rangeName bucketLabels:(NSString *) firstLabel, ... {
++ (CCRangeConstraint *)rangeNamed:(NSString *) rangeName bucketLabels:(NSString *) firstLabel, ... {
 	NSString *eachValue;
 	va_list valueList;
 	NSMutableArray *values = [NSMutableArray arrayWithCapacity:20];
@@ -60,13 +60,13 @@
 		va_end(valueList);
 	}
 
-	MLWRangeConstraint *constraint = [[[MLWRangeConstraint alloc] init] autorelease];
+	CCRangeConstraint *constraint = [[[CCRangeConstraint alloc] init] autorelease];
 	constraint.dict = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:rangeName, values, nil] forKeys:[NSArray arrayWithObjects:@"range", @"bucketLabel", nil]];
 	return constraint;
 }
 
-+ (MLWRangeConstraint *) rangeNamed:(NSString *) rangeName from:(id) fromValue to:(id) toValue {
-	MLWRangeConstraint *constraint = [[[MLWRangeConstraint alloc] init] autorelease];
++ (CCRangeConstraint *) rangeNamed:(NSString *) rangeName from:(id) fromValue to:(id) toValue {
+	CCRangeConstraint *constraint = [[[CCRangeConstraint alloc] init] autorelease];
 	constraint.dict = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:rangeName, fromValue, toValue, nil] forKeys:[NSArray arrayWithObjects:@"range", @"from", @"to", nil]];
 	return constraint;
 }
@@ -115,8 +115,8 @@
 	NSMutableArray *currentValues = [self.dict objectForKey:@"value"];
 	NSMutableArray *itemsToRemove = [NSMutableArray arrayWithCapacity:2];
 	for(id aValue in currentValues) {
-		if([aValue isKindOfClass:[MLWFacetResult class]] && [((MLWFacetResult *)aValue).label isEqualToString:value]) {
-			[itemsToRemove addObject:((MLWFacetResult *)aValue).label];
+		if([aValue isKindOfClass:[CCFacetResult class]] && [((CCFacetResult *)aValue).label isEqualToString:value]) {
+			[itemsToRemove addObject:((CCFacetResult *)aValue).label];
 		}
 		else if([aValue isKindOfClass:[NSString class]] && [(NSString *)aValue isEqualToString:value]) {
 			[itemsToRemove addObject:aValue];
@@ -165,8 +165,8 @@
 
 
 - (BOOL)checkValue:(id) value placeIntoArray:(NSMutableArray *)array {
-	if([value isKindOfClass:[MLWFacetResult class]]) {
-		[array addObject:((MLWFacetResult *)value).label];
+	if([value isKindOfClass:[CCFacetResult class]]) {
+		[array addObject:((CCFacetResult *)value).label];
 		return YES;
 	}
 	else if([value isKindOfClass:[NSString class]] || [value isKindOfClass:[NSNumber class]]) {

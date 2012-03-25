@@ -112,13 +112,18 @@
 }
 
 - (void)removeValue:(id) value {
+	if([value isKindOfClass:[CCFacetResult class]]) {
+		value = ((CCFacetResult *)value).label;
+	}
+
 	NSMutableArray *currentValues = [self.dict objectForKey:@"value"];
 	NSMutableArray *itemsToRemove = [NSMutableArray arrayWithCapacity:2];
 	for(id aValue in currentValues) {
-		if([aValue isKindOfClass:[CCFacetResult class]] && [((CCFacetResult *)aValue).label isEqualToString:value]) {
-			[itemsToRemove addObject:((CCFacetResult *)aValue).label];
+		if([aValue isKindOfClass:[value class]] == NO) {
+			continue;
 		}
-		else if([aValue isKindOfClass:[NSString class]] && [(NSString *)aValue isEqualToString:value]) {
+
+		if([aValue isKindOfClass:[NSString class]] && [(NSString *)aValue isEqualToString:value]) {
 			[itemsToRemove addObject:aValue];
 		}
 		else if([aValue isKindOfClass:[NSNumber class]] && [(NSNumber *)aValue isEqualToNumber:value]) {
@@ -184,6 +189,13 @@
 	}
 
 	return NO;
+}
+
+- (NSString *)serialize {
+	if(self.values.count == 0 && self.bucketLabels.count == 0) {
+		return @"{}";
+	}
+	return [super serialize];
 }
 
 @end

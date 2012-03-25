@@ -152,7 +152,7 @@
 		CCFacetResult *facetResult = [results objectAtIndex:indexPath.row];
 		cell.textLabel.text = facetResult.label;
 		if(self.tabs.selectedSegmentIndex == 0 && [facetResult.label isEqualToString:@""]) {
-			// cell.textLabel.text = @"Unspecified";
+			cell.textLabel.text = @"Unspecified";
 		}
 		cell.detailTextLabel.text = [NSString stringWithFormat:@"%i", facetResult.count];
 
@@ -180,20 +180,21 @@
 - (void)tableView:(UITableView *) tableView didSelectRowAtIndexPath:(NSIndexPath *) indexPath {
 	if(indexPath.section != 2) {
 		CCRangeConstraint *rangeConstraint = [self rangeConstraintForCurrentFacet];
+		CCFacetResult *facetResult = [[self resultsForCurrentFacet] objectAtIndex:indexPath.row];
 
 		UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
 		if(cell.accessoryType == UITableViewCellAccessoryNone) {
 			cell.accessoryType = UITableViewCellAccessoryCheckmark;
 			if(rangeConstraint != nil) {
-				[rangeConstraint addValue:cell.textLabel.text];
+				[rangeConstraint addValue:facetResult];
 			}
 			else {
-				[self.constraint addConstraint:[CCRangeConstraint rangeNamed:[self facetNameForCurrentFacet] value:cell.textLabel.text]];
+				[self.constraint addConstraint:[CCRangeConstraint rangeNamed:[self facetNameForCurrentFacet] value:facetResult]];
 			}
 		}
 		else {
 			cell.accessoryType = UITableViewCellAccessoryNone;
-			[rangeConstraint removeValue:cell.textLabel.text];
+			[rangeConstraint removeValue:facetResult];
 		}
 
 		[tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -223,6 +224,7 @@
 		[self.constraint removeStringQueryConstraints];
 	}
 
+	NSLog(@"MLWFilterViewController: constructed constraint: %@", [self.constraint serialize]);
 	if(delegate != nil && [delegate respondsToSelector:@selector(filterView:constructedConstraint:)]) {
 		[delegate filterView:self constructedConstraint:self.constraint];
 	}

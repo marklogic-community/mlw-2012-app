@@ -206,15 +206,15 @@
 
 
 - (void)viewDidUnload {
-	[super viewDidUnload];
 	self.tableView = nil;
 	self.view = nil;
 	self.sessionBlocks = nil;
 	self.loadingView = nil;
+
+	[super viewDidUnload];
 }
 
 - (void)dealloc {
-	[super dealloc];
 	self.filterConstraint = nil;
 	self.filterController = nil;
 	self.filterNavController = nil;
@@ -222,6 +222,8 @@
 	self.view = nil;
 	self.sessionBlocks = nil;
 	self.loadingView = nil;
+
+	[super dealloc];
 }
 
 @end

@@ -14,24 +14,42 @@
 
 
 @interface MLWScheduleGridController ()
+@property (nonatomic, retain) MLWFilterViewController *filterController;
+@property (nonatomic, retain) UINavigationController *filterNavController;
 @property (nonatomic, retain) UIScrollView *scrollView;
 @property (nonatomic, retain) MLWScheduleGridView *gridView;
 @property (nonatomic, retain) UIView *loadingView;
 @property (nonatomic, retain) NSArray *sessionBlocks;
-@property (nonatomic, retain) UIPopoverController *popover;
+@property (nonatomic, retain) UIPopoverController *sessionPopover;
+@property (nonatomic, retain) UIPopoverController *filterPopover;
+@property (nonatomic, retain) CCAndConstraint *filterConstraint;
+
+- (void)fetchSessions;
+- (void)filterResults:(UIBarButtonItem *)sender;
 @end
 
 @implementation MLWScheduleGridController
 
+@synthesize filterController = _filterController;
+@synthesize filterNavController = _filterNavController;
 @synthesize scrollView = _scrollView;
 @synthesize gridView = _gridView;
 @synthesize loadingView = _loadingView;
 @synthesize sessionBlocks = _sessionsInBlocks;
-@synthesize popover = _popover;
+@synthesize sessionPopover = _sessionPopover;
+@synthesize filterPopover = _filterPopover;
+@synthesize filterConstraint = _filterConstraint;
 
 - (id)init {
     self = [super init];
     if(self) {
+		self.filterConstraint = nil;
+		self.filterController = [[[MLWFilterViewController alloc] init] autorelease];
+		self.filterController.delegate = self;
+		self.filterNavController = [[[UINavigationController alloc] initWithRootViewController:self.filterController] autorelease];
+		self.filterNavController.navigationBar.tintColor = [UIColor colorWithRed:(236.0f/255.0f) green:(125.0f/255.0f) blue:(30.0f/255.0f) alpha:1.0f];
+		self.filterNavController.title = @"Filter Sessions";
+
 		self.navigationItem.title = @"Schedule";
 		self.tabBarItem.title = @"Schedule";
 		self.tabBarItem.image = [UIImage imageNamed:@"calendar"];
@@ -40,6 +58,10 @@
 }
 
 - (void)loadView {
+	UIBarButtonItem *filter = [[UIBarButtonItem alloc] initWithTitle:@"Filter" style:UIBarButtonItemStylePlain target:self action:@selector(filterResults:)];
+	self.navigationItem.rightBarButtonItem = filter;
+	[filter release];
+
 	self.view = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)] autorelease];
 	self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"fabric"]];
@@ -66,9 +88,13 @@
 	[self.gridView addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionNew context:nil];
 	[self.scrollView addSubview:self.gridView];
 
+	[self fetchSessions];
+}
+
+- (void)fetchSessions {
 	MLWAppDelegate *appDelegate = (MLWAppDelegate *)[UIApplication sharedApplication].delegate;
 	MLWConference *conference = appDelegate.conference;
-	BOOL cached = [conference fetchSessionsWithConstraint:nil callback:^(NSArray *sessions, NSError *error) {
+	BOOL cached = [conference fetchSessionsWithConstraint:self.filterConstraint callback:^(NSArray *sessions, NSError *error) {
 		self.sessionBlocks = [conference sessionsToBlocks:sessions];
 		self.gridView.sessions = self.sessionBlocks;
 		[self.gridView setNeedsLayout];
@@ -111,11 +137,11 @@
 	}
 
 	MLWSessionDetailController *viewShowController = [[MLWSessionDetailController alloc] initWithSession:sessionView.session];
-	if(self.popover == nil) {
-		self.popover = [[[UIPopoverController alloc] initWithContentViewController:viewShowController] autorelease];
+	if(self.sessionPopover == nil) {
+		self.sessionPopover = [[[UIPopoverController alloc] initWithContentViewController:viewShowController] autorelease];
 	}
 	else {
-		[self.popover setContentViewController:viewShowController animated:YES];
+		[self.sessionPopover setContentViewController:viewShowController animated:YES];
 	}
 	[viewShowController release];
 
@@ -124,28 +150,49 @@
 		sessionRect.origin.y = sessionView.superview.frame.origin.y;
 	}
 
-	[self.popover presentPopoverFromRect:[self.gridView convertRect:sessionRect toView:self.view] inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+	[self.sessionPopover presentPopoverFromRect:[self.gridView convertRect:sessionRect toView:self.view] inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
+- (void)filterView:(MLWFilterViewController *) filterViewController constructedConstraint:(CCAndConstraint *) constraint {
+	self.filterConstraint = constraint;
+	[self.filterPopover dismissPopoverAnimated:YES];
+	[self fetchSessions];
+}
+
+- (void)filterResults:(UIBarButtonItem *)sender {
+	if(self.filterPopover == nil) {
+		self.filterPopover = [[[UIPopoverController alloc] initWithContentViewController:self.filterNavController] autorelease];
+	}
+
+	[self.filterPopover presentPopoverFromBarButtonItem:self.navigationItem.rightBarButtonItem permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
 
 - (void)viewDidUnload {
-	[super viewDidUnload];
 	self.gridView = nil;
 	self.view = nil;
 	self.sessionBlocks = nil;
-	self.popover = nil;
+	self.sessionPopover = nil;
+	self.filterPopover = nil;
 	self.loadingView = nil;
 	self.scrollView = nil;
+
+	[super viewDidUnload];
 }
 
 - (void)dealloc {
-	[super dealloc];
+	self.filterConstraint = nil;
+	self.filterController = nil;
+	self.filterNavController = nil;
 	self.gridView = nil;
 	self.view = nil;
 	self.sessionBlocks = nil;
-	self.popover = nil;
+	self.sessionPopover = nil;
+	self.filterPopover = nil;
 	self.loadingView = nil;
 	self.scrollView = nil;
+
+	[super dealloc];
 }
 
 @end

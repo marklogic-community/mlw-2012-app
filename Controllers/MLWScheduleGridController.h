@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "MLWSessionView.h"
+#import "MLWFilterViewController.h"
 
-@interface MLWScheduleGridController : UIViewController<MLWSessionViewDelegate>
+@interface MLWScheduleGridController : UIViewController<MLWSessionViewDelegate, MLWFilterViewControllerDelegate>
 
 @end

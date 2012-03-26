@@ -13,6 +13,7 @@
 @property (nonatomic, retain) UILabel *titleLabel;
 @property (nonatomic, retain) UILabel *trackLabel;
 @property (nonatomic, retain) UILabel *locationLabel;
+@property (nonatomic, retain) UILabel *combinedLabel;
 @end
 
 @implementation MLWSessionView
@@ -22,6 +23,7 @@
 @synthesize titleLabel;
 @synthesize trackLabel;
 @synthesize locationLabel;
+@synthesize combinedLabel;
 
 - (id)initWithFrame:(CGRect)frame session:(MLWSession *) session {
     self = [super initWithFrame:frame];
@@ -72,15 +74,36 @@
 		titleLabel.frame = CGRectInset(self.bounds, 5, 5);
 	}
 	else {
-		CGRect maxTitleRect;
-		CGRect metaRect;
+		if(self.frame.size.height < 50) {
+			CGRect maxTitleRect;
+			CGRect metaRect;
 
-		CGRectDivide(CGRectInset(self.bounds, 5, 5), &metaRect, &maxTitleRect, 30, CGRectMaxYEdge);
-		CGSize requiredSize = [_session.title sizeWithFont:titleLabel.font constrainedToSize:maxTitleRect.size];
-		titleLabel.frame = CGRectMake(maxTitleRect.origin.x, maxTitleRect.origin.y, requiredSize.width, requiredSize.height);
+			CGRectDivide(CGRectInset(self.bounds, 5, 5), &metaRect, &maxTitleRect, 30, CGRectMaxYEdge);
+			CGSize requiredSize = [_session.title sizeWithFont:titleLabel.font constrainedToSize:maxTitleRect.size];
+			titleLabel.frame = CGRectMake(maxTitleRect.origin.x, maxTitleRect.origin.y, requiredSize.width, requiredSize.height);
 
-		trackLabel.frame = CGRectMake(titleLabel.frame.origin.x, titleLabel.frame.origin.y + titleLabel.frame.size.height + 5, titleLabel.frame.size.width, 15);
-		locationLabel.frame = CGRectMake(trackLabel.frame.origin.x, trackLabel.frame.origin.y + trackLabel.frame.size.height, titleLabel.frame.size.width, 15);
+			if(combinedLabel == nil) {
+				self.combinedLabel = [[[UILabel alloc] init] autorelease];
+				combinedLabel.text = [NSString stringWithFormat:@"%@ - %@", _session.track, _session.location];
+				combinedLabel.font = [UIFont systemFontOfSize:10];
+				combinedLabel.textColor = [UIColor colorWithWhite:0.3f alpha:1.0f];
+				[self addSubview:combinedLabel];
+			}
+
+			combinedLabel.frame = CGRectMake(titleLabel.frame.origin.x, titleLabel.frame.origin.y + titleLabel.frame.size.height + 5, titleLabel.frame.size.width, 15);
+		}
+		else {
+			CGRect maxTitleRect;
+			CGRect metaRect;
+
+			CGRectDivide(CGRectInset(self.bounds, 5, 5), &metaRect, &maxTitleRect, 30, CGRectMaxYEdge);
+			CGSize requiredSize = [_session.title sizeWithFont:titleLabel.font constrainedToSize:maxTitleRect.size];
+			titleLabel.frame = CGRectMake(maxTitleRect.origin.x, maxTitleRect.origin.y, requiredSize.width, requiredSize.height);
+
+			trackLabel.frame = CGRectMake(titleLabel.frame.origin.x, titleLabel.frame.origin.y + titleLabel.frame.size.height + 5, titleLabel.frame.size.width, 15);
+			locationLabel.frame = CGRectMake(trackLabel.frame.origin.x, trackLabel.frame.origin.y + trackLabel.frame.size.height, titleLabel.frame.size.width, 15);
+			[self.combinedLabel removeFromSuperview];
+		}
 	}
 }
 
@@ -100,6 +123,7 @@
 	self.titleLabel = nil;
 	self.trackLabel = nil;
 	self.locationLabel = nil;
+	self.combinedLabel = nil;
 	[_session release];
 
 	[super dealloc];

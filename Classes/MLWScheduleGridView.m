@@ -53,7 +53,7 @@
 
 			if([lastDay isEqualToString:((MLWSession *)[blockSessions objectAtIndex:0]).dayOfWeek] == NO) {
 				lastDay = ((MLWSession *)[blockSessions objectAtIndex:0]).dayOfWeek;
-				UIView *headerView = [self dayOfWeekHeader:lastDay withFrame:CGRectMake(totalWidth, totalHeight, self.frame.size.width + 1, rowHeight + 1)];
+				UIView *headerView = [self dayOfWeekHeader:lastDay withFrame:CGRectMake(totalWidth, totalHeight, self.frame.size.width, rowHeight + 1)];
 				[self addSubview:headerView];
 				totalHeight += rowHeight;
 			}

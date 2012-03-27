@@ -15,7 +15,7 @@
 - (void)filterView:(MLWFilterViewController *) filterViewController constructedConstraint:(CCAndConstraint *) constraint;
 @end
 
-@interface MLWFilterViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
+@interface MLWFilterViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate> {
 	id<MLWFilterViewControllerDelegate>delegate;
 }
 

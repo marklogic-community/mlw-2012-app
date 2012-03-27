@@ -50,6 +50,8 @@
 		self.searchField.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 		self.searchField.clearButtonMode = UITextFieldViewModeAlways;
 		self.searchField.keyboardAppearance = UIKeyboardAppearanceAlert;
+		self.searchField.returnKeyType = UIReturnKeyDone;
+		self.searchField.delegate = self;
     }
     return self;
 }
@@ -209,6 +211,11 @@
 - (void)resetFiltering:(UIBarButtonItem *)sender {
 	self.constraint = [[[CCAndConstraint alloc] init] autorelease];
 	[self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+	[self doneFiltering:nil];
+	return YES;
 }
 
 - (void)doneFiltering:(UIBarButtonItem *)sender {

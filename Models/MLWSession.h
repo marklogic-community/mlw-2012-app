@@ -11,6 +11,7 @@
 @interface MLWSession : NSObject
 
 - (id)initWithData:(NSDictionary *) jsonData;
+- (NSString *)dayOfWeek;
 - (NSString *)formattedDate;
 - (NSString *)formattedTime;
 

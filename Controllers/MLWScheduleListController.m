@@ -42,7 +42,7 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
 	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-	if (self) {
+	if(self) {
 		self.filterConstraint = nil;
 		self.filterController = [[[MLWFilterViewController alloc] init] autorelease];
 		self.filterController.delegate = self;

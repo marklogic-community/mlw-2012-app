@@ -59,6 +59,13 @@
 	return self;
 }
 
+- (NSString *)dayOfWeek {
+	NSDateFormatter *startFormat = [[[NSDateFormatter alloc] init] autorelease];
+	[startFormat setDateFormat:@"EEEE"];
+
+	return [NSString stringWithFormat:@"%@", [startFormat stringFromDate:_startTime]];
+}
+
 - (NSString *)formattedDate {
 	NSDateFormatter *startFormat = [[[NSDateFormatter alloc] init] autorelease];
 	[startFormat setDateFormat:@"EEEE, h:mma"];

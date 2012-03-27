@@ -13,6 +13,10 @@
 #import "MLWSession.h"
 #import "UIPurposeView.h"
 
+@interface MLWScheduleGridView ()
+- (UIView *)dayOfWeekHeader:(NSString *)dayOfWeek withFrame:(CGRect) frame;
+@end
+
 @implementation MLWScheduleGridView
 
 @synthesize sessions = _sessions;
@@ -42,9 +46,17 @@
 			[view removeFromSuperview];
 		}
 
+		NSString *lastDay = nil;
 		int totalHeight = 0;
 		for(NSArray *blockSessions in self.sessions) {
 			int totalWidth = 0;
+
+			if([lastDay isEqualToString:((MLWSession *)[blockSessions objectAtIndex:0]).dayOfWeek] == NO) {
+				lastDay = ((MLWSession *)[blockSessions objectAtIndex:0]).dayOfWeek;
+				UIView *headerView = [self dayOfWeekHeader:lastDay withFrame:CGRectMake(totalWidth, totalHeight, self.frame.size.width + 1, rowHeight + 1)];
+				[self addSubview:headerView];
+				totalHeight += rowHeight;
+			}
 
 			UIPurposeView *timeView = [[UIPurposeView alloc] initWithFrame:CGRectMake(totalWidth, totalHeight, columnWidth + 1, rowHeight + 1)]; 
 			timeView.purpose = @"time";
@@ -71,6 +83,7 @@
 				[sessionView release];
 			}
 			else {
+
 				UIPurposeView *labelView = [[UIPurposeView alloc] initWithFrame:CGRectMake(totalWidth, totalHeight, self.frame.size.width - totalWidth, rowHeight + 1)]; 
 				labelView.purpose = @"breakoutLabel";
 				labelView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
@@ -147,6 +160,9 @@
 					frame.size.width = self.frame.size.width - columnWidth;
 					frame.origin.x = columnWidth;
 				}
+				else if([purposeView.purpose isEqualToString:@"dayOfWeekHeader"]) {
+					frame.size.width = self.frame.size.width + 1;
+				}
 				else if([purposeView.purpose isEqualToString:@"breakoutWrapper"]) {
 					frame.size.width = self.frame.size.width;
 					NSArray *sessionViews = [purposeView.subviews sortedArrayUsingComparator:^(MLWSessionView *sessionView1, MLWSessionView *sessionView2) {
@@ -178,6 +194,25 @@
 	}
 
 	removeChildren = NO;
+}
+
+- (UIView *)dayOfWeekHeader:(NSString *)dayOfWeek withFrame:(CGRect) frame {
+	UIPurposeView *labelView = [[[UIPurposeView alloc] initWithFrame:frame] autorelease]; 
+	labelView.purpose = @"dayOfWeekHeader";
+	labelView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+	labelView.layer.borderColor = [UIColor colorWithWhite:0.7f alpha:1.0f].CGColor;
+	labelView.layer.borderWidth = 1;
+
+	UILabel *label = [[UILabel alloc] initWithFrame:CGRectInset(labelView.bounds, 5, 5)];
+	label.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+	label.backgroundColor = [UIColor clearColor];
+	label.font = [UIFont boldSystemFontOfSize:14];
+	label.text = dayOfWeek;
+	label.textColor = [UIColor colorWithWhite:0.3f alpha:1.0f];
+	[labelView addSubview:label];
+	[label release];
+
+	return labelView;
 }
 
 - (void)dealloc {

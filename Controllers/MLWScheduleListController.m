@@ -20,6 +20,7 @@
 @property (nonatomic, retain) UINavigationController *filterNavController;
 @property (nonatomic, retain) UITableView *tableView;
 @property (nonatomic, retain) UIView *loadingView;
+@property (nonatomic, retain) UIView *noResultsView;
 @property (nonatomic, retain) NSArray *sessionBlocks;
 @property (nonatomic, retain) CCAndConstraint *filterConstraint;
 
@@ -35,6 +36,7 @@
 @synthesize filterNavController = _filterNavController;
 @synthesize tableView = _tableView;
 @synthesize loadingView = _loadingView;
+@synthesize noResultsView = _noResultsView;
 @synthesize sessionBlocks = _sessionsInBlocks;
 @synthesize filterConstraint = _filterConstraint;
 
@@ -70,10 +72,24 @@
 	self.loadingView.backgroundColor = [UIColor blackColor];
 	self.loadingView.alpha = 1.0f;
 	UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+	spinner.center = self.loadingView.center;
 	spinner.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
 	[spinner startAnimating];
 	[self.loadingView addSubview:spinner];
     [spinner release];
+
+	self.noResultsView = [[[UIView alloc] initWithFrame:self.view.frame] autorelease];
+	self.noResultsView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+	self.noResultsView.backgroundColor = [UIColor clearColor];
+	UILabel *noResultsLabel = [[UILabel alloc] initWithFrame:self.view.frame];
+	noResultsLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+	noResultsLabel.backgroundColor = [UIColor clearColor];
+	noResultsLabel.text = @"No Sessions";
+	noResultsLabel.textAlignment = UITextAlignmentCenter;
+	noResultsLabel.font = [UIFont boldSystemFontOfSize:30];
+	noResultsLabel.textColor = [UIColor whiteColor];
+	[self.noResultsView addSubview:noResultsLabel];
+	[noResultsLabel release];
 
 	self.tableView = [[[UITableView alloc] init] autorelease];
 	self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -99,10 +115,17 @@
 		completion:^(BOOL finished) {
 			[self.loadingView removeFromSuperview];
 		}];
+
+		if(sessions.count == 0) {
+			self.noResultsView.frame = self.view.frame;
+			[self.view addSubview:self.noResultsView];
+		}
 	}];
 
+	[self.noResultsView removeFromSuperview];
 	if(!cached) {
 		[self.view addSubview:self.loadingView];
+		[self.loadingView setNeedsLayout];
 		self.loadingView.alpha = 1.0f;
 	}
 }
@@ -210,6 +233,7 @@
 	self.view = nil;
 	self.sessionBlocks = nil;
 	self.loadingView = nil;
+	self.noResultsView = nil;
 
 	[super viewDidUnload];
 }
@@ -222,6 +246,7 @@
 	self.view = nil;
 	self.sessionBlocks = nil;
 	self.loadingView = nil;
+	self.noResultsView = nil;
 
 	[super dealloc];
 }

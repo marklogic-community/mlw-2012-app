@@ -19,6 +19,7 @@
 @property (nonatomic, retain) UIScrollView *scrollView;
 @property (nonatomic, retain) MLWScheduleGridView *gridView;
 @property (nonatomic, retain) UIView *loadingView;
+@property (nonatomic, retain) UIView *noResultsView;
 @property (nonatomic, retain) NSArray *sessionBlocks;
 @property (nonatomic, retain) UIPopoverController *sessionPopover;
 @property (nonatomic, retain) UIPopoverController *filterPopover;
@@ -35,6 +36,7 @@
 @synthesize scrollView = _scrollView;
 @synthesize gridView = _gridView;
 @synthesize loadingView = _loadingView;
+@synthesize noResultsView = _noResultsView;
 @synthesize sessionBlocks = _sessionsInBlocks;
 @synthesize sessionPopover = _sessionPopover;
 @synthesize filterPopover = _filterPopover;
@@ -82,6 +84,19 @@
 	[self.loadingView addSubview:spinner];
     [spinner release];
 
+	self.noResultsView = [[[UIView alloc] initWithFrame:self.view.frame] autorelease];
+	self.noResultsView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+	self.noResultsView.backgroundColor = [UIColor clearColor];
+	UILabel *noResultsLabel = [[UILabel alloc] initWithFrame:self.view.frame];
+	noResultsLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+	noResultsLabel.backgroundColor = [UIColor clearColor];
+	noResultsLabel.text = @"No Sessions";
+	noResultsLabel.textAlignment = UITextAlignmentCenter;
+	noResultsLabel.font = [UIFont boldSystemFontOfSize:30];
+	noResultsLabel.textColor = [UIColor whiteColor];
+	[self.noResultsView addSubview:noResultsLabel];
+	[noResultsLabel release];
+
 	self.gridView = [[[MLWScheduleGridView alloc] initWithFrame:self.view.bounds] autorelease];
 	self.gridView.backgroundColor = [UIColor whiteColor];
 	self.gridView.delegate = self;
@@ -105,10 +120,17 @@
 		completion:^(BOOL finished) {
 			[self.loadingView removeFromSuperview];
 		}];
+
+		if(sessions.count == 0) {
+			self.noResultsView.frame = self.view.frame;
+			[self.view addSubview:self.noResultsView];
+		}
 	}];
 
+	[self.noResultsView removeFromSuperview];
 	if(!cached) {
 		[self.view addSubview:self.loadingView];
+		[self.loadingView setNeedsLayout];
 		self.loadingView.alpha = 1.0f;
 	}
 }
@@ -175,6 +197,7 @@
 	self.sessionPopover = nil;
 	self.filterPopover = nil;
 	self.loadingView = nil;
+	self.noResultsView = nil;
 	self.scrollView = nil;
 
 	[super viewDidUnload];
@@ -190,6 +213,7 @@
 	self.sessionPopover = nil;
 	self.filterPopover = nil;
 	self.loadingView = nil;
+	self.noResultsView = nil;
 	self.scrollView = nil;
 
 	[super dealloc];

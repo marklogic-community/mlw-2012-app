@@ -294,10 +294,12 @@
 			[contactView addSubview:contactLabel];
 			[contactLabel release];
 
+			nextYOrigin += contactView.frame.size.height;
 			[speakerView addSubview:contactView];
 			[contactView release];
 		}
 
+		speakerView.frame = CGRectMake(0, 0, width, nextYOrigin);
 		[cell.contentView addSubview:speakerView];
 		[speakerView release];
 	}

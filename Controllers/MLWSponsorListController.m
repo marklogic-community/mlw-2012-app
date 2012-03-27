@@ -44,6 +44,7 @@
 	self.loadingView.backgroundColor = [UIColor blackColor];
 	self.loadingView.alpha = 1.0f;
 	UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+	spinner.center = self.loadingView.center;
 	spinner.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
 	[spinner startAnimating];
 	[self.loadingView addSubview:spinner];

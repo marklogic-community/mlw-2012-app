@@ -45,7 +45,7 @@
 		return self.cachedLogoView;
 	}
 
-	self.cachedLogoView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 50)] autorelease];
+	self.cachedLogoView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 150, 75)] autorelease];
 	UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
 	spinner.center = self.cachedLogoView.center;
 	[spinner startAnimating];
@@ -62,6 +62,8 @@
 
 			UIImage *logoImage = [UIImage imageWithData:logoData];
 			UIImageView *logoImageView = [[UIImageView alloc] initWithImage:logoImage];
+			logoImageView.frame = self.cachedLogoView.bounds;
+			logoImageView.contentMode = UIViewContentModeScaleAspectFit;
 			[self.cachedLogoView addSubview:logoImageView];
 			[logoImageView release];
 		});

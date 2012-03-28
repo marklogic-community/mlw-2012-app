@@ -33,6 +33,7 @@
 	label.text = [self.dataSource tableView:self titleForHeaderInSection:section];
 
 	[colorView addSubview:label];
+    [label release];
 	[colorView release];
 
 	return headerView;

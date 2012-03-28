@@ -73,7 +73,7 @@
 - (void)layoutSubviews {
 	float totalHeight = 5;
 
-	CGRect sponsorFrame = self.sponsor.logo.frame;
+	CGRect sponsorFrame = self.sponsor.logo.bounds;
 	sponsorFrame.origin.y = totalHeight;
 	sponsorFrame.origin.x = (self.frame.size.width - sponsorFrame.size.width) / 2.0f;
 	self.sponsor.logo.frame = sponsorFrame;

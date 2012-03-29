@@ -159,13 +159,16 @@
 	}
 
 	MLWSessionDetailController *viewShowController = [[MLWSessionDetailController alloc] initWithSession:sessionView.session];
+	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewShowController];
+	[viewShowController release];
+
 	if(self.sessionPopover == nil) {
-		self.sessionPopover = [[[UIPopoverController alloc] initWithContentViewController:viewShowController] autorelease];
+		self.sessionPopover = [[[UIPopoverController alloc] initWithContentViewController:navController] autorelease];
 	}
 	else {
-		[self.sessionPopover setContentViewController:viewShowController animated:YES];
+		[self.sessionPopover setContentViewController:navController animated:YES];
 	}
-	[viewShowController release];
+	[navController release];
 
 	CGRect sessionRect = sessionView.frame;
 	if(sessionView.session.plenary == NO) {

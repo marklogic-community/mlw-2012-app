@@ -9,22 +9,46 @@
 #import "MLWSessionDetailController.h"
 #import "UITableView+helpers.h"
 #import "MLWSpeaker.h"
+#import "MLWMySchedule.h"
+#import "MLWAppDelegate.h"
 
 @interface MLWSessionDetailController ()
 @property (nonatomic, retain) UITableView *tableView;
 @property (nonatomic, retain) MLWSession *session;
+@property (nonatomic, retain) UIBarButtonItem *addToScheduleButton;
+@property (nonatomic, retain) UIBarButtonItem *removeFromScheduleButton;
+@property (nonatomic, retain) MLWMySchedule *mySchedule;
+- (void)addToSchedule:(UIBarButtonItem *)sender;
+- (void)removeFromSchedule:(UIBarButtonItem *)sender;
 @end
 
 @implementation MLWSessionDetailController
 
 @synthesize tableView = _tableView;
 @synthesize session = _session;
+@synthesize addToScheduleButton;
+@synthesize removeFromScheduleButton;
+@synthesize mySchedule;
 
 - (id)initWithSession:(MLWSession *)session {
     self = [super init];
     if(self) {
 		self.session = session;
-		self.navigationItem.title = session.title;
+		self.addToScheduleButton = [[[UIBarButtonItem alloc] initWithTitle:@"Add to Schedule" style:UIBarButtonItemStylePlain target:self action:@selector(addToSchedule:)] autorelease];
+		self.removeFromScheduleButton = [[[UIBarButtonItem alloc] initWithTitle:@"Remove from Schedule" style:UIBarButtonItemStylePlain target:self action:@selector(removeFromSchedule:)] autorelease];
+
+		MLWAppDelegate *appDelegate = (MLWAppDelegate *)[UIApplication sharedApplication].delegate;
+		MLWConference *conference = appDelegate.conference;
+
+		[conference fetchMySchedule:^(MLWMySchedule *schedule, NSError *error) {
+			self.mySchedule = schedule;
+			if([schedule hasSession:self.session]) {
+				self.navigationItem.rightBarButtonItem = self.removeFromScheduleButton;
+			}
+			else {
+				self.navigationItem.rightBarButtonItem = self.addToScheduleButton;
+			}
+		}];
 
 		nameHeight = 50;
 		titleHeight = 44;
@@ -311,6 +335,16 @@
 	return nil;
 }
 
+- (void)addToSchedule:(UIBarButtonItem *)sender {
+	[self.mySchedule addSession:self.session];
+	self.navigationItem.rightBarButtonItem = self.removeFromScheduleButton;
+}
+
+- (void)removeFromSchedule:(UIBarButtonItem *)sender {
+	[self.mySchedule removeSession:self.session];
+	self.navigationItem.rightBarButtonItem = self.addToScheduleButton;
+}
+
 - (void)viewDidUnload {
 	self.view = nil;
 	self.tableView = nil;
@@ -321,6 +355,9 @@
 	self.view = nil;
 	self.tableView = nil;
 	self.session = nil;
+	self.addToScheduleButton = nil;
+	self.removeFromScheduleButton = nil;
+	self.mySchedule = nil;
     [super dealloc];
 }
 

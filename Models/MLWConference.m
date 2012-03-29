@@ -213,7 +213,18 @@
 		});
 	});
 
-	return YES;
+	return NO;
+}
+
+- (BOOL)fetchMySchedule:(void (^)(MLWMySchedule *schedule, NSError *error)) callback {
+	NSDictionary *scheduleDict = [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"mlw2012.mySchedule"];
+	callback([MLWMySchedule scheduleWithData:scheduleDict], nil);
+	return NO;
+}
+
+- (void)saveMySchedule:(MLWMySchedule *) schedule {
+	[[NSUserDefaults standardUserDefaults] setObject:[schedule serialize] forKey:@"mlw2012.mySchedule"];
+	[[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (MLWSpeaker *)speakerWithId:(NSString *)speakerId {

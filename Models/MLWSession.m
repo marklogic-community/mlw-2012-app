@@ -15,6 +15,7 @@
 
 @implementation MLWSession
 
+@synthesize id = _id;
 @synthesize startTime = _startTime;
 @synthesize endTime = _endTime;
 @synthesize plenary = _plenary;
@@ -28,6 +29,7 @@
 - (id)initWithData:(NSDictionary *) jsonData {
 	self = [super init];
 	if(self) {
+		_id = [[jsonData objectForKey:@"id"] retain];
 		_startTime = [[self stringToDate:[jsonData objectForKey:@"startTime::date"]] retain];
 		_endTime = [[self stringToDate:[jsonData objectForKey:@"endTime::date"]] retain];
 		_plenary = [[jsonData objectForKey:@"plenary"] boolValue];
@@ -94,6 +96,7 @@
 }
 
 - (void) dealloc {
+	[_id release];
 	[_startTime release];
 	[_endTime release];
 	[_title release];

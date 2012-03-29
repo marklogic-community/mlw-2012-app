@@ -15,6 +15,7 @@
 - (NSString *)formattedDate;
 - (NSString *)formattedTime;
 
+@property (readonly) NSString *id;
 @property (readonly) NSDate *startTime;
 @property (readonly) NSDate *endTime;
 @property (readonly) BOOL plenary;

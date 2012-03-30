@@ -22,4 +22,6 @@
 @property (nonatomic, assign) NSObject<MLWSessionViewDelegate> *delegate;
 @property (readonly) MLWSession *session;
 
+- (void)setDisabled:(BOOL) disabled;
+
 @end

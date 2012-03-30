@@ -57,7 +57,7 @@
 }
 
 - (void)loadView {
-	UIBarButtonItem *reset = [[UIBarButtonItem alloc] initWithTitle:@"Reset" style:UIBarButtonItemStylePlain target:self action:@selector(resetFiltering:)];
+	UIBarButtonItem *reset = [[UIBarButtonItem alloc] initWithTitle:@"Clear Filters" style:UIBarButtonItemStylePlain target:self action:@selector(resetFiltering:)];
 	self.navigationItem.leftBarButtonItem = reset;
 	[reset release];
 	UIBarButtonItem *done = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneFiltering:)];
@@ -211,6 +211,7 @@
 - (void)resetFiltering:(UIBarButtonItem *)sender {
 	self.constraint = [[[CCAndConstraint alloc] init] autorelease];
 	[self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
+	[self doneFiltering:nil];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {

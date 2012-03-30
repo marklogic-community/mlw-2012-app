@@ -69,6 +69,21 @@
     return self;
 }
 
+- (void)setDisabled:(BOOL) disabled {
+	if(disabled) {
+		self.titleLabel.alpha = 0.25;
+		self.trackLabel.alpha = 0.25;
+		self.locationLabel.alpha = 0.25;
+		self.combinedLabel.alpha = 0.25;
+	}
+	else {
+		self.titleLabel.alpha = 1.0;
+		self.trackLabel.alpha = 1.0;
+		self.locationLabel.alpha = 1.0;
+		self.combinedLabel.alpha = 1.0;
+	}
+}
+
 - (void)layoutSubviews {
 	if(_session.plenary) {
 		titleLabel.frame = CGRectInset(self.bounds, 5, 5);

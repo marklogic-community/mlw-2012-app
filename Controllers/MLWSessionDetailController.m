@@ -17,7 +17,6 @@
 @property (nonatomic, retain) MLWSession *session;
 @property (nonatomic, retain) UIBarButtonItem *addToScheduleButton;
 @property (nonatomic, retain) UIBarButtonItem *removeFromScheduleButton;
-@property (nonatomic, retain) MLWMySchedule *mySchedule;
 - (void)addToSchedule:(UIBarButtonItem *)sender;
 - (void)removeFromSchedule:(UIBarButtonItem *)sender;
 @end
@@ -28,7 +27,6 @@
 @synthesize session = _session;
 @synthesize addToScheduleButton;
 @synthesize removeFromScheduleButton;
-@synthesize mySchedule;
 
 - (id)initWithSession:(MLWSession *)session {
     self = [super init];
@@ -39,16 +37,12 @@
 
 		MLWAppDelegate *appDelegate = (MLWAppDelegate *)[UIApplication sharedApplication].delegate;
 		MLWConference *conference = appDelegate.conference;
-
-		[conference fetchMySchedule:^(MLWMySchedule *schedule, NSError *error) {
-			self.mySchedule = schedule;
-			if([schedule hasSession:self.session]) {
-				self.navigationItem.rightBarButtonItem = self.removeFromScheduleButton;
-			}
-			else {
-				self.navigationItem.rightBarButtonItem = self.addToScheduleButton;
-			}
-		}];
+		if([conference.userSchedule hasSession:self.session]) {
+			self.navigationItem.rightBarButtonItem = self.removeFromScheduleButton;
+		}
+		else {
+			self.navigationItem.rightBarButtonItem = self.addToScheduleButton;
+		}
 
 		nameHeight = 50;
 		titleHeight = 44;
@@ -336,12 +330,16 @@
 }
 
 - (void)addToSchedule:(UIBarButtonItem *)sender {
-	[self.mySchedule addSession:self.session];
+	MLWAppDelegate *appDelegate = (MLWAppDelegate *)[UIApplication sharedApplication].delegate;
+	MLWConference *conference = appDelegate.conference;
+	[conference.userSchedule addSession:self.session];
 	self.navigationItem.rightBarButtonItem = self.removeFromScheduleButton;
 }
 
 - (void)removeFromSchedule:(UIBarButtonItem *)sender {
-	[self.mySchedule removeSession:self.session];
+	MLWAppDelegate *appDelegate = (MLWAppDelegate *)[UIApplication sharedApplication].delegate;
+	MLWConference *conference = appDelegate.conference;
+	[conference.userSchedule removeSession:self.session];
 	self.navigationItem.rightBarButtonItem = self.addToScheduleButton;
 }
 
@@ -357,7 +355,6 @@
 	self.session = nil;
 	self.addToScheduleButton = nil;
 	self.removeFromScheduleButton = nil;
-	self.mySchedule = nil;
     [super dealloc];
 }
 

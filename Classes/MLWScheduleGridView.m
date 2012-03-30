@@ -12,19 +12,24 @@
 #import "MLWScheduleGridView.h"
 #import "MLWSession.h"
 #import "UIPurposeView.h"
+#import "MLWAppDelegate.h"
+#import "MLWMySchedule.h"
 
 @interface MLWScheduleGridView ()
 - (UIView *)dayOfWeekHeader:(NSString *)dayOfWeek withFrame:(CGRect) frame;
+@property (nonatomic, retain) NSMutableArray *sessionViews;
 @end
 
 @implementation MLWScheduleGridView
 
 @synthesize sessions = _sessions;
 @synthesize delegate;
+@synthesize sessionViews = _sessionViews;
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if(self) {
+		self.sessionViews = [NSMutableArray arrayWithCapacity:100];
 		self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 		self.sessions = [NSArray array];
     }
@@ -35,6 +40,22 @@
 	[_sessions release];
 	_sessions = [sessions retain];
 	removeChildren = YES;
+	[self.sessionViews removeAllObjects];
+}
+
+- (void)limitToUserSchedule:(BOOL) limit {
+	MLWAppDelegate *appDelegate = (MLWAppDelegate *)[UIApplication sharedApplication].delegate;
+	MLWMySchedule *schedule = appDelegate.conference.userSchedule;
+	if(limit == NO) {
+		for(MLWSessionView *sessionView in self.sessionViews) {
+			sessionView.disabled = NO;
+		}
+	}
+	else {
+		for(MLWSessionView *sessionView in self.sessionViews) {
+			sessionView.disabled = ![schedule hasSession:sessionView.session];
+		}
+	}
 }
 
 - (void)layoutSubviews {
@@ -78,6 +99,7 @@
 				MLWSession *session = [blockSessions objectAtIndex:0];
 				MLWSessionView *sessionView = [[MLWSessionView alloc] initWithFrame:CGRectMake(totalWidth, totalHeight, self.frame.size.width - totalWidth, rowHeight + 1) session:session]; 
 				sessionView.delegate = delegate;
+				[self.sessionViews addObject:sessionView];
 				[self addSubview:sessionView];
 				totalHeight += rowHeight;
 				[sessionView release];
@@ -115,6 +137,7 @@
 					}
 					MLWSessionView *sessionView = [[MLWSessionView alloc] initWithFrame:CGRectMake(totalWidth, 0, width, sessionRowHeight + 1) session:session]; 
 					sessionView.delegate = delegate;
+					[self.sessionViews addObject:sessionView];
 					[breakoutWrapper addSubview:sessionView];
 					totalWidth += columnWidth;
 					[sessionView release];

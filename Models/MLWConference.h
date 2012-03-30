@@ -18,9 +18,10 @@
 - (BOOL)fetchFacetsWithConstraint:(CCConstraint *) constraint callback:(void (^)(CCFacetResponse *, NSError *)) callback;
 - (BOOL)fetchTweets:(void (^)(NSArray *sessions, NSError *error)) callback;
 - (BOOL)fetchSponsors:(void (^)(NSArray *sessions, NSError *error)) callback;
-- (BOOL)fetchMySchedule:(void (^)(MLWMySchedule *schedule, NSError *error)) callback;
 - (void)saveMySchedule:(MLWMySchedule *) schedule;
 - (MLWSpeaker *)speakerWithId:(NSString *)speakerId;
 - (NSArray *)sessionsToBlocks:(NSArray *)sessions;
+
+@property (nonatomic, retain) MLWMySchedule *userSchedule;
 
 @end

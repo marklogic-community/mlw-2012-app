@@ -57,9 +57,11 @@
 		return;
 	}
 
+	[self willChangeValueForKey:@"count"];
 	NSMutableArray *sessionIds = [dict objectForKey:@"sessions"];
 	[sessionIds addObject:session.id];
 	[self save];
+	[self didChangeValueForKey:@"count"];
 }
 
 - (void)removeSession:(MLWSession *)session {
@@ -74,10 +76,18 @@
 			[sessionsToDelete addObject:sessionId];
 		}
 	}
+
+	[self willChangeValueForKey:@"count"];
 	for(NSString *sessionId in sessionsToDelete) {
 		[sessionIds removeObject:sessionId];
 	}
 	[self save];
+	[self didChangeValueForKey:@"count"];
+}
+
+- (NSUInteger)count {
+	NSMutableArray *sessionIds = [dict objectForKey:@"sessions"];
+	return sessionIds.count;
 }
 
 - (void)save {

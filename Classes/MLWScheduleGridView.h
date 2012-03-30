@@ -16,4 +16,6 @@
 @property (nonatomic, assign) NSObject<MLWSessionViewDelegate> *delegate;
 @property (nonatomic, retain) NSArray *sessions;
 
+- (void)limitToUserSchedule:(BOOL) limit;
+
 @end

@@ -21,6 +21,7 @@
 @property (nonatomic, retain) NSArray *sponsors;
 
 - (void)populateSpeakers:(void (^)(NSError *)) callback;
+- (void)populateUserSchedule:(void (^)(NSError *)) callback;
 @end
 
 @implementation MLWConference
@@ -28,6 +29,7 @@
 @synthesize sessions = _sessions;
 @synthesize speakers = _speakers;
 @synthesize sponsors = _sponsors;
+@synthesize userSchedule;
 
 - (id)init {
 	self = [super init];
@@ -48,21 +50,43 @@
 
 	CCAndConstraint *sessionConstraint = [CCAndConstraint andConstraints:[CCKeywordConstraint key:@"type" equals:@"session"], constraint, nil];
 
-	if(self.speakers == nil) {
-		[self populateSpeakers:^(NSError *error) {
-			if(error != nil) {
-				callback(nil, error);
-				return;
+	if(self.userSchedule == nil) {
+		[self populateUserSchedule:^(NSError *error) {
+			if(self.speakers == nil) {
+				[self populateSpeakers:^(NSError *error) {
+					if(error != nil) {
+						callback(nil, error);
+						return;
+					}
+					[self populateSessionsWithConstraint:sessionConstraint callback:^(NSError *error) {
+						callback(_sessions, error);
+					}];
+				}];
 			}
-			[self populateSessionsWithConstraint:sessionConstraint callback:^(NSError *error) {
-				callback(_sessions, error);
-			}];
+			else {
+				[self populateSessionsWithConstraint:sessionConstraint callback:^(NSError *error) {
+					callback(_sessions, error);
+				}];
+			}
 		}];
 	}
 	else {
-		[self populateSessionsWithConstraint:sessionConstraint callback:^(NSError *error) {
-			callback(_sessions, error);
-		}];
+		if(self.speakers == nil) {
+			[self populateSpeakers:^(NSError *error) {
+				if(error != nil) {
+					callback(nil, error);
+					return;
+				}
+				[self populateSessionsWithConstraint:sessionConstraint callback:^(NSError *error) {
+					callback(_sessions, error);
+				}];
+			}];
+		}
+		else {
+			[self populateSessionsWithConstraint:sessionConstraint callback:^(NSError *error) {
+				callback(_sessions, error);
+			}];
+		}
 	}
 
 	return NO;
@@ -115,6 +139,12 @@
 		callback(error);
 	}];
 	[sessionSearch release];
+}
+
+- (void)populateUserSchedule:(void (^)(NSError *)) callback {
+	NSDictionary *scheduleDict = [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"mlw2012.mySchedule"];
+	self.userSchedule = [MLWMySchedule scheduleWithData:scheduleDict];
+	callback(nil);
 }
 
 - (BOOL)fetchTweets:(void (^)(NSArray *sessions, NSError *error)) callback {
@@ -216,12 +246,6 @@
 	return NO;
 }
 
-- (BOOL)fetchMySchedule:(void (^)(MLWMySchedule *schedule, NSError *error)) callback {
-	NSDictionary *scheduleDict = [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"mlw2012.mySchedule"];
-	callback([MLWMySchedule scheduleWithData:scheduleDict], nil);
-	return NO;
-}
-
 - (void)saveMySchedule:(MLWMySchedule *) schedule {
 	[[NSUserDefaults standardUserDefaults] setObject:[schedule serialize] forKey:@"mlw2012.mySchedule"];
 	[[NSUserDefaults standardUserDefaults] synchronize];
@@ -266,6 +290,7 @@
 	self.sessions = nil;
 	self.speakers = nil;
 	self.sponsors = nil;
+	self.userSchedule = nil;
 	[super dealloc];
 }
 

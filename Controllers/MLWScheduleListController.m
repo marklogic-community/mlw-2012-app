@@ -13,6 +13,7 @@
 #import "UITableView+helpers.h"
 #import "MLWFilterViewController.h"
 #import "CCAndConstraint.h"
+#import "MLWMySchedule.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface MLWScheduleListController ()
@@ -23,9 +24,12 @@
 @property (nonatomic, retain) UIView *noResultsView;
 @property (nonatomic, retain) NSArray *sessionBlocks;
 @property (nonatomic, retain) CCAndConstraint *filterConstraint;
+@property (nonatomic) BOOL limitedToUserSchedule;
+@property (nonatomic, retain) MLWMySchedule *userSchedule;
 
 - (void)fetchSessions;
 - (void)filterResults:(UIBarButtonItem *)sender;
+- (void)toggleMySchedule:(UIBarButtonItem *)sender;
 - (MLWSession *)sessionForIndexPath:(NSIndexPath *) indexPath;
 @end
 
@@ -39,6 +43,8 @@
 @synthesize noResultsView = _noResultsView;
 @synthesize sessionBlocks = _sessionsInBlocks;
 @synthesize filterConstraint = _filterConstraint;
+@synthesize limitedToUserSchedule;
+@synthesize userSchedule;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
 	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -63,6 +69,10 @@
 	UIBarButtonItem *filter = [[UIBarButtonItem alloc] initWithTitle:@"Filter" style:UIBarButtonItemStylePlain target:self action:@selector(filterResults:)];
 	self.navigationItem.rightBarButtonItem = filter;
 	[filter release];
+
+	UIBarButtonItem *myScheduleButton = [[UIBarButtonItem alloc] initWithTitle:@"My Schedule" style:UIBarButtonItemStylePlain target:self action:@selector(toggleMySchedule:)];
+	self.navigationItem.leftBarButtonItem = myScheduleButton;
+	[myScheduleButton release];
 
 	self.view = [[[UIView alloc] init] autorelease];
 	self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -106,6 +116,12 @@
 	MLWAppDelegate *appDelegate = (MLWAppDelegate *)[UIApplication sharedApplication].delegate;
 	MLWConference *conference = appDelegate.conference;
 	BOOL cached = [conference fetchSessionsWithConstraint:self.filterConstraint callback:^(NSArray *sessions, NSError *error) {
+		if(self.userSchedule == nil) {
+			MLWAppDelegate *appDelegate = (MLWAppDelegate *)[UIApplication sharedApplication].delegate;
+			MLWConference *conference = appDelegate.conference;
+			self.userSchedule = conference.userSchedule;
+		}
+
 		self.sessionBlocks = [conference sessionsToBlocks:sessions];
 
 		[self.tableView reloadData];
@@ -131,6 +147,7 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+	[self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[self.tableView indexPathForSelectedRow], nil] withRowAnimation:UITableViewRowAnimationNone];
 	[self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
 	[super viewDidAppear:animated];
 }
@@ -198,6 +215,15 @@
 	cell.layer.borderColor = [UIColor colorWithWhite:0.8f alpha:1.0f].CGColor;
 	cell.layer.borderWidth = 0.5f;
 	cell.backgroundColor = [UIColor whiteColor];
+
+	if(self.limitedToUserSchedule == NO || [self.userSchedule hasSession:[self sessionForIndexPath:indexPath]]) {
+		cell.textLabel.alpha = 1.0;
+		cell.detailTextLabel.alpha = 1.0;
+	}
+	else {
+		cell.textLabel.alpha = 0.25;
+		cell.detailTextLabel.alpha = 0.25;
+	}
 }
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -227,6 +253,19 @@
 	return [sessionsInBlock objectAtIndex:indexPath.row];
 }
 
+- (void)toggleMySchedule:(UIBarButtonItem *)sender {
+	if(sender.style == UIBarButtonItemStylePlain) {
+		sender.style = UIBarButtonItemStyleDone;
+		self.limitedToUserSchedule = YES;
+	}
+	else {
+		sender.style = UIBarButtonItemStylePlain;
+		self.limitedToUserSchedule = NO;
+	}
+
+	[self.tableView reloadRowsAtIndexPaths:[self.tableView indexPathsForVisibleRows] withRowAnimation:UITableViewRowAnimationNone];
+}
+
 
 - (void)viewDidUnload {
 	self.tableView = nil;
@@ -239,6 +278,7 @@
 }
 
 - (void)dealloc {
+	self.userSchedule = nil;
 	self.filterConstraint = nil;
 	self.filterController = nil;
 	self.filterNavController = nil;

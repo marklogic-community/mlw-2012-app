@@ -18,4 +18,6 @@
 - (void)addSession:(MLWSession *)session;
 - (void)removeSession:(MLWSession *)session;
 
+@property (nonatomic, readonly) NSUInteger count;
+
 @end

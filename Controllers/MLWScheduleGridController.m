@@ -115,6 +115,10 @@
 	[conference.userSchedule addObserver:self forKeyPath:@"count" options:NSKeyValueObservingOptionNew context:nil];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+	[self.gridView limitToUserSchedule:self.navigationItem.leftBarButtonItem.style == UIBarButtonItemStyleDone];
+}
+
 - (void)fetchSessions {
 	MLWAppDelegate *appDelegate = (MLWAppDelegate *)[UIApplication sharedApplication].delegate;
 	MLWConference *conference = appDelegate.conference;

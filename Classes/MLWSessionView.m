@@ -69,6 +69,10 @@
     return self;
 }
 
+- (BOOL)disabled {
+	return self.titleLabel.alpha < 1.0;
+}
+
 - (void)setDisabled:(BOOL) disabled {
 	if(disabled) {
 		self.titleLabel.alpha = 0.25;

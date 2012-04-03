@@ -46,15 +46,31 @@
 - (void)limitToUserSchedule:(BOOL) limit {
 	MLWAppDelegate *appDelegate = (MLWAppDelegate *)[UIApplication sharedApplication].delegate;
 	MLWMySchedule *schedule = appDelegate.conference.userSchedule;
+	MLWSessionView *firstSessionInFuture = nil;
 	if(limit == NO) {
 		for(MLWSessionView *sessionView in self.sessionViews) {
 			sessionView.disabled = NO;
+			if(firstSessionInFuture == nil && [sessionView.session.startTime compare:[NSDate date]] == NSOrderedDescending) {
+				firstSessionInFuture = sessionView;
+			}
 		}
 	}
 	else {
 		for(MLWSessionView *sessionView in self.sessionViews) {
 			sessionView.disabled = ![schedule hasSession:sessionView.session];
+			if(firstSessionInFuture == nil && sessionView.disabled == NO && [sessionView.session.startTime compare:[NSDate date]] == NSOrderedDescending) {
+				firstSessionInFuture = sessionView;
+			}
 		}
+	}
+	if(firstSessionInFuture != nil && [self.superview isKindOfClass:[UIScrollView class]]) {
+		UIScrollView *scrollView = (UIScrollView *)self.superview;
+		CGRect scrollToFrame = firstSessionInFuture.frame;
+		scrollToFrame.origin.x = 0;
+		if(scrollToFrame.origin.y == 0) {
+			scrollToFrame.origin.y = firstSessionInFuture.superview.frame.origin.y;
+		}
+		[scrollView scrollRectToVisible:scrollToFrame animated:YES];
 	}
 }
 

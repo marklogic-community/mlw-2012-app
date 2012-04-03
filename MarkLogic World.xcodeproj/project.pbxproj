@@ -147,7 +147,7 @@
 		C26D89CE151E447200934014 /* CCStringQueryConstraint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCStringQueryConstraint.m; path = CoronaConnector/CCStringQueryConstraint.m; sourceTree = "<group>"; };
 		C283A4CB1524F06F004BF170 /* MLWMySchedule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWMySchedule.h; path = Models/MLWMySchedule.h; sourceTree = "<group>"; };
 		C283A4CC1524F06F004BF170 /* MLWMySchedule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWMySchedule.m; path = Models/MLWMySchedule.m; sourceTree = "<group>"; };
-		C29A8E1F150A560B00320140 /* MarkLogic World.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MarkLogic World.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C29A8E1F150A560B00320140 /* MLW '12.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MLW '12.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C29A8E23150A560B00320140 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C29A8E25150A560B00320140 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C29A8E27150A560B00320140 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -306,7 +306,7 @@
 		C29A8E20150A560B00320140 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C29A8E1F150A560B00320140 /* MarkLogic World.app */,
+				C29A8E1F150A560B00320140 /* MLW '12.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -398,7 +398,7 @@
 			);
 			name = "MarkLogic World";
 			productName = "MarkLogic World";
-			productReference = C29A8E1F150A560B00320140 /* MarkLogic World.app */;
+			productReference = C29A8E1F150A560B00320140 /* MLW '12.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -562,7 +562,7 @@
 				GCC_PREFIX_HEADER = "Resources/MarkLogic World-Prefix.pch";
 				INFOPLIST_FILE = "Resources/MarkLogic World-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "MLW '12";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -574,7 +574,7 @@
 				GCC_PREFIX_HEADER = "Resources/MarkLogic World-Prefix.pch";
 				INFOPLIST_FILE = "Resources/MarkLogic World-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "MLW '12";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

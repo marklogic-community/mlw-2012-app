@@ -145,7 +145,13 @@
 	}
 	if(indexPath.section == 2) {
 		MLWSpeaker *speaker = [self.session.speakers objectAtIndex:indexPath.row];
-		float height = [speaker.bio sizeWithFont:[UIFont systemFontOfSize:14] constrainedToSize:CGSizeMake(self.view.frame.size.width - 40, 10000)].height + nameHeight + titleHeight;
+		float height = nameHeight;
+		if(speaker.bio != nil) {
+			height += [speaker.bio sizeWithFont:[UIFont systemFontOfSize:14] constrainedToSize:CGSizeMake(self.view.frame.size.width - 40, 10000)].height;
+		}
+		if(speaker.title != nil) {
+			height += titleHeight;
+		}
 		if(speaker.email != nil) {
 			height += contactHeight;
 		}
@@ -258,38 +264,42 @@
 		[nameView release];
 
 		// Bio view
-		UILabel *bioLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, nextYOrigin, width, [speaker.bio sizeWithFont:[UIFont systemFontOfSize:14] constrainedToSize:CGSizeMake(self.view.frame.size.width - 40, 10000)].height)];
-		bioLabel.numberOfLines = 0;
-		bioLabel.backgroundColor = [UIColor clearColor];
-		bioLabel.font = [UIFont systemFontOfSize:14];
-		bioLabel.text = speaker.bio;
-		nextYOrigin += bioLabel.frame.size.height;
-		[speakerView addSubview:bioLabel];
-		[bioLabel release];
+		if(speaker.bio != nil) {
+			UILabel *bioLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, nextYOrigin, width, [speaker.bio sizeWithFont:[UIFont systemFontOfSize:14] constrainedToSize:CGSizeMake(self.view.frame.size.width - 40, 10000)].height)];
+			bioLabel.numberOfLines = 0;
+			bioLabel.backgroundColor = [UIColor clearColor];
+			bioLabel.font = [UIFont systemFontOfSize:14];
+			bioLabel.text = speaker.bio;
+			nextYOrigin += bioLabel.frame.size.height;
+			[speakerView addSubview:bioLabel];
+			[bioLabel release];
+		}
 
 		// Title view
-		UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, nextYOrigin, width, titleHeight)];
+		if(speaker.title != nil) {
+			UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, nextYOrigin, width, titleHeight)];
 
-		UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(10, 15, 45, 16)];
-		title.backgroundColor = [UIColor clearColor];
-		title.textColor = [UIColor colorWithRed:(236.0f/255.0f) green:(125.0f/255.0f) blue:(30.0f/255.0f) alpha:1.0f];
-		title.font = [UIFont boldSystemFontOfSize:13];
-		title.text = @"Title:";
-		[titleView addSubview:title];
-		[title release];
+			UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(10, 15, 45, 16)];
+			title.backgroundColor = [UIColor clearColor];
+			title.textColor = [UIColor colorWithRed:(236.0f/255.0f) green:(125.0f/255.0f) blue:(30.0f/255.0f) alpha:1.0f];
+			title.font = [UIFont boldSystemFontOfSize:13];
+			title.text = @"Title:";
+			[titleView addSubview:title];
+			[title release];
 
-		UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(55, 15, 280 - 55, 16)];
-		titleLabel.backgroundColor = [UIColor clearColor];
-		titleLabel.font = [UIFont boldSystemFontOfSize:13];
-		titleLabel.text = speaker.title;
-		titleLabel.adjustsFontSizeToFitWidth = YES;
-		titleLabel.minimumFontSize = 10;
-		[titleView addSubview:titleLabel];
-		[titleLabel release];
+			UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(55, 15, 280 - 55, 16)];
+			titleLabel.backgroundColor = [UIColor clearColor];
+			titleLabel.font = [UIFont boldSystemFontOfSize:13];
+			titleLabel.text = speaker.title;
+			titleLabel.adjustsFontSizeToFitWidth = YES;
+			titleLabel.minimumFontSize = 10;
+			[titleView addSubview:titleLabel];
+			[titleLabel release];
 
-		nextYOrigin += titleView.frame.size.height;
-		[speakerView addSubview:titleView];
-		[titleView release];
+			nextYOrigin += titleView.frame.size.height;
+			[speakerView addSubview:titleView];
+			[titleView release];
+		}
 
 		// Contact view
 		if(speaker.email != nil) {

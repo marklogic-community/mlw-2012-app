@@ -27,6 +27,14 @@
 		_email = [[jsonData objectForKey:@"email"] retain];
 		_bio = [[jsonData objectForKey:@"bio"] retain];
 
+		if([_bio isKindOfClass:[NSNull class]] || _bio.length == 0) {
+			[_bio release];
+			_bio = nil;
+		}
+		if([_title isKindOfClass:[NSNull class]] || _title.length == 0) {
+			[_title release];
+			_title = nil;
+		}
 		if([_email isKindOfClass:[NSNull class]] || _email.length == 0) {
 			[_email release];
 			_email = nil;

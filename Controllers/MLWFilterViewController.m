@@ -157,7 +157,9 @@
 		if(self.tabs.selectedSegmentIndex == 0 && [facetResult.label isEqualToString:@""]) {
 			cell.textLabel.text = @"Unspecified";
 		}
-		cell.detailTextLabel.text = [NSString stringWithFormat:@"%i", facetResult.count];
+		if(self.tabs.selectedSegmentIndex == 0) {
+			cell.detailTextLabel.text = [NSString stringWithFormat:@"%i", facetResult.count];
+		}
 
 		for(NSString *selectedFacetValue in [self rangeConstraintForCurrentFacet].values) {
 			if([selectedFacetValue isEqualToString:facetResult.label]) {

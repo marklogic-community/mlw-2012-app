@@ -201,6 +201,7 @@
 		cell.accessoryType = UITableViewCellAccessoryNone;
 	}
 	cell.textLabel.text = session.title;
+	cell.detailTextLabel.text = nil;
 	if(session.track != nil && session.location != nil) {
 		cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ - %@", session.track, session.location];
 	}

@@ -150,7 +150,6 @@
 - (void)viewDidAppear:(BOOL)animated {
 	[self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[self.tableView indexPathForSelectedRow], nil] withRowAnimation:UITableViewRowAnimationNone];
 	[self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
-	[self scrollToNextSession];
 	[super viewDidAppear:animated];
 }
 

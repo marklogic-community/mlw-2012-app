@@ -160,6 +160,9 @@
 		if(self.tabs.selectedSegmentIndex == 0) {
 			cell.detailTextLabel.text = [NSString stringWithFormat:@"%i", facetResult.count];
 		}
+		else {
+			cell.detailTextLabel.text = @"";
+		}
 
 		for(NSString *selectedFacetValue in [self rangeConstraintForCurrentFacet].values) {
 			if([selectedFacetValue isEqualToString:facetResult.label]) {
@@ -225,10 +228,10 @@
 	CCStringQueryConstraint *constraint = (CCStringQueryConstraint *)[[self.constraint stringQueryConstraints] lastObject];
 	if(self.searchField.text.length != 0) {
 		if(constraint != nil) {
-			constraint.query = self.searchField.text;
+			constraint.query = self.searchField.text.lowercaseString;
 		}
 		else {
-			[self.constraint addConstraint:[CCStringQueryConstraint stringQuery:self.searchField.text]];
+			[self.constraint addConstraint:[CCStringQueryConstraint stringQuery:self.searchField.text.lowercaseString]];
 		}
 	}
 	else if(constraint != nil) {

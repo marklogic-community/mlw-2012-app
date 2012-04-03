@@ -31,6 +31,7 @@
 - (void)filterResults:(UIBarButtonItem *)sender;
 - (void)toggleMySchedule:(UIBarButtonItem *)sender;
 - (MLWSession *)sessionForIndexPath:(NSIndexPath *) indexPath;
+- (void)scrollToNextSession;
 @end
 
 
@@ -149,6 +150,7 @@
 - (void)viewDidAppear:(BOOL)animated {
 	[self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[self.tableView indexPathForSelectedRow], nil] withRowAnimation:UITableViewRowAnimationNone];
 	[self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
+	[self scrollToNextSession];
 	[super viewDidAppear:animated];
 }
 
@@ -265,6 +267,26 @@
 	}
 
 	[self.tableView reloadRowsAtIndexPaths:[self.tableView indexPathsForVisibleRows] withRowAnimation:UITableViewRowAnimationNone];
+	[self scrollToNextSession];
+}
+
+- (void)scrollToNextSession {
+	MLWAppDelegate *appDelegate = (MLWAppDelegate *)[UIApplication sharedApplication].delegate;
+	MLWMySchedule *schedule = appDelegate.conference.userSchedule;
+
+	int section = -1;
+	int row = -1;
+	for(NSArray *block in self.sessionBlocks) {
+		section++;
+		row = -1;
+		for(MLWSession *session in block) {
+			row++;
+			if((self.limitedToUserSchedule == NO || [schedule hasSession:session]) && [session.startTime compare:[NSDate date]] == NSOrderedDescending) {
+				[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:section] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+				break;
+			}
+		}
+	}
 }
 
 

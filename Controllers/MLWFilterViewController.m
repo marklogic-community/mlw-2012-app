@@ -22,6 +22,7 @@
 @property (nonatomic, retain) CCFacetResponse *facetResponse;
 @property (nonatomic, retain) CCAndConstraint *constraint;
 @property (nonatomic, retain) UITextField *searchField;
+@property (nonatomic, retain) NSArray *cachedResultsForCurrentFacet;
 
 - (void)changeTab:(UISegmentedControl *)sender;
 - (void)resetFiltering:(UIBarButtonItem *)sender;
@@ -40,6 +41,7 @@
 @synthesize facetResponse = _facetResponse;
 @synthesize constraint = _constraint;
 @synthesize searchField = _searchField;
+@synthesize cachedResultsForCurrentFacet;
 
 - (id)init {
     self = [super init];
@@ -210,6 +212,7 @@
 }
 
 - (void)changeTab:(UISegmentedControl *)sender {
+	self.cachedResultsForCurrentFacet = nil;
 	[self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
 }
 
@@ -256,7 +259,25 @@
 }
 
 - (NSArray *)resultsForCurrentFacet {
-	return [self.facetResponse facetNamed:[self facetNameForCurrentFacet]].results;
+	if(cachedResultsForCurrentFacet != nil) {
+		return cachedResultsForCurrentFacet;
+	}
+
+	NSString *facetName = [self facetNameForCurrentFacet];
+	NSArray *results = [self.facetResponse facetNamed:facetName].results;
+	if([facetName isEqualToString:@"speaker"]) {
+		results = [results sortedArrayUsingComparator:^(CCFacetResult *result1, CCFacetResult *result2) {
+			NSString *cleaned1 = [result1.label stringByReplacingOccurrencesOfString:@"Admiral " withString:@""];
+			cleaned1 = [cleaned1 stringByReplacingOccurrencesOfString:@"Dr. " withString:@""];
+			NSString *cleaned2 = [result2.label stringByReplacingOccurrencesOfString:@"Admiral " withString:@""];
+			cleaned2 = [cleaned2 stringByReplacingOccurrencesOfString:@"Dr. " withString:@""];
+
+			return [cleaned1 localizedCompare:cleaned2];
+		}];
+	}
+	self.cachedResultsForCurrentFacet = results;
+
+	return results;
 }
 
 - (CCRangeConstraint *)rangeConstraintForCurrentFacet {
@@ -268,6 +289,7 @@
 	self.loadingView = nil;
 	self.tabs = nil;
 	self.facetResponse = nil;
+	self.cachedResultsForCurrentFacet = nil;
 
     [super viewDidUnload];
 }
@@ -279,6 +301,7 @@
 	self.tabs = nil;
 	self.facetResponse = nil;
 	self.constraint = nil;
+	self.cachedResultsForCurrentFacet = nil;
 
 	[super dealloc];
 }

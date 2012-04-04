@@ -190,8 +190,7 @@
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 	if(cell == nil) {
 		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier] autorelease];
-		cell.textLabel.adjustsFontSizeToFitWidth = YES;
-		cell.textLabel.minimumFontSize = 14;
+		cell.textLabel.font = [UIFont boldSystemFontOfSize:14];
 	}
 
 	MLWSession *session = [self sessionForIndexPath:indexPath];

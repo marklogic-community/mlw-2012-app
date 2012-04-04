@@ -24,12 +24,10 @@
 @property (nonatomic, retain) UIView *noResultsView;
 @property (nonatomic, retain) NSArray *sessionBlocks;
 @property (nonatomic, retain) CCAndConstraint *filterConstraint;
-@property (nonatomic) BOOL limitedToUserSchedule;
 @property (nonatomic, retain) MLWMySchedule *userSchedule;
 
 - (void)fetchSessions;
 - (void)filterResults:(UIBarButtonItem *)sender;
-- (void)toggleMySchedule:(UIBarButtonItem *)sender;
 - (MLWSession *)sessionForIndexPath:(NSIndexPath *) indexPath;
 - (void)scrollToNextSession;
 @end
@@ -44,13 +42,14 @@
 @synthesize noResultsView = _noResultsView;
 @synthesize sessionBlocks = _sessionsInBlocks;
 @synthesize filterConstraint = _filterConstraint;
-@synthesize limitedToUserSchedule;
 @synthesize userSchedule;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
 	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
 	if(self) {
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToNextSession) name:UIApplicationDidBecomeActiveNotification object:nil];
 		self.filterConstraint = nil;
+		self.sessionBlocks = nil;
 		self.filterController = [[[MLWFilterViewController alloc] init] autorelease];
 		self.filterController.delegate = self;
 		self.filterNavController = [[[UINavigationController alloc] initWithRootViewController:self.filterController] autorelease];
@@ -70,10 +69,6 @@
 	UIBarButtonItem *filter = [[UIBarButtonItem alloc] initWithTitle:@"Filter" style:UIBarButtonItemStylePlain target:self action:@selector(filterResults:)];
 	self.navigationItem.rightBarButtonItem = filter;
 	[filter release];
-
-	UIBarButtonItem *myScheduleButton = [[UIBarButtonItem alloc] initWithTitle:@"My Schedule" style:UIBarButtonItemStylePlain target:self action:@selector(toggleMySchedule:)];
-	self.navigationItem.leftBarButtonItem = myScheduleButton;
-	[myScheduleButton release];
 
 	self.view = [[[UIView alloc] init] autorelease];
 	self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -123,9 +118,16 @@
 			self.userSchedule = conference.userSchedule;
 		}
 
+		BOOL shouldScroll = NO;
+		if(self.sessionBlocks == nil) {
+			shouldScroll = YES;
+		}
 		self.sessionBlocks = [conference sessionsToBlocks:sessions];
 
 		[self.tableView reloadData];
+		if(shouldScroll) {
+			[self scrollToNextSession];
+		}
 		[UIView transitionWithView:self.loadingView duration:0.5f options:UIViewAnimationOptionCurveLinear animations:^{
 			self.loadingView.alpha = 0.0f;
 		}
@@ -151,6 +153,8 @@
 	[self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:[self.tableView indexPathForSelectedRow], nil] withRowAnimation:UITableViewRowAnimationNone];
 	[self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
 	[super viewDidAppear:animated];
+
+	[self scrollToNextSession];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -217,13 +221,17 @@
 	cell.layer.borderWidth = 0.5f;
 	cell.backgroundColor = [UIColor whiteColor];
 
-	if(self.limitedToUserSchedule == NO || [self.userSchedule hasSession:[self sessionForIndexPath:indexPath]]) {
-		cell.textLabel.alpha = 1.0;
-		cell.detailTextLabel.alpha = 1.0;
+	cell.textLabel.backgroundColor = [UIColor clearColor];
+	cell.detailTextLabel.backgroundColor = [UIColor clearColor];
+
+	if([self.userSchedule hasSession:[self sessionForIndexPath:indexPath]]) {
+		UIView *bgView = [[UIView alloc] init];
+		bgView.backgroundColor = [UIColor colorWithRed:0.0f green:(102.0f/255.0f) blue:(233.0f/255.0f) alpha:0.25f];
+		cell.backgroundView = bgView;
+		[bgView release];
 	}
 	else {
-		cell.textLabel.alpha = 0.25;
-		cell.detailTextLabel.alpha = 0.25;
+		cell.backgroundView = nil;
 	}
 }
 
@@ -254,23 +262,13 @@
 	return [sessionsInBlock objectAtIndex:indexPath.row];
 }
 
-- (void)toggleMySchedule:(UIBarButtonItem *)sender {
-	if(sender.style == UIBarButtonItemStylePlain) {
-		sender.style = UIBarButtonItemStyleDone;
-		self.limitedToUserSchedule = YES;
-	}
-	else {
-		sender.style = UIBarButtonItemStylePlain;
-		self.limitedToUserSchedule = NO;
-	}
-
-	[self.tableView reloadRowsAtIndexPaths:[self.tableView indexPathsForVisibleRows] withRowAnimation:UITableViewRowAnimationNone];
-	[self scrollToNextSession];
-}
-
 - (void)scrollToNextSession {
 	MLWAppDelegate *appDelegate = (MLWAppDelegate *)[UIApplication sharedApplication].delegate;
-	MLWMySchedule *schedule = appDelegate.conference.userSchedule;
+
+	if(self.sessionBlocks == nil || appDelegate.shouldScrollToNextSession == NO) {
+		return;
+	}
+	appDelegate.shouldScrollToNextSession = NO;
 
 	int section = -1;
 	int row = -1;
@@ -279,9 +277,10 @@
 		row = -1;
 		for(MLWSession *session in block) {
 			row++;
-			if((self.limitedToUserSchedule == NO || [schedule hasSession:session]) && [session.startTime compare:[NSDate date]] == NSOrderedDescending) {
+			if([session.startTime compare:[NSDate date]] == NSOrderedDescending) {
+				NSLog(@"scrolling to session: %@", session.title);
 				[self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:row inSection:section] atScrollPosition:UITableViewScrollPositionNone animated:YES];
-				break;
+				return;
 			}
 		}
 	}
@@ -299,6 +298,8 @@
 }
 
 - (void)dealloc {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+
 	self.userSchedule = nil;
 	self.filterConstraint = nil;
 	self.filterController = nil;

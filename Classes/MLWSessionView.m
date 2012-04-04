@@ -39,6 +39,7 @@
 		}
 
 		self.titleLabel = [[[UILabel alloc] init] autorelease];
+		titleLabel.backgroundColor = [UIColor clearColor];
 		titleLabel.text = session.title;
 		titleLabel.font = [UIFont boldSystemFontOfSize:11];
 		if(session.selectable) {
@@ -52,12 +53,14 @@
 			titleLabel.numberOfLines = 0;
 
 			self.trackLabel = [[[UILabel alloc] init] autorelease];
+			trackLabel.backgroundColor = [UIColor clearColor];
 			trackLabel.text = session.track;
 			trackLabel.font = [UIFont systemFontOfSize:10];
 			trackLabel.textColor = [UIColor colorWithWhite:0.3f alpha:1.0f];
 			[self addSubview:trackLabel];
 
 			self.locationLabel = [[[UILabel alloc] init] autorelease];
+			locationLabel.backgroundColor = [UIColor clearColor];
 			locationLabel.text = session.location;
 			locationLabel.font = [UIFont systemFontOfSize:10];
 			locationLabel.textColor = [UIColor colorWithWhite:0.3f alpha:1.0f];
@@ -69,22 +72,17 @@
     return self;
 }
 
-- (BOOL)disabled {
-	return self.titleLabel.alpha < 1.0;
+- (BOOL)highlighed {
+	return isHighlighed;
 }
 
-- (void)setDisabled:(BOOL) disabled {
-	if(disabled) {
-		self.titleLabel.alpha = 0.25;
-		self.trackLabel.alpha = 0.25;
-		self.locationLabel.alpha = 0.25;
-		self.combinedLabel.alpha = 0.25;
+- (void)setHighlighted:(BOOL) highlighted {
+	isHighlighed = highlighted;
+	if(highlighted) {
+		self.backgroundColor = [UIColor colorWithRed:0.0f green:(102.0f/255.0f) blue:(233.0f/255.0f) alpha:0.25f];
 	}
 	else {
-		self.titleLabel.alpha = 1.0;
-		self.trackLabel.alpha = 1.0;
-		self.locationLabel.alpha = 1.0;
-		self.combinedLabel.alpha = 1.0;
+		self.backgroundColor = [UIColor whiteColor];
 	}
 }
 
@@ -103,6 +101,7 @@
 
 			if(combinedLabel == nil) {
 				self.combinedLabel = [[[UILabel alloc] init] autorelease];
+				combinedLabel.backgroundColor = [UIColor clearColor];
 				combinedLabel.text = [NSString stringWithFormat:@"%@ - %@", _session.track, _session.location];
 				combinedLabel.font = [UIFont systemFontOfSize:10];
 				combinedLabel.textColor = [UIColor colorWithWhite:0.3f alpha:1.0f];

@@ -29,6 +29,8 @@
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if(self) {
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToNextSession) name:UIApplicationDidBecomeActiveNotification object:nil];
+
 		self.sessionViews = [NSMutableArray arrayWithCapacity:100];
 		self.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 		self.sessions = [NSArray array];
@@ -43,34 +45,34 @@
 	[self.sessionViews removeAllObjects];
 }
 
-- (void)limitToUserSchedule:(BOOL) limit {
+- (void)updateUserSchedule {
 	MLWAppDelegate *appDelegate = (MLWAppDelegate *)[UIApplication sharedApplication].delegate;
 	MLWMySchedule *schedule = appDelegate.conference.userSchedule;
-	MLWSessionView *firstSessionInFuture = nil;
-	if(limit == NO) {
-		for(MLWSessionView *sessionView in self.sessionViews) {
-			sessionView.disabled = NO;
-			if(firstSessionInFuture == nil && [sessionView.session.startTime compare:[NSDate date]] == NSOrderedDescending) {
-				firstSessionInFuture = sessionView;
-			}
-		}
+	for(MLWSessionView *sessionView in self.sessionViews) {
+		sessionView.highlighted = [schedule hasSession:sessionView.session];
 	}
-	else {
-		for(MLWSessionView *sessionView in self.sessionViews) {
-			sessionView.disabled = ![schedule hasSession:sessionView.session];
-			if(firstSessionInFuture == nil && sessionView.disabled == NO && [sessionView.session.startTime compare:[NSDate date]] == NSOrderedDescending) {
-				firstSessionInFuture = sessionView;
-			}
-		}
+}
+
+- (void)scrollToNextSession {
+	MLWAppDelegate *appDelegate = (MLWAppDelegate *)[UIApplication sharedApplication].delegate;
+
+	if(_sessions.count == 0 || appDelegate.shouldScrollToNextSession == NO) {
+		return;
 	}
-	if(firstSessionInFuture != nil && [self.superview isKindOfClass:[UIScrollView class]]) {
-		UIScrollView *scrollView = (UIScrollView *)self.superview;
-		CGRect scrollToFrame = firstSessionInFuture.frame;
-		scrollToFrame.origin.x = 0;
-		if(scrollToFrame.origin.y == 0) {
-			scrollToFrame.origin.y = firstSessionInFuture.superview.frame.origin.y;
+	appDelegate.shouldScrollToNextSession = NO;
+
+	for(MLWSessionView *sessionView in self.sessionViews) {
+		if([sessionView.session.startTime compare:[NSDate date]] == NSOrderedDescending) {
+			NSLog(@"scrolling to session: %@", sessionView.session.title);
+			UIScrollView *scrollView = (UIScrollView *)self.superview;
+			CGRect scrollToFrame = sessionView.frame;
+			scrollToFrame.origin.x = 0;
+			if(scrollToFrame.origin.y == 0) {
+				scrollToFrame.origin.y = sessionView.superview.frame.origin.y;
+			}
+			[scrollView scrollRectToVisible:scrollToFrame animated:YES];
+			return;
 		}
-		[scrollView scrollRectToVisible:scrollToFrame animated:YES];
 	}
 }
 
@@ -233,6 +235,8 @@
 	}
 
 	removeChildren = NO;
+	[self updateUserSchedule];
+	[self scrollToNextSession];
 }
 
 - (UIView *)dayOfWeekHeader:(NSString *)dayOfWeek withFrame:(CGRect) frame {
@@ -255,6 +259,8 @@
 }
 
 - (void)dealloc {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+
 	self.delegate = nil;
 	self.sessions = nil;
 

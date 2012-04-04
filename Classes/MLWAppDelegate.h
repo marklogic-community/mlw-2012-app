@@ -14,5 +14,6 @@
 @property (retain, nonatomic) UIWindow *window;
 @property (retain, nonatomic) MLWConference *conference;
 @property (retain, nonatomic) UITabBarController *tabBarController;
+@property BOOL shouldScrollToNextSession;
 
 @end

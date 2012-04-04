@@ -15,14 +15,16 @@
 - (void)sessionViewWasSelected:(MLWSessionView *) view;
 @end
 
-@interface MLWSessionView : UIView
+@interface MLWSessionView : UIView {
+	BOOL isHighlighed;
+}
 
 - (id)initWithFrame:(CGRect)frame session:(MLWSession *) session;
 
 @property (nonatomic, assign) NSObject<MLWSessionViewDelegate> *delegate;
 @property (readonly) MLWSession *session;
 
-- (BOOL)disabled;
-- (void)setDisabled:(BOOL) disabled;
+- (BOOL)highlighed;
+- (void)setHighlighted:(BOOL) highlighted;
 
 @end

@@ -27,7 +27,6 @@
 
 - (void)fetchSessions;
 - (void)filterResults:(UIBarButtonItem *)sender;
-- (void)toggleMySchedule:(UIBarButtonItem *)sender;
 @end
 
 @implementation MLWScheduleGridController
@@ -64,10 +63,6 @@
 	UIBarButtonItem *filter = [[UIBarButtonItem alloc] initWithTitle:@"Filter" style:UIBarButtonItemStylePlain target:self action:@selector(filterResults:)];
 	self.navigationItem.rightBarButtonItem = filter;
 	[filter release];
-
-	UIBarButtonItem *myScheduleButton = [[UIBarButtonItem alloc] initWithTitle:@"My Schedule" style:UIBarButtonItemStylePlain target:self action:@selector(toggleMySchedule:)];
-	self.navigationItem.leftBarButtonItem = myScheduleButton;
-	[myScheduleButton release];
 
 	self.view = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)] autorelease];
 	self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -115,10 +110,6 @@
 	[conference.userSchedule addObserver:self forKeyPath:@"count" options:NSKeyValueObservingOptionNew context:nil];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-	[self.gridView limitToUserSchedule:self.navigationItem.leftBarButtonItem.style == UIBarButtonItemStyleDone];
-}
-
 - (void)fetchSessions {
 	MLWAppDelegate *appDelegate = (MLWAppDelegate *)[UIApplication sharedApplication].delegate;
 	MLWConference *conference = appDelegate.conference;
@@ -153,9 +144,7 @@
 		[self.scrollView setContentSize:self.gridView.frame.size];
 	}
 	else if([keyPath isEqualToString:@"count"]) {
-		if(self.navigationItem.leftBarButtonItem.style == UIBarButtonItemStyleDone) {
-			[self.gridView limitToUserSchedule:YES];
-		}
+		[self.gridView updateUserSchedule];
 	}
 }
 
@@ -209,17 +198,6 @@
 	}
 
 	[self.filterPopover presentPopoverFromBarButtonItem:self.navigationItem.rightBarButtonItem permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-}
-
-- (void)toggleMySchedule:(UIBarButtonItem *)sender {
-	if(sender.style == UIBarButtonItemStylePlain) {
-		sender.style = UIBarButtonItemStyleDone;
-		[self.gridView limitToUserSchedule:YES];
-	}
-	else {
-		sender.style = UIBarButtonItemStylePlain;
-		[self.gridView limitToUserSchedule:NO];
-	}
 }
 
 

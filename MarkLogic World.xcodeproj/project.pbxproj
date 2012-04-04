@@ -36,6 +36,10 @@
 		C20CEEBA1517E594009AA0AD /* MLWTweetView.m in Sources */ = {isa = PBXBuildFile; fileRef = C20CEEB91517E594009AA0AD /* MLWTweetView.m */; };
 		C20CEEBD1518E357009AA0AD /* MLWSponsorView.m in Sources */ = {isa = PBXBuildFile; fileRef = C20CEEBC1518E357009AA0AD /* MLWSponsorView.m */; };
 		C213AC1F152BB98300DEFB90 /* tweets.png in Resources */ = {isa = PBXBuildFile; fileRef = C213AC1E152BB98300DEFB90 /* tweets.png */; };
+		C213AC29152CD03600DEFB90 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C213AC28152CD03600DEFB90 /* Icon.png */; };
+		C213AC2B152CD03A00DEFB90 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C213AC2A152CD03A00DEFB90 /* Icon@2x.png */; };
+		C213AC2D152CD04200DEFB90 /* Icon~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = C213AC2C152CD04200DEFB90 /* Icon~ipad.png */; };
+		C213AC2F152CD04600DEFB90 /* Icon~ipad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C213AC2E152CD04600DEFB90 /* Icon~ipad@2x.png */; };
 		C26D897A151B757A00934014 /* MLWFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C26D8979151B757A00934014 /* MLWFilterViewController.m */; };
 		C26D89C1151E3F5400934014 /* CCAndConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = C26D89AA151E3F5400934014 /* CCAndConstraint.m */; };
 		C26D89C2151E3F5400934014 /* CCBooleanConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = C26D89AC151E3F5400934014 /* CCBooleanConstraint.m */; };
@@ -119,6 +123,10 @@
 		C20CEEBB1518E357009AA0AD /* MLWSponsorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWSponsorView.h; path = Classes/MLWSponsorView.h; sourceTree = "<group>"; };
 		C20CEEBC1518E357009AA0AD /* MLWSponsorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWSponsorView.m; path = Classes/MLWSponsorView.m; sourceTree = "<group>"; };
 		C213AC1E152BB98300DEFB90 /* tweets.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tweets.png; sourceTree = "<group>"; };
+		C213AC28152CD03600DEFB90 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		C213AC2A152CD03A00DEFB90 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		C213AC2C152CD04200DEFB90 /* Icon~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon~ipad.png"; sourceTree = "<group>"; };
+		C213AC2E152CD04600DEFB90 /* Icon~ipad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon~ipad@2x.png"; sourceTree = "<group>"; };
 		C26D8978151B757A00934014 /* MLWFilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWFilterViewController.h; path = Controllers/MLWFilterViewController.h; sourceTree = "<group>"; };
 		C26D8979151B757A00934014 /* MLWFilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWFilterViewController.m; path = Controllers/MLWFilterViewController.m; sourceTree = "<group>"; };
 		C26D89A9151E3F5400934014 /* CCAndConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCAndConstraint.h; path = CoronaConnector/CCAndConstraint.h; sourceTree = "<group>"; };
@@ -295,6 +303,10 @@
 		C29A8E14150A560B00320140 = {
 			isa = PBXGroup;
 			children = (
+				C213AC2E152CD04600DEFB90 /* Icon~ipad@2x.png */,
+				C213AC2C152CD04200DEFB90 /* Icon~ipad.png */,
+				C213AC2A152CD03A00DEFB90 /* Icon@2x.png */,
+				C213AC28152CD03600DEFB90 /* Icon.png */,
 				C26D89A8151E3EAB00934014 /* CoronaConnector */,
 				C20CEE5815129049009AA0AD /* SBJSON */,
 				C20CEE2D151287C1009AA0AD /* Resources */,
@@ -442,6 +454,10 @@
 				C20CEE951514D385009AA0AD /* blank.png in Resources */,
 				C20CEE9E151506D5009AA0AD /* fabric.png in Resources */,
 				C213AC1F152BB98300DEFB90 /* tweets.png in Resources */,
+				C213AC29152CD03600DEFB90 /* Icon.png in Resources */,
+				C213AC2B152CD03A00DEFB90 /* Icon@2x.png in Resources */,
+				C213AC2D152CD04200DEFB90 /* Icon~ipad.png in Resources */,
+				C213AC2F152CD04600DEFB90 /* Icon~ipad@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

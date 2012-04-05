@@ -9,6 +9,7 @@
 #import "MLWSponsorListController.h"
 #import "MLWAppDelegate.h"
 #import "MLWSponsorView.h"
+#import "MLWSponsorDetailViewController.h"
 #import "UITableView+helpers.h"
 #import <QuartzCore/QuartzCore.h>
 
@@ -135,6 +136,10 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+	if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+		return 44;
+	}
+
 	MLWSponsorView *sponsorView = [self sponsorViewForIndexPath:indexPath];
 	return [sponsorView calculatedHeightWithWidth:self.view.frame.size.width];
 }
@@ -145,6 +150,12 @@
 	if(cell == nil) {
 		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier] autorelease];
 		cell.selectionStyle = UITableViewCellSelectionStyleNone;
+	}
+
+	if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+		cell.textLabel.text = [self sponsorViewForIndexPath:indexPath].sponsor.name;
+		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+		return cell;
 	}
 
 	for(UIView *view in cell.contentView.subviews) {
@@ -164,6 +175,12 @@
 }
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+		MLWSponsorDetailViewController *sponsorDetailController = [[MLWSponsorDetailViewController alloc] initWithSponsorView:[self sponsorViewForIndexPath:indexPath]];
+		[self.navigationController pushViewController:sponsorDetailController animated:YES];
+		[sponsorDetailController release];
+	}
+
 	return nil;
 }
 

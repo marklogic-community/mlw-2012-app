@@ -243,9 +243,9 @@
 }
 
 - (void)tableView:(UITableView *) tableView didSelectRowAtIndexPath:(NSIndexPath *) indexPath {
-	MLWSessionDetailController *viewShowController = [[MLWSessionDetailController alloc] initWithSession:[self sessionForIndexPath:indexPath]];
-	[self.navigationController pushViewController:viewShowController animated:YES];
-	[viewShowController release];
+	MLWSessionDetailController *sessionDetailController = [[MLWSessionDetailController alloc] initWithSession:[self sessionForIndexPath:indexPath]];
+	[self.navigationController pushViewController:sessionDetailController animated:YES];
+	[sessionDetailController release];
 }
 
 - (void)filterView:(MLWFilterViewController *) filterViewController constructedConstraint:(CCAndConstraint *) constraint {

@@ -40,6 +40,7 @@
 		C213AC2B152CD03A00DEFB90 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C213AC2A152CD03A00DEFB90 /* Icon@2x.png */; };
 		C213AC2D152CD04200DEFB90 /* Icon~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = C213AC2C152CD04200DEFB90 /* Icon~ipad.png */; };
 		C213AC2F152CD04600DEFB90 /* Icon~ipad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C213AC2E152CD04600DEFB90 /* Icon~ipad@2x.png */; };
+		C213AC32152E14DD00DEFB90 /* MLWSponsorDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C213AC31152E14DD00DEFB90 /* MLWSponsorDetailViewController.m */; };
 		C26D897A151B757A00934014 /* MLWFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C26D8979151B757A00934014 /* MLWFilterViewController.m */; };
 		C26D89C1151E3F5400934014 /* CCAndConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = C26D89AA151E3F5400934014 /* CCAndConstraint.m */; };
 		C26D89C2151E3F5400934014 /* CCBooleanConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = C26D89AC151E3F5400934014 /* CCBooleanConstraint.m */; };
@@ -127,6 +128,8 @@
 		C213AC2A152CD03A00DEFB90 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		C213AC2C152CD04200DEFB90 /* Icon~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon~ipad.png"; sourceTree = "<group>"; };
 		C213AC2E152CD04600DEFB90 /* Icon~ipad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon~ipad@2x.png"; sourceTree = "<group>"; };
+		C213AC30152E14DD00DEFB90 /* MLWSponsorDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWSponsorDetailViewController.h; path = Controllers/MLWSponsorDetailViewController.h; sourceTree = "<group>"; };
+		C213AC31152E14DD00DEFB90 /* MLWSponsorDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWSponsorDetailViewController.m; path = Controllers/MLWSponsorDetailViewController.m; sourceTree = "<group>"; };
 		C26D8978151B757A00934014 /* MLWFilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MLWFilterViewController.h; path = Controllers/MLWFilterViewController.h; sourceTree = "<group>"; };
 		C26D8979151B757A00934014 /* MLWFilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MLWFilterViewController.m; path = Controllers/MLWFilterViewController.m; sourceTree = "<group>"; };
 		C26D89A9151E3F5400934014 /* CCAndConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCAndConstraint.h; path = CoronaConnector/CCAndConstraint.h; sourceTree = "<group>"; };
@@ -373,6 +376,8 @@
 				C29A8E74150FE50F00320140 /* MLWSponsorListController.m */,
 				C26D8978151B757A00934014 /* MLWFilterViewController.h */,
 				C26D8979151B757A00934014 /* MLWFilterViewController.m */,
+				C213AC30152E14DD00DEFB90 /* MLWSponsorDetailViewController.h */,
+				C213AC31152E14DD00DEFB90 /* MLWSponsorDetailViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -513,6 +518,7 @@
 				C26D89CC151E3F5400934014 /* CCSearchRequest.m in Sources */,
 				C26D89CF151E447200934014 /* CCStringQueryConstraint.m in Sources */,
 				C283A4CD1524F06F004BF170 /* MLWMySchedule.m in Sources */,
+				C213AC32152E14DD00DEFB90 /* MLWSponsorDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

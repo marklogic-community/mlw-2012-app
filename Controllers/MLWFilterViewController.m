@@ -81,7 +81,7 @@
 	[self.loadingView addSubview:spinner];
     [spinner release];
 
-	self.tabs = [[[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Track", @"Speaker", @"Keyword", nil]] autorelease];
+	self.tabs = [[[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Keyword", @"Track", @"Speaker", nil]] autorelease];
 	self.tabs.tintColor = [UIColor colorWithWhite:0.5 alpha:1];
 	self.tabs.segmentedControlStyle = UISegmentedControlStyleBar;
 	self.tabs.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
@@ -131,7 +131,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *) tableView numberOfRowsInSection:(NSInteger) section {
-	if(self.tabs.selectedSegmentIndex == 2) {
+	if(self.tabs.selectedSegmentIndex == 0) {
 		return 1;
 	}
 	return [self resultsForCurrentFacet].count;
@@ -139,7 +139,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *) tableView cellForRowAtIndexPath:(NSIndexPath *) indexPath {
 	NSString *cellIdentifier = @"Cell";
-	if(self.tabs.selectedSegmentIndex == 2) {
+	if(self.tabs.selectedSegmentIndex == 0) {
 		cellIdentifier = @"SearchCell";
 	}
 
@@ -152,14 +152,14 @@
 
 	cell.accessoryType = UITableViewCellAccessoryNone;
 
-	if(self.tabs.selectedSegmentIndex != 2) {
+	if(self.tabs.selectedSegmentIndex != 0) {
 		NSArray *results = [self resultsForCurrentFacet];
 		CCFacetResult *facetResult = [results objectAtIndex:indexPath.row];
 		cell.textLabel.text = facetResult.label;
-		if(self.tabs.selectedSegmentIndex == 0 && [facetResult.label isEqualToString:@""]) {
+		if(self.tabs.selectedSegmentIndex == 1 && [facetResult.label isEqualToString:@""]) {
 			cell.textLabel.text = @"Unspecified";
 		}
-		if(self.tabs.selectedSegmentIndex == 0) {
+		if(self.tabs.selectedSegmentIndex == 1) {
 			cell.detailTextLabel.text = [NSString stringWithFormat:@"%i", facetResult.count];
 		}
 		else {
@@ -249,10 +249,10 @@
 }
 
 - (NSString *)facetNameForCurrentFacet {
-	if(self.tabs.selectedSegmentIndex == 0) {
+	if(self.tabs.selectedSegmentIndex == 1) {
 		return @"track";
 	}
-	if(self.tabs.selectedSegmentIndex == 1) {
+	if(self.tabs.selectedSegmentIndex == 2) {
 		return @"speaker";
 	}
 	return nil;

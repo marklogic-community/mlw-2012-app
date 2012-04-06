@@ -78,7 +78,11 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *) tableView {
-	return 3;
+	int numSections = 2;
+	if(self.session.speakers.count > 0) {
+		numSections++;
+	}
+	return numSections;
 }
 
 - (NSInteger)tableView:(UITableView *) tableView numberOfRowsInSection:(NSInteger) section {

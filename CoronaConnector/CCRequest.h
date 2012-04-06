@@ -11,6 +11,7 @@
 @interface CCRequest : NSObject
 
 - (NSData *)dictionaryToPOSTData:(NSDictionary *) parameters;
+- (NSString *)encodeString:(NSString *)string;
 
 @property (nonatomic, retain) NSURL *baseURL;
 @property (nonatomic, retain) NSMutableDictionary *parameters;

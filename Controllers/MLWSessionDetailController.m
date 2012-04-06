@@ -11,6 +11,7 @@
 #import "MLWSpeaker.h"
 #import "MLWMySchedule.h"
 #import "MLWAppDelegate.h"
+#import "MLWSessionSurveyViewController.h"
 
 @interface MLWSessionDetailController ()
 @property (nonatomic, retain) UITableView *tableView;
@@ -19,6 +20,7 @@
 @property (nonatomic, retain) UIBarButtonItem *removeFromScheduleButton;
 - (void)addToSchedule:(UIBarButtonItem *)sender;
 - (void)removeFromSchedule:(UIBarButtonItem *)sender;
+- (void)takeSurvey:(UIBarButtonItem *)sender;
 @end
 
 @implementation MLWSessionDetailController
@@ -43,6 +45,8 @@
 		else {
 			self.navigationItem.rightBarButtonItem = self.addToScheduleButton;
 		}
+
+		self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Survey" style:UIBarButtonItemStylePlain target:self action:@selector(takeSurvey:)] autorelease];
 
 		nameHeight = 50;
 		titleHeight = 44;
@@ -351,6 +355,12 @@
 	MLWConference *conference = appDelegate.conference;
 	[conference.userSchedule removeSession:self.session];
 	self.navigationItem.rightBarButtonItem = self.addToScheduleButton;
+}
+
+- (void)takeSurvey:(UIBarButtonItem *)sender {
+	MLWSessionSurveyViewController *surveyController = [[MLWSessionSurveyViewController alloc] initWithSession:self.session];
+	[self.navigationController pushViewController:surveyController animated:YES];
+	[surveyController release];
 }
 
 - (void)viewDidUnload {

@@ -309,6 +309,7 @@
 	self.tabs = nil;
 	self.facetResponse = nil;
 	self.constraint = nil;
+	self.searchField = nil;
 	self.cachedResultsForCurrentFacet = nil;
 
 	[super dealloc];

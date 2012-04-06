@@ -138,6 +138,7 @@
 
 - (void) dealloc {
 	self.delegate = nil;
+	[_session release];
 	self.titleLabel = nil;
 	self.trackLabel = nil;
 	self.locationLabel = nil;

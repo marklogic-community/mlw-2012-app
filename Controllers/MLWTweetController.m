@@ -148,19 +148,21 @@
 
 
 - (void)viewDidUnload {
-	[super viewDidUnload];
 	self.tableView = nil;
 	self.loadingView = nil;
 	self.view = nil;
 	self.tweets = nil;
+
+	[super viewDidUnload];
 }
 
 - (void)dealloc {
-	[super dealloc];
 	self.tableView = nil;
 	self.loadingView = nil;
 	self.view = nil;
 	self.tweets = nil;
+
+	[super dealloc];
 }
 
 @end

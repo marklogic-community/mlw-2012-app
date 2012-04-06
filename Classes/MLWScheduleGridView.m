@@ -295,6 +295,7 @@
 
 	self.delegate = nil;
 	self.sessions = nil;
+	self.sessionViews = nil;
 
 	[super dealloc];
 }

@@ -63,7 +63,7 @@
 
 	for(MLWSessionView *sessionView in self.sessionViews) {
 		if([sessionView.session.startTime compare:[NSDate date]] == NSOrderedDescending) {
-			NSLog(@"scrolling to session: %@", sessionView.session.title);
+			NSLog(@"MLWScheduleGridView: Scrolling to session: %@", sessionView.session.title);
 			UIScrollView *scrollView = (UIScrollView *)self.superview;
 			CGRect scrollToFrame = sessionView.frame;
 			scrollToFrame.origin.x = 0;
@@ -123,7 +123,6 @@
 				[sessionView release];
 			}
 			else {
-
 				UIPurposeView *labelView = [[UIPurposeView alloc] initWithFrame:CGRectMake(totalWidth, totalHeight, self.frame.size.width - totalWidth, rowHeight + 1)]; 
 				labelView.purpose = @"breakoutLabel";
 				labelView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
@@ -142,34 +141,67 @@
 				[labelView release];
 				totalHeight += rowHeight;
 
+				// Amphitheater, Polaris, Hemi A, Oceanic A&B, Hemi B, Meridian D&E
+
+				int index = 0;
+				NSMutableArray *ordered = [NSMutableArray arrayWithObjects:[NSNull null], [NSNull null], [NSNull null], [NSNull null], [NSNull null], [NSNull null], nil];
+				for(MLWSession *session in blockSessions) {
+					MLWSessionView *sessionView = [[MLWSessionView alloc] initWithFrame:CGRectZero session:session]; 
+					sessionView.delegate = delegate;
+					[self.sessionViews addObject:sessionView];
+
+					index = -1;
+					if([session.location isEqualToString:@"Amphitheater"]) {
+						index = 0;
+					}
+					else if([session.location isEqualToString:@"Polaris"]) {
+						index = 1;
+					}
+					else if([session.location isEqualToString:@"Hemisphere A"]) {
+						index = 2;
+					}
+					else if([session.location isEqualToString:@"Oceanic A & B"]) {
+						index = 3;
+					}
+					else if([session.location isEqualToString:@"Hemisphere B"]) {
+						index = 4;
+					}
+					else if([session.location isEqualToString:@"Meridian D & E"]) {
+						index = 5;
+					}
+					if(index == -1) {
+						NSLog(@"Session '%@' has an incorrect location '%@'", session.title, session.location);
+					}
+					else {
+						[ordered replaceObjectAtIndex:index withObject:sessionView];
+					}
+
+					[sessionView release];
+				}
+				
+				for(index = 0; index < ordered.count; index++) {
+					NSObject *item = [ordered objectAtIndex:index];
+					if([item isKindOfClass:[NSNull class]]) {
+						MLWSessionView *blankView = [[MLWSessionView alloc] initWithFrame:CGRectZero session:nil]; 
+						[ordered replaceObjectAtIndex:index withObject:blankView];
+						[blankView release];
+					}
+				}
+
 				int position = 0;
 				totalWidth = 0;
 				UIPurposeView *breakoutWrapper = [[UIPurposeView alloc] initWithFrame:CGRectMake(0, totalHeight, self.frame.size.width, sessionRowHeight + 1)]; 
 				breakoutWrapper.purpose = @"breakoutWrapper";
 				breakoutWrapper.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-				for(MLWSession *session in blockSessions) {
+				for(MLWSessionView *sessionView in ordered) {
 					position++;
 					int width = columnWidth + 1;
 					if(position == NUMBEROFCOLUMNS) {
 						width = self.frame.size.width - totalWidth;
 					}
-					MLWSessionView *sessionView = [[MLWSessionView alloc] initWithFrame:CGRectMake(totalWidth, 0, width, sessionRowHeight + 1) session:session]; 
-					sessionView.delegate = delegate;
-					[self.sessionViews addObject:sessionView];
+					sessionView.frame = CGRectMake(totalWidth, 0, width, sessionRowHeight + 1); 
 					[breakoutWrapper addSubview:sessionView];
 					totalWidth += columnWidth;
-					[sessionView release];
-				}
-				for(int i = position; i < NUMBEROFCOLUMNS; i++) {
-					position++;
-					int width = columnWidth + 1;
-					if(position == NUMBEROFCOLUMNS) {
-						width = self.frame.size.width - totalWidth;
-					}
-					MLWSessionView *blankView = [[MLWSessionView alloc] initWithFrame:CGRectMake(totalWidth, 0, width, sessionRowHeight + 1) session:nil]; 
-					[breakoutWrapper addSubview:blankView];
-					totalWidth += columnWidth;
-					[blankView release];
 				}
 				[self addSubview:breakoutWrapper];
                 [breakoutWrapper release];

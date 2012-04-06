@@ -16,10 +16,8 @@
 @interface MLWSessionDetailController ()
 @property (nonatomic, retain) UITableView *tableView;
 @property (nonatomic, retain) MLWSession *session;
-@property (nonatomic, retain) UIBarButtonItem *addToScheduleButton;
-@property (nonatomic, retain) UIBarButtonItem *removeFromScheduleButton;
-- (void)addToSchedule:(UIBarButtonItem *)sender;
-- (void)removeFromSchedule:(UIBarButtonItem *)sender;
+@property (nonatomic, retain) UIBarButtonItem *highlightButton;
+- (void)toggleHighlighting:(UIBarButtonItem *)sender;
 - (void)takeSurvey:(UIBarButtonItem *)sender;
 @end
 
@@ -27,26 +25,40 @@
 
 @synthesize tableView = _tableView;
 @synthesize session = _session;
-@synthesize addToScheduleButton;
-@synthesize removeFromScheduleButton;
+@synthesize highlightButton;
 
 - (id)initWithSession:(MLWSession *)session {
     self = [super init];
     if(self) {
 		self.session = session;
-		self.addToScheduleButton = [[[UIBarButtonItem alloc] initWithTitle:@"Add to Schedule" style:UIBarButtonItemStylePlain target:self action:@selector(addToSchedule:)] autorelease];
-		self.removeFromScheduleButton = [[[UIBarButtonItem alloc] initWithTitle:@"Remove from Schedule" style:UIBarButtonItemStylePlain target:self action:@selector(removeFromSchedule:)] autorelease];
 
 		MLWAppDelegate *appDelegate = (MLWAppDelegate *)[UIApplication sharedApplication].delegate;
 		MLWConference *conference = appDelegate.conference;
 		if([conference.userSchedule hasSession:self.session]) {
-			self.navigationItem.rightBarButtonItem = self.removeFromScheduleButton;
+			self.highlightButton = [[[UIBarButtonItem alloc] initWithTitle:@"Unhighlight" style:UIBarButtonItemStyleBordered target:self action:@selector(toggleHighlighting:)] autorelease];
 		}
 		else {
-			self.navigationItem.rightBarButtonItem = self.addToScheduleButton;
+			self.highlightButton = [[[UIBarButtonItem alloc] initWithTitle:@"Highlight" style:UIBarButtonItemStyleBordered target:self action:@selector(toggleHighlighting:)] autorelease];
 		}
 
-		self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Survey" style:UIBarButtonItemStylePlain target:self action:@selector(takeSurvey:)] autorelease];
+		if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+			UIToolbar* tools = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, 170, 44.01)];
+			tools.tintColor = [UIColor colorWithRed:(236.0f/255.0f) green:(125.0f/255.0f) blue:(30.0f/255.0f) alpha:1.0f];
+
+			UIBarButtonItem *space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+			UIBarButtonItem *surveyButton = [[UIBarButtonItem alloc] initWithTitle:@"Survey" style:UIBarButtonItemStyleBordered target:self action:@selector(takeSurvey:)];
+			NSArray* buttons = [NSArray arrayWithObjects:space, surveyButton, self.highlightButton, nil];
+			[tools setItems:buttons animated:NO];
+			[space release];
+			[surveyButton release];
+
+			self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithCustomView:tools] autorelease];
+			[tools release];
+		}
+		else {
+			self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Survey" style:UIBarButtonItemStylePlain target:self action:@selector(takeSurvey:)] autorelease];
+			self.navigationItem.rightBarButtonItem = self.highlightButton;
+		}
 
 		nameHeight = 50;
 		titleHeight = 44;
@@ -347,18 +359,17 @@
 	return nil;
 }
 
-- (void)addToSchedule:(UIBarButtonItem *)sender {
+- (void)toggleHighlighting:(UIBarButtonItem *)sender {
 	MLWAppDelegate *appDelegate = (MLWAppDelegate *)[UIApplication sharedApplication].delegate;
 	MLWConference *conference = appDelegate.conference;
-	[conference.userSchedule addSession:self.session];
-	self.navigationItem.rightBarButtonItem = self.removeFromScheduleButton;
-}
-
-- (void)removeFromSchedule:(UIBarButtonItem *)sender {
-	MLWAppDelegate *appDelegate = (MLWAppDelegate *)[UIApplication sharedApplication].delegate;
-	MLWConference *conference = appDelegate.conference;
-	[conference.userSchedule removeSession:self.session];
-	self.navigationItem.rightBarButtonItem = self.addToScheduleButton;
+	if([sender.title isEqualToString:@"Highlight"]) {
+		[conference.userSchedule addSession:self.session];
+		sender.title = @"Unhighlight";
+	}
+	else {
+		[conference.userSchedule removeSession:self.session];
+		sender.title = @"Highlight";
+	}
 }
 
 - (void)takeSurvey:(UIBarButtonItem *)sender {
@@ -377,8 +388,7 @@
 	self.view = nil;
 	self.tableView = nil;
 	self.session = nil;
-	self.addToScheduleButton = nil;
-	self.removeFromScheduleButton = nil;
+	self.highlightButton = nil;
     [super dealloc];
 }
 

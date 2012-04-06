@@ -26,7 +26,7 @@
 			self.dict = [NSMutableDictionary dictionaryWithCapacity:10];
 		}
 		else {
-			self.dict = [data mutableCopy];
+			self.dict = [[data mutableCopy] autorelease];
 		}
 		[self.dict setObject:[NSMutableArray arrayWithArray:[self.dict objectForKey:@"sessions"]] forKey:@"sessions"];
 	}

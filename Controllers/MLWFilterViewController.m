@@ -156,9 +156,6 @@
 		NSArray *results = [self resultsForCurrentFacet];
 		CCFacetResult *facetResult = [results objectAtIndex:indexPath.row];
 		cell.textLabel.text = facetResult.label;
-		if(self.tabs.selectedSegmentIndex == 1 && [facetResult.label isEqualToString:@""]) {
-			cell.textLabel.text = @"Unspecified";
-		}
 		if(self.tabs.selectedSegmentIndex == 1) {
 			cell.detailTextLabel.text = [NSString stringWithFormat:@"%i", facetResult.count];
 		}
@@ -275,8 +272,19 @@
 			return [cleaned1 localizedCompare:cleaned2];
 		}];
 	}
-	self.cachedResultsForCurrentFacet = results;
 
+	if([facetName isEqualToString:@"track"]) {
+		NSMutableArray *filteredResults = [NSMutableArray arrayWithCapacity:results.count];
+		for(CCFacetResult *result in results) {
+			if([result.label isEqualToString:@""]) {
+				continue;
+			}
+			[filteredResults addObject:result];
+		}
+		results = filteredResults;
+	}
+
+	self.cachedResultsForCurrentFacet = results;
 	return results;
 }
 

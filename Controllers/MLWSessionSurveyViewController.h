@@ -8,7 +8,7 @@
 
 #import "MLWSession.h"
 
-@interface MLWSessionSurveyViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface MLWSessionSurveyViewController : UITableViewController
 
 - (id)initWithSession:(MLWSession *)session;
 

@@ -12,7 +12,6 @@
 
 @interface MLWSessionSurveyViewController ()
 @property (nonatomic, retain) UIView *loadingView;
-@property (nonatomic, retain) UITableView *tableView;
 @property (nonatomic, retain) MLWSession *session;
 @property (nonatomic, retain) UISegmentedControl *speakerTabs;
 @property (nonatomic, retain) UISegmentedControl *qualityTabs;
@@ -23,14 +22,13 @@
 @implementation MLWSessionSurveyViewController
 
 @synthesize loadingView = _loadingView;
-@synthesize tableView = _tableView;
 @synthesize session = _session;
 @synthesize speakerTabs = _speakerTabs;
 @synthesize qualityTabs = _qualityTabs;
 @synthesize comments = _comments;
 
 - (id)initWithSession:(MLWSession *)session {
-    self = [super init];
+    self = [super initWithStyle:UITableViewStyleGrouped];
     if(self) {
 		self.session = session;
 		self.navigationItem.title = session.title;
@@ -40,16 +38,10 @@
 }
 
 - (void)loadView {
-	self.view = [[[UIView alloc] init] autorelease];
-	self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+	[super loadView];
 
-	self.tableView = [[[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped] autorelease];
-	self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-	self.tableView.delegate = self;
-	self.tableView.dataSource = self;
 	self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 	[self.tableView applyBackground];
-	[self.view addSubview:self.tableView];
 
 	self.speakerTabs = [[[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"Poor", @"Fair", @"Avg", @"Good", @"Great", nil]] autorelease];
 	self.speakerTabs.tintColor = [UIColor colorWithWhite:0.5 alpha:1];
@@ -129,7 +121,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 	if(indexPath.section == 2) {
-		return 200;
+		return 175;
 	}
 	return 44;
 }
@@ -190,8 +182,6 @@
 
 - (void)viewDidUnload {
 	self.loadingView = nil;
-	self.view = nil;
-	self.tableView = nil;
 	self.speakerTabs = nil;
 	self.qualityTabs = nil;
 	self.comments = nil;
@@ -200,8 +190,6 @@
 
 - (void)dealloc {
 	self.loadingView = nil;
-	self.view = nil;
-	self.tableView = nil;
 	self.session = nil;
 	self.speakerTabs = nil;
 	self.qualityTabs = nil;

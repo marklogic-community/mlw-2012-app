@@ -102,13 +102,19 @@
 			if(combinedLabel == nil) {
 				self.combinedLabel = [[[UILabel alloc] init] autorelease];
 				combinedLabel.backgroundColor = [UIColor clearColor];
-				combinedLabel.text = [NSString stringWithFormat:@"%@ - %@", _session.track, _session.location];
 				combinedLabel.font = [UIFont systemFontOfSize:10];
 				combinedLabel.textColor = [UIColor colorWithWhite:0.3f alpha:1.0f];
 				[self addSubview:combinedLabel];
 			}
 
-			combinedLabel.frame = CGRectMake(titleLabel.frame.origin.x, titleLabel.frame.origin.y + titleLabel.frame.size.height + 5, titleLabel.frame.size.width, 15);
+			if(_session.track != nil && _session.location != nil) {
+				combinedLabel.text = [NSString stringWithFormat:@"%@ - %@", _session.track, _session.location];
+			}
+			else if(_session.location != nil) {
+				combinedLabel.text = _session.location;
+			}
+
+			combinedLabel.frame = CGRectMake(titleLabel.frame.origin.x, titleLabel.frame.origin.y + titleLabel.frame.size.height + 5, self.bounds.size.width - (titleLabel.frame.origin.x * 2), 15);
 		}
 		else {
 			CGRect maxTitleRect;
@@ -143,7 +149,6 @@
 	self.trackLabel = nil;
 	self.locationLabel = nil;
 	self.combinedLabel = nil;
-	[_session release];
 
 	[super dealloc];
 }

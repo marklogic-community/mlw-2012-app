@@ -29,6 +29,7 @@
 - (void)refreshResults:(UIBarButtonItem *)sender;
 @property (nonatomic, retain) UITableView *tableView;
 @property (nonatomic, retain) UIView *loadingView;
+@property (nonatomic, retain) UIView *noResultsView;
 @property (nonatomic, retain) NSArray *tweets;
 @end
 
@@ -36,6 +37,7 @@
 
 @synthesize tableView = _tableView;
 @synthesize loadingView = _loadingView;
+@synthesize noResultsView = _noResultsView;
 @synthesize tweets = _tweets;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -67,6 +69,19 @@
 	[self.loadingView addSubview:spinner];
     [spinner release];
 
+	self.noResultsView = [[[UIView alloc] initWithFrame:self.view.frame] autorelease];
+	self.noResultsView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+	self.noResultsView.backgroundColor = [UIColor clearColor];
+	UILabel *noResultsLabel = [[UILabel alloc] initWithFrame:self.view.frame];
+	noResultsLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+	noResultsLabel.backgroundColor = [UIColor clearColor];
+	noResultsLabel.text = @"No Tweets";
+	noResultsLabel.textAlignment = UITextAlignmentCenter;
+	noResultsLabel.font = [UIFont boldSystemFontOfSize:30];
+	noResultsLabel.textColor = [UIColor whiteColor];
+	[self.noResultsView addSubview:noResultsLabel];
+	[noResultsLabel release];
+
 	self.tableView = [[[UITableView alloc] init] autorelease];
 	self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	self.tableView.delegate = self;
@@ -91,7 +106,14 @@
 	MLWAppDelegate *appDelegate = (MLWAppDelegate *)[UIApplication sharedApplication].delegate;
 	MLWConference *conference = appDelegate.conference;
 	[conference fetchTweets:^(NSArray *tweets, NSError *error) {
-		self.tweets = tweets;
+		if(tweets.count == 0) {
+			self.noResultsView.frame = self.view.frame;
+			[self.view addSubview:self.noResultsView];
+			self.tweets = [NSArray array];
+		}
+		else {
+			self.tweets = tweets;
+		}
 
 		[self.tableView reloadData];
 		[UIView transitionWithView:self.loadingView duration:0.5f options:UIViewAnimationOptionCurveLinear animations:^{
@@ -102,6 +124,7 @@
 			[self.loadingView removeFromSuperview];
 		}];
 	}];
+	[self.noResultsView removeFromSuperview];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -162,7 +185,7 @@
 - (void)viewDidUnload {
 	self.tableView = nil;
 	self.loadingView = nil;
-	self.view = nil;
+	self.noResultsView = nil;
 	self.tweets = nil;
 
 	[super viewDidUnload];
@@ -171,7 +194,7 @@
 - (void)dealloc {
 	self.tableView = nil;
 	self.loadingView = nil;
-	self.view = nil;
+	self.noResultsView = nil;
 	self.tweets = nil;
 
 	[super dealloc];

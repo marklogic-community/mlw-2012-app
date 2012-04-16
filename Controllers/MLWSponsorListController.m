@@ -29,18 +29,24 @@
 - (MLWSponsorView *)sponsorViewForIndexPath:(NSIndexPath *)indexPath;
 @property (nonatomic, retain) UITableView *tableView;
 @property (nonatomic, retain) UIView *loadingView;
+@property (nonatomic, retain) UIView *noResultsView;
 @property (nonatomic, retain) NSArray *sponsors;
+
+- (void)refreshResults;
 @end
 
 @implementation MLWSponsorListController
 
 @synthesize tableView = _tableView;
 @synthesize loadingView = _loadingView;
+@synthesize noResultsView = _noResultsView;
 @synthesize sponsors = _sponsors;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if(self) {
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshResults) name:UIApplicationDidBecomeActiveNotification object:nil];
+
 		self.navigationItem.title = @"Sponsors";
 		self.tabBarItem.title = @"Sponsors";
 		self.tabBarItem.image = [UIImage imageNamed:@"badge"];
@@ -63,6 +69,19 @@
 	[self.loadingView addSubview:spinner];
     [spinner release];
 
+	self.noResultsView = [[[UIView alloc] initWithFrame:self.view.frame] autorelease];
+	self.noResultsView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+	self.noResultsView.backgroundColor = [UIColor clearColor];
+	UILabel *noResultsLabel = [[UILabel alloc] initWithFrame:self.view.frame];
+	noResultsLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+	noResultsLabel.backgroundColor = [UIColor clearColor];
+	noResultsLabel.text = @"No Sponsors";
+	noResultsLabel.textAlignment = UITextAlignmentCenter;
+	noResultsLabel.font = [UIFont boldSystemFontOfSize:30];
+	noResultsLabel.textColor = [UIColor whiteColor];
+	[self.noResultsView addSubview:noResultsLabel];
+	[noResultsLabel release];
+
 	self.tableView = [[[UITableView alloc] init] autorelease];
 	self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	self.tableView.delegate = self;
@@ -70,33 +89,52 @@
 	self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 	[self.tableView applyBackground];
 	[self.view addSubview:self.tableView];
+}
+
+- (void)viewWillAppear:(BOOL) animated {
+	[self refreshResults];
+
+	[super viewWillAppear:animated];
+}
+
+- (void)refreshResults {
+	if(self.sponsors.count > 0) {
+		return;
+	}
 
 	MLWAppDelegate *appDelegate = (MLWAppDelegate *)[UIApplication sharedApplication].delegate;
 	MLWConference *conference = appDelegate.conference;
 	BOOL cached = [conference fetchSponsors:^(NSArray *sponsors, NSError *error) {
-		NSMutableArray *sponsorViews = [NSMutableArray arrayWithCapacity:sponsors.count];
-		for(MLWSponsor *sponsor in sponsors) {
-			[sponsorViews addObject:[[[MLWSponsorView alloc] initWithSponsor:sponsor] autorelease]];
+		if(sponsors.count == 0) {
+			self.noResultsView.frame = self.view.frame;
+			[self.view addSubview:self.noResultsView];
+			self.sponsors = [NSArray array];
 		}
-
-		NSMutableArray *groups = [NSMutableArray arrayWithCapacity:sponsorViews.count];
-		NSString *lastLevel = [((MLWSponsorView *)[sponsorViews objectAtIndex:0]).sponsor.level copy];
-		NSMutableArray *sponsorsInGroup = [NSMutableArray arrayWithCapacity:6];
-
-		for(MLWSponsorView *sponsorView in sponsorViews) {
-			if([sponsorView.sponsor.level isEqualToString:lastLevel] == NO) {
-				[groups addObject:[NSArray arrayWithArray:sponsorsInGroup]];
-				[sponsorsInGroup removeAllObjects];
-				[lastLevel release];
-				lastLevel = [sponsorView.sponsor.level copy];
+		else {
+			NSMutableArray *sponsorViews = [NSMutableArray arrayWithCapacity:sponsors.count];
+			for(MLWSponsor *sponsor in sponsors) {
+				[sponsorViews addObject:[[[MLWSponsorView alloc] initWithSponsor:sponsor] autorelease]];
 			}
 
-			[sponsorsInGroup addObject:sponsorView];
-		}
+			NSMutableArray *groups = [NSMutableArray arrayWithCapacity:sponsorViews.count];
+			NSString *lastLevel = [((MLWSponsorView *)[sponsorViews objectAtIndex:0]).sponsor.level copy];
+			NSMutableArray *sponsorsInGroup = [NSMutableArray arrayWithCapacity:6];
 
-		[groups addObject:[NSArray arrayWithArray:sponsorsInGroup]];
-		[lastLevel release];
-		self.sponsors = groups;
+			for(MLWSponsorView *sponsorView in sponsorViews) {
+				if([sponsorView.sponsor.level isEqualToString:lastLevel] == NO) {
+					[groups addObject:[NSArray arrayWithArray:sponsorsInGroup]];
+					[sponsorsInGroup removeAllObjects];
+					[lastLevel release];
+					lastLevel = [sponsorView.sponsor.level copy];
+				}
+
+				[sponsorsInGroup addObject:sponsorView];
+			}
+
+			[groups addObject:[NSArray arrayWithArray:sponsorsInGroup]];
+			[lastLevel release];
+			self.sponsors = groups;
+		}
 
 		[self.tableView reloadData];
 		[UIView transitionWithView:self.loadingView duration:0.5f options:UIViewAnimationOptionCurveLinear animations:^{
@@ -107,7 +145,9 @@
 		}];
 	}];
 
+	[self.noResultsView removeFromSuperview];
 	if(!cached) {
+		self.loadingView.frame = self.view.frame;
 		[self.view addSubview:self.loadingView];
 		self.loadingView.alpha = 1.0f;
 	}
@@ -205,18 +245,20 @@
 
 - (void)viewDidUnload {
 	self.tableView = nil;
-	self.view = nil;
 	self.sponsors = nil;
 	self.loadingView = nil;
+	self.noResultsView = nil;
 
 	[super viewDidUnload];
 }
 
 - (void)dealloc {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+
 	self.tableView = nil;
-	self.view = nil;
 	self.sponsors = nil;
 	self.loadingView = nil;
+	self.noResultsView = nil;
 
 	[super dealloc];
 }

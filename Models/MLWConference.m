@@ -209,7 +209,7 @@
 }
 
 - (BOOL)fetchSponsors:(void (^)(NSArray *sessions, NSError *error)) callback {
-	if(_sponsors != nil) {
+	if(_sponsors.count > 0) {
 		callback(_sponsors, nil);
 		return YES;
 	}

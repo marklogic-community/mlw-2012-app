@@ -38,7 +38,7 @@
 @property (nonatomic, retain) CCAndConstraint *filterConstraint;
 @property (nonatomic, retain) MLWMySchedule *userSchedule;
 
-- (void)fetchSessions;
+- (void)fetchSessions:(BOOL) refetch;
 - (void)filterResults:(UIBarButtonItem *)sender;
 - (MLWSession *)sessionForIndexPath:(NSIndexPath *) indexPath;
 - (void)scrollToNextSession;
@@ -59,7 +59,7 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
 	self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
 	if(self) {
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToNextSession) name:UIApplicationDidBecomeActiveNotification object:nil];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appEnteredForground) name:UIApplicationDidBecomeActiveNotification object:nil];
 		self.filterConstraint = nil;
 		self.sessionBlocks = nil;
 		self.filterController = [[[MLWFilterViewController alloc] init] autorelease];
@@ -116,11 +116,28 @@
 	self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 	[self.tableView applyBackground];
 	[self.view addSubview:self.tableView];
-
-	[self fetchSessions];
 }
 
-- (void)fetchSessions {
+- (void)appEnteredForground {
+	if(self.sessionBlocks.count == 0) {
+		[self fetchSessions:NO];
+	}
+	else {
+		[self scrollToNextSession];
+	}
+}
+
+- (void)viewWillAppear:(BOOL) animated {
+	[self fetchSessions:NO];
+
+	[super viewWillAppear:animated];
+}
+
+- (void)fetchSessions:(BOOL) refetch {
+	if(refetch == NO && self.sessionBlocks.count > 0) {
+		return;
+	}
+
 	MLWAppDelegate *appDelegate = (MLWAppDelegate *)[UIApplication sharedApplication].delegate;
 	MLWConference *conference = appDelegate.conference;
 	BOOL cached = [conference fetchSessionsWithConstraint:self.filterConstraint callback:^(NSArray *sessions, NSError *error) {
@@ -155,8 +172,8 @@
 
 	[self.noResultsView removeFromSuperview];
 	if(!cached) {
+		self.loadingView.frame = self.view.frame;
 		[self.view addSubview:self.loadingView];
-		[self.loadingView setNeedsLayout];
 		self.loadingView.alpha = 1.0f;
 	}
 }
@@ -262,7 +279,7 @@
 
 - (void)filterView:(MLWFilterViewController *) filterViewController constructedConstraint:(CCAndConstraint *) constraint {
 	self.filterConstraint = constraint;
-	[self fetchSessions];
+	[self fetchSessions:YES];
 }
 
 - (void)filterResults:(UIBarButtonItem *)sender {

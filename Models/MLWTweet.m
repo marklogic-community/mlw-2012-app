@@ -28,6 +28,7 @@
 
 @implementation MLWTweet
 
+@synthesize name = _name;
 @synthesize username = _username;
 @synthesize content = _content;
 @synthesize date = _date;
@@ -37,6 +38,7 @@
 - (id)initWithData:(NSDictionary *) jsonData {
 	self = [super init];
 	if(self) {
+		_name = [[jsonData objectForKey:@"from_user_name"] retain];
 		_username = [[jsonData objectForKey:@"from_user"] retain];
 		_content = [[jsonData objectForKey:@"text"] retain];
 		_date = [[self stringToDate:[jsonData objectForKey:@"created_at"]] retain];
@@ -106,6 +108,7 @@
 }
 
 - (void) dealloc {
+	[_name release];
 	[_username release];
 	[_content release];
 	[_date release];

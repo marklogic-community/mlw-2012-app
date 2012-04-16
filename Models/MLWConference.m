@@ -165,7 +165,7 @@
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 		SBJsonParser *parser = [[[SBJsonParser alloc] init] autorelease];
 
-		NSURL *url = [NSURL URLWithString:@"http://search.twitter.com/search.json?q=marklogic&rpp=50&include_entities=true&result_type=recent"];
+		NSURL *url = [NSURL URLWithString:@"http://search.twitter.com/search.json?q=mlw12+OR+marklogic&rpp=50&include_entities=true&result_type=recent"];
 		NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
 		request.URL = url;
 

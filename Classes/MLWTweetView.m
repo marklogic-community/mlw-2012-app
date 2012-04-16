@@ -86,7 +86,7 @@
 
 	int totalHeight = 5;
 	self.usernameLabel.frame = CGRectMake(rightFrame.origin.x, totalHeight, rightFrame.size.width - 5, 16);
-	self.usernameLabel.text = self.tweet.username;
+	self.usernameLabel.text = [NSString stringWithFormat:@"%@ - @%@", self.tweet.name, self.tweet.username];
 	totalHeight += self.usernameLabel.frame.size.height;
 
 	self.contentLabel.frame = CGRectMake(rightFrame.origin.x, totalHeight, rightFrame.size.width - 5, [self.tweet.content sizeWithFont:[UIFont systemFontOfSize:13] constrainedToSize:CGSizeMake(rightFrame.size.width - 5, 63)].height);

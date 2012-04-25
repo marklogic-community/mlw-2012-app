@@ -238,10 +238,7 @@
 				break;
 			case 1:
 				cell.textLabel.text = @"Day";
-				NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-				[formatter setDateFormat:@"EEEE"];
-				cell.detailTextLabel.text = [formatter stringFromDate:self.session.startTime];
-				[formatter release];
+				cell.detailTextLabel.text = self.session.dayOfWeek;
 				break;
 			case 2:
 				cell.textLabel.text = @"Time";

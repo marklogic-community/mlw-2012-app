@@ -74,17 +74,20 @@
 }
 
 - (NSString *)dayOfWeek {
-	NSDateFormatter *startFormat = [[[NSDateFormatter alloc] init] autorelease];
-	[startFormat setDateFormat:@"EEEE"];
+	NSDateFormatter *dowFormat = [[[NSDateFormatter alloc] init] autorelease];
+	dowFormat.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"EDT"];
+	[dowFormat setDateFormat:@"EEEE"];
 
-	return [NSString stringWithFormat:@"%@", [startFormat stringFromDate:_startTime]];
+	return [dowFormat stringFromDate:_startTime];
 }
 
 - (NSString *)formattedDate {
 	NSDateFormatter *startFormat = [[[NSDateFormatter alloc] init] autorelease];
+	startFormat.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"EDT"];
 	[startFormat setDateFormat:@"EEEE, h:mma"];
 
 	NSDateFormatter *endFormat = [[[NSDateFormatter alloc] init] autorelease];
+	endFormat.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"EDT"];
 	[endFormat setDateStyle:NSDateFormatterNoStyle];
 	[endFormat setTimeStyle:NSDateFormatterShortStyle];
 
@@ -93,6 +96,7 @@
 
 - (NSString *)formattedTime {
 	NSDateFormatter *format = [[[NSDateFormatter alloc] init] autorelease];
+	format.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"EDT"];
 	[format setDateFormat:@"h:mma"];
 
 	return [[NSString stringWithFormat:@"%@ - %@", [format stringFromDate:_startTime], [format stringFromDate:_endTime]] lowercaseString];
@@ -101,6 +105,7 @@
 
 - (NSDate *)stringToDate:(NSString *) dateString {
 	NSDateFormatter *dateFormat = [[[NSDateFormatter alloc] init] autorelease];
+	dateFormat.timeZone = [NSTimeZone timeZoneWithAbbreviation:@"EDT"];
 	[dateFormat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZZZ"];
 	NSRange timezone = NSMakeRange([dateString length] - 3, 3);
 	NSString *cleanDate = [dateString stringByReplacingOccurrencesOfString:@":" withString:@"" options:NSCaseInsensitiveSearch range:timezone];

@@ -27,6 +27,7 @@
 
 @implementation MLWTweet
 
+@synthesize id = _id;
 @synthesize name = _name;
 @synthesize username = _username;
 @synthesize content = _content;
@@ -36,6 +37,7 @@
 - (id)initWithData:(NSDictionary *) jsonData {
 	self = [super init];
 	if(self) {
+		_id = [[jsonData objectForKey:@"id_str"] retain];
 		_name = [[jsonData objectForKey:@"from_user_name"] retain];
 		_username = [[jsonData objectForKey:@"from_user"] retain];
 		_content = [[jsonData objectForKey:@"text"] retain];
@@ -96,6 +98,7 @@
 	[_content release];
 	[_date release];
 	[_profileImageURL release];
+	[_id release];
 
 	[super dealloc];
 }

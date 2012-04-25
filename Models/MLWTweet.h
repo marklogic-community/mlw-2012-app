@@ -24,6 +24,7 @@
 
 - (id)initWithData:(NSDictionary *) jsonData;
 
+@property (readonly) NSString *id;
 @property (readonly) NSString *name;
 @property (readonly) NSString *username;
 @property (readonly) NSString *content;

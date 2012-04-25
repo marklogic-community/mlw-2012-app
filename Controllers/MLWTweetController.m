@@ -178,6 +178,8 @@
 }
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	MLWTweet *tweet = [self.tweets objectAtIndex:indexPath.row];
+	[[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://twitter.com/#!/%@/status/%@", tweet.username, tweet.id]]];
 	return nil;
 }
 

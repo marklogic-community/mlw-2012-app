@@ -28,8 +28,7 @@
 @property (readonly) NSString *username;
 @property (readonly) NSString *content;
 @property (readonly) NSDate *date;
-@property (readonly) UIImage *profileImage;
-@property (readonly) NSString *profileImageURL;
+@property (readonly) NSURL *profileImageURL;
 @property (readonly) NSString *dateString;
 
 @end

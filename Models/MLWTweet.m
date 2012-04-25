@@ -23,7 +23,6 @@
 
 @interface MLWTweet ()
 - (NSDate *)stringToDate:(NSString *) dateString;
-@property (nonatomic, retain) UIImage *cachedImage;
 @end
 
 @implementation MLWTweet
@@ -33,7 +32,6 @@
 @synthesize content = _content;
 @synthesize date = _date;
 @synthesize profileImageURL = _profileImageURL;
-@synthesize cachedImage;
 
 - (id)initWithData:(NSDictionary *) jsonData {
 	self = [super init];
@@ -42,11 +40,14 @@
 		_username = [[jsonData objectForKey:@"from_user"] retain];
 		_content = [[jsonData objectForKey:@"text"] retain];
 		_date = [[self stringToDate:[jsonData objectForKey:@"created_at"]] retain];
-		_profileImageURL = [[jsonData objectForKey:@"profile_image_url"] retain];
+		NSString *profileImageString = [jsonData objectForKey:@"profile_image_url"];
 
-		if([_profileImageURL isKindOfClass:[NSNull class]] || _profileImageURL.length == 0) {
+		if([profileImageString isKindOfClass:[NSNull class]] || profileImageString.length == 0) {
 			[_profileImageURL release];
 			_profileImageURL = nil;
+		}
+		else {
+			_profileImageURL = [[NSURL URLWithString:profileImageString] retain];
 		}
 	}
 	return self;
@@ -57,24 +58,6 @@
 	NSDateFormatter *dateFormat = [[[NSDateFormatter alloc] init] autorelease];
 	[dateFormat setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss z"];
 	return [dateFormat dateFromString:dateString];
-}
-
-- (UIImage *)profileImage {
-	if(_profileImageURL == nil) {
-		return nil;
-	}
-
-	if(self.cachedImage != nil) {
-		return self.cachedImage;
-	}
-
-	NSURL *url = [NSURL URLWithString:_profileImageURL];
-	CGImageSourceRef src = CGImageSourceCreateWithURL((CFURLRef)url, NULL);
-	CGImageRef image = CGImageSourceCreateImageAtIndex(src, 0, NULL);
-	self.cachedImage = [UIImage imageWithCGImage:image];
-	CFRelease(src);
-	CGImageRelease(image);
-	return self.cachedImage;
 }
 
 - (NSString *)dateString {
@@ -113,7 +96,6 @@
 	[_content release];
 	[_date release];
 	[_profileImageURL release];
-	self.cachedImage = nil;
 
 	[super dealloc];
 }

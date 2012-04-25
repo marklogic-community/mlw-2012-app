@@ -19,6 +19,7 @@
 */
 
 #import "MLWTweetView.h"
+#import "UIImageView+WebCache.h"
 
 @interface MLWTweetView ()
 @property (nonatomic, retain) MLWTweet *tweet;
@@ -72,13 +73,13 @@
 
 - (void)layoutSubviews {
 	CGRect rightFrame;
-	if(self.tweet.profileImage != nil) {
+	if(self.tweet.profileImageURL != nil) {
 		CGRect imageFrame;
 		CGRectDivide(self.bounds, &imageFrame, &rightFrame, 75, CGRectMinXEdge);
 		imageFrame = CGRectInset(imageFrame, 7.5, 7.5);
 		imageFrame.size.height = imageFrame.size.width;
 		self.profileImage.frame = imageFrame;
-		self.profileImage.image = self.tweet.profileImage;
+		[self.profileImage setImageWithURL:self.tweet.profileImageURL placeholderImage:nil];
 	}
 	else {
 		rightFrame = CGRectInset(self.bounds, 5, 5);

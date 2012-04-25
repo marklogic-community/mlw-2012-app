@@ -96,6 +96,7 @@
 }
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	[[UIApplication sharedApplication] openURL:self.sponsorView.sponsor.websiteURL];
 	return nil;
 }
 

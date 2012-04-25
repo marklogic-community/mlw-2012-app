@@ -232,6 +232,9 @@
 		[self.navigationController pushViewController:sponsorDetailController animated:YES];
 		[sponsorDetailController release];
 	}
+	else {
+		[[UIApplication sharedApplication] openURL:[self sponsorViewForIndexPath:indexPath].sponsor.websiteURL];
+	}
 
 	return nil;
 }

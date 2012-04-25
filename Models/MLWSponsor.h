@@ -27,6 +27,7 @@
 @property (readonly) NSString *level;
 @property (readonly) NSString *description;
 @property (readonly) NSString *website;
+@property (readonly) NSURL *websiteURL;
 @property (readonly) UIView *logo;
 
 @end

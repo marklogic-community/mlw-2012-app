@@ -31,6 +31,7 @@
 @synthesize level = _level;
 @synthesize description = _description;
 @synthesize website = _website;
+@synthesize websiteURL = _websiteURL;
 @synthesize logo = _logo;
 @synthesize logoURL;
 @synthesize cachedLogoView;
@@ -42,6 +43,7 @@
 		_level = [[jsonData objectForKey:@"level"] retain];
 		_description = [[jsonData objectForKey:@"info"] retain];
 		_website = [[jsonData objectForKey:@"websitePretty"] retain];
+		_websiteURL = [[NSURL URLWithString:[jsonData objectForKey:@"websiteFull"]] retain];
 		self.logoURL = [NSURL URLWithString:[jsonData objectForKey:@"imageURL"]];
 		self.cachedLogoView = nil;
     }
@@ -90,6 +92,7 @@
 	[_level release];
 	[_description release];
 	[_website release];
+	[_websiteURL release];
 	self.logoURL = nil;
 	self.cachedLogoView = nil;
 

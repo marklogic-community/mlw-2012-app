@@ -2,12 +2,12 @@ Branches
 
 - The master branch contains a version of the app that runs against Corona.  
 - The rest-api-port branch contains a version of the app that has been ported to run against 
-  MarkLogic 6 and the rest-api.  Before you build the app in XCode, you need to updated the password
-  in the MarkLogic World-Prefix.pch file
+  MarkLogic 6 and the rest-api.  Before you build the app in XCode, you need to update 
+  the password in the src file named: MarkLogic World-Prefix.pch 
  
 Server setup for REST API PORT
 
-- Create a database and assign a rest api instance.  Code here is hardcoded to port 8011.
+- Create a database and a REST API instance.  Code here is hardcoded to port 8011.
 - Pull down the app source code on to the server somewhere and look in the admin directory
 - Unzip the data and load via loader.py (needs admin creds on the cmd line)
 - Then add speaker names by running the import.xqy script inside QueryConsole or the like.

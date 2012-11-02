@@ -1,0 +1,9 @@
+Branches
+
+- The master branch contains a version of the app that runs against Corona.  
+- The rest-api-port branch contains a version of the app that has been ported to run against 
+  MarkLogic 6 and the rest-api.
+ 
+Setup
+
+- TBD

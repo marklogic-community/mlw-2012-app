@@ -42,8 +42,8 @@
 	self = [super init];
 	if(self) {
 		_id = [[jsonData objectForKey:@"id"] retain];
-		_startTime = [[self stringToDate:[jsonData objectForKey:@"startTime::date"]] retain];
-		_endTime = [[self stringToDate:[jsonData objectForKey:@"endTime::date"]] retain];
+		_startTime = [[self stringToDate:[jsonData objectForKey:@"startTime__date"]] retain];
+		_endTime = [[self stringToDate:[jsonData objectForKey:@"endTime__date"]] retain];
 		_plenary = [[jsonData objectForKey:@"plenary"] boolValue];
 		_selectable = [[jsonData objectForKey:@"selectable"] boolValue];
 		_title = [[jsonData objectForKey:@"title"] retain];

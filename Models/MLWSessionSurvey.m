@@ -19,6 +19,7 @@
 */
 
 #import "MLWSessionSurvey.h"
+#import "MLURLRequest.h"
 #import "SBJSON.h"
 
 @interface MLWSessionSurvey ()
@@ -68,12 +69,14 @@
 }
 
 - (void)submit:(void (^)(NSError *)) callback {
-	self.baseURL = [NSURL URLWithString:CORONABASE];
+	self.baseURL = [NSURL URLWithString:APIBASE];
 	NSString *uri = [NSString stringWithFormat:@"/survey/%@.json", [[NSProcessInfo processInfo] globallyUniqueString]];
 
-	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/store?uri=%@", self.baseURL.absoluteString, [self encodeString:uri]]];
-	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+	NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/documents?uri=%@&format=json", self.baseURL.absoluteString, [self encodeString:uri]]];
+	NSMutableURLRequest *request = [[MLURLRequest alloc] init];
 	request.HTTPMethod = @"PUT";
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+
 	request.URL = url;
 
 	SBJsonWriter *jsonWriter = [[SBJsonWriter alloc] init];

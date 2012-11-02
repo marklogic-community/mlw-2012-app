@@ -21,13 +21,13 @@
 #import <Foundation/Foundation.h>
 #import "MLWSpeaker.h"
 #import "MLWMySchedule.h"
-#import "CCConstraint.h"
-#import "CCFacetResponse.h"
+#import "MLConstraint.h"
+#import "MLFacetResponse.h"
 
 @interface MLWConference : NSObject
 
-- (BOOL)fetchSessionsWithConstraint:(CCConstraint *) constraint callback:(void (^)(NSArray *, NSError *)) callback;
-- (BOOL)fetchFacetsWithConstraint:(CCConstraint *) constraint callback:(void (^)(CCFacetResponse *, NSError *)) callback;
+- (BOOL)fetchSessionsWithConstraint:(MLConstraint *) constraint callback:(void (^)(NSArray *, NSError *)) callback;
+- (BOOL)fetchFacetsWithConstraint:(MLConstraint *) constraint callback:(void (^)(MLFacetResponse *, NSError *)) callback;
 - (BOOL)fetchTweets:(void (^)(NSArray *sessions, NSError *error)) callback;
 - (BOOL)fetchSponsors:(void (^)(NSArray *sessions, NSError *error)) callback;
 - (void)saveMySchedule:(MLWMySchedule *) schedule;

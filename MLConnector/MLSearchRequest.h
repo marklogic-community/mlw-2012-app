@@ -1,8 +1,7 @@
 /*
-    MarkLogic World-Prefix.pch
-	MarkLogic World
-    Created by Ryan Grimm on 3/9/12.
-    Ripped up and ported from Corona to REST API by Eric Bloch November 2012
+    MLSearchRequest.h
+	ML Connector
+    Created by Ryan Grimm on 3/22/12.
 
 	Copyright 2012 MarkLogic
 
@@ -19,16 +18,15 @@
 	limitations under the License.
 */
 
-#import <Availability.h>
+#import <Foundation/Foundation.h>
+#import "MLRequest.h"
+#import "MLConstraint.h"
 
-#ifndef __IPHONE_4_0
-#warning "This project uses features only available in iOS SDK 4.0 and later."
-#endif
+@interface MLSearchRequest : MLRequest
 
-#ifdef __OBJC__
-    #import <UIKit/UIKit.h>
-    #import <Foundation/Foundation.h>
-	#define APIBASE @"http://mlw12.marklogic.com/rest-api/v1"
-    #define APIUSER @"admin"
-    #define APIPASS @"XXXX" /* replace this with a valid password */
-#endif
+- (id)initWithConstraint:(MLConstraint *) constraint;
+- (void)fetchResults:(NSUInteger) start length:(NSUInteger) length callback:(void (^)(id, NSError *)) callback;
+
+@property (nonatomic, retain) MLConstraint *constraint;
+
+@end

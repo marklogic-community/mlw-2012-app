@@ -35,7 +35,7 @@
 @property (nonatomic, retain) NSArray *sessionBlocks;
 @property (nonatomic, retain) UIPopoverController *sessionPopover;
 @property (nonatomic, retain) UIPopoverController *filterPopover;
-@property (nonatomic, retain) CCAndConstraint *filterConstraint;
+@property (nonatomic, retain) MLAndConstraint *filterConstraint;
 
 - (void)fetchSessions;
 - (void)filterResults:(UIBarButtonItem *)sender;
@@ -197,7 +197,7 @@
 	[self.sessionPopover presentPopoverFromRect:[self.gridView convertRect:sessionRect toView:self.view] inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
-- (void)filterView:(MLWFilterViewController *) filterViewController constructedConstraint:(CCAndConstraint *) constraint {
+- (void)filterView:(MLWFilterViewController *) filterViewController constructedConstraint:(MLAndConstraint *) constraint {
 	self.navigationItem.leftBarButtonItem.style = UIBarButtonItemStylePlain;
 	self.filterConstraint = constraint;
 	[self.filterPopover dismissPopoverAnimated:YES];

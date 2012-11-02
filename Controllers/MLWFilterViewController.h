@@ -18,13 +18,13 @@
 	limitations under the License.
 */
 
-#import "CCAndConstraint.h"
+#import "MLAndConstraint.h"
 
 @class MLWFilterViewController;
 
 @protocol MLWFilterViewControllerDelegate <NSObject>
 @optional
-- (void)filterView:(MLWFilterViewController *) filterViewController constructedConstraint:(CCAndConstraint *) constraint;
+- (void)filterView:(MLWFilterViewController *) filterViewController constructedConstraint:(MLAndConstraint *) constraint;
 @end
 
 @interface MLWFilterViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate> {

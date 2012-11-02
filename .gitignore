@@ -1,3 +1,5 @@
 MarkLogic\ World.xcodeproj/project.xcworkspace
 MarkLogic\ World.xcodeproj/xcuserdata
+MarkLogic\ World.xcworkspace/*
 .DS_Store
+build/*

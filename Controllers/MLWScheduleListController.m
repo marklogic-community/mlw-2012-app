@@ -24,7 +24,7 @@
 #import "MLWSession.h"
 #import "UITableView+helpers.h"
 #import "MLWFilterViewController.h"
-#import "CCAndConstraint.h"
+#import "MLAndConstraint.h"
 #import "MLWMySchedule.h"
 #import <QuartzCore/QuartzCore.h>
 
@@ -35,7 +35,7 @@
 @property (nonatomic, retain) UIView *loadingView;
 @property (nonatomic, retain) UIView *noResultsView;
 @property (nonatomic, retain) NSArray *sessionBlocks;
-@property (nonatomic, retain) CCAndConstraint *filterConstraint;
+@property (nonatomic, retain) MLAndConstraint *filterConstraint;
 @property (nonatomic, retain) MLWMySchedule *userSchedule;
 
 - (void)fetchSessions:(BOOL) refetch;
@@ -277,7 +277,7 @@
 	[sessionDetailController release];
 }
 
-- (void)filterView:(MLWFilterViewController *) filterViewController constructedConstraint:(CCAndConstraint *) constraint {
+- (void)filterView:(MLWFilterViewController *) filterViewController constructedConstraint:(MLAndConstraint *) constraint {
 	self.filterConstraint = constraint;
 	[self fetchSessions:YES];
 }

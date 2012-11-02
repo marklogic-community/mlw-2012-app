@@ -18,10 +18,10 @@
 	limitations under the License.
 */
 
-#import "CCRequest.h"
+#import "MLRequest.h"
 #import "MLWSession.h"
 
-@interface MLWSessionSurvey : CCRequest
+@interface MLWSessionSurvey : MLRequest
 
 - (id)initWithSession:(MLWSession *)session;
 

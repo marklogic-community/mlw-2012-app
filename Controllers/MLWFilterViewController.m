@@ -21,18 +21,18 @@
 #import "MLWFilterViewController.h"
 #import "UITableView+helpers.h"
 #import "MLWAppDelegate.h"
-#import "CCFacetResponse.h"
-#import "CCFacetResult.h"
-#import "CCAndConstraint.h"
-#import "CCRangeConstraint.h"
-#import "CCStringQueryConstraint.h"
+#import "MLFacetResponse.h"
+#import "MLFacetResult.h"
+#import "MLAndConstraint.h"
+#import "MLRangeConstraint.h"
+#import "MLStringQueryConstraint.h"
 
 @interface MLWFilterViewController ()
 @property (nonatomic, retain) UITableView *tableView;
 @property (nonatomic, retain) UIView *loadingView;
 @property (nonatomic, retain) UISegmentedControl *tabs;
-@property (nonatomic, retain) CCFacetResponse *facetResponse;
-@property (nonatomic, retain) CCAndConstraint *constraint;
+@property (nonatomic, retain) MLFacetResponse *facetResponse;
+@property (nonatomic, retain) MLAndConstraint *constraint;
 @property (nonatomic, retain) UITextField *searchField;
 @property (nonatomic, retain) NSArray *cachedResultsForCurrentFacet;
 
@@ -41,7 +41,7 @@
 - (void)doneFiltering:(UIBarButtonItem *)sender;
 - (NSString *)facetNameForCurrentFacet;
 - (NSArray *)resultsForCurrentFacet;
-- (CCRangeConstraint *)rangeConstraintForCurrentFacet;
+- (MLRangeConstraint *)rangeConstraintForCurrentFacet;
 @end
 
 @implementation MLWFilterViewController
@@ -59,7 +59,7 @@
     self = [super init];
     if(self) {
 		self.navigationItem.title = @"Filter Sessions";
-		self.constraint = [[[CCAndConstraint alloc] init] autorelease];
+		self.constraint = [[[MLAndConstraint alloc] init] autorelease];
 		self.searchField = [[[UITextField alloc] init] autorelease];
 		self.searchField.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 		self.searchField.clearButtonMode = UITextFieldViewModeAlways;
@@ -112,7 +112,7 @@
 
 	MLWAppDelegate *appDelegate = (MLWAppDelegate *)[UIApplication sharedApplication].delegate;
 	MLWConference *conference = appDelegate.conference;
-	BOOL cached = [conference fetchFacetsWithConstraint:nil callback:^(CCFacetResponse *response, NSError *error) {
+	BOOL cached = [conference fetchFacetsWithConstraint:nil callback:^(MLFacetResponse *response, NSError *error) {
 		self.facetResponse = response;
 		[self.tableView reloadData];
 		[UIView transitionWithView:self.loadingView duration:0.5f options:UIViewAnimationOptionCurveLinear animations:^{
@@ -166,7 +166,7 @@
 
 	if(self.tabs.selectedSegmentIndex != 0) {
 		NSArray *results = [self resultsForCurrentFacet];
-		CCFacetResult *facetResult = [results objectAtIndex:indexPath.row];
+		MLFacetResult *facetResult = [results objectAtIndex:indexPath.row];
 		cell.textLabel.text = facetResult.label;
 		if(self.tabs.selectedSegmentIndex == 1) {
 			cell.detailTextLabel.text = [NSString stringWithFormat:@"%i", facetResult.count];
@@ -182,7 +182,7 @@
 		}
 	}
 	else {
-		CCStringQueryConstraint *constraint = (CCStringQueryConstraint *)[[self.constraint stringQueryConstraints] lastObject];
+		MLStringQueryConstraint *constraint = (MLStringQueryConstraint *)[[self.constraint stringQueryConstraints] lastObject];
 		self.searchField.text = constraint.query;
 		self.searchField.frame = CGRectInset(cell.contentView.bounds, 7, 9);
 		[self.searchField becomeFirstResponder];
@@ -198,8 +198,8 @@
 
 - (void)tableView:(UITableView *) tableView didSelectRowAtIndexPath:(NSIndexPath *) indexPath {
 	if(indexPath.section != 2) {
-		CCRangeConstraint *rangeConstraint = [self rangeConstraintForCurrentFacet];
-		CCFacetResult *facetResult = [[self resultsForCurrentFacet] objectAtIndex:indexPath.row];
+		MLRangeConstraint *rangeConstraint = [self rangeConstraintForCurrentFacet];
+		MLFacetResult *facetResult = [[self resultsForCurrentFacet] objectAtIndex:indexPath.row];
 
 		UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
 		if(cell.accessoryType == UITableViewCellAccessoryNone) {
@@ -208,7 +208,7 @@
 				[rangeConstraint addValue:facetResult];
 			}
 			else {
-				[self.constraint addConstraint:[CCRangeConstraint rangeNamed:[self facetNameForCurrentFacet] value:facetResult]];
+				[self.constraint addConstraint:[MLRangeConstraint rangeNamed:[self facetNameForCurrentFacet] value:facetResult]];
 			}
 		}
 		else {
@@ -226,7 +226,7 @@
 }
 
 - (void)resetFiltering:(UIBarButtonItem *)sender {
-	self.constraint = [[[CCAndConstraint alloc] init] autorelease];
+	self.constraint = [[[MLAndConstraint alloc] init] autorelease];
 	[self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationFade];
 	[self doneFiltering:nil];
 }
@@ -237,13 +237,13 @@
 }
 
 - (void)doneFiltering:(UIBarButtonItem *)sender {
-	CCStringQueryConstraint *constraint = (CCStringQueryConstraint *)[[self.constraint stringQueryConstraints] lastObject];
+	MLStringQueryConstraint *constraint = (MLStringQueryConstraint *)[[self.constraint stringQueryConstraints] lastObject];
 	if(self.searchField.text.length != 0) {
 		if(constraint != nil) {
 			constraint.query = self.searchField.text.lowercaseString;
 		}
 		else {
-			[self.constraint addConstraint:[CCStringQueryConstraint stringQuery:self.searchField.text.lowercaseString]];
+			[self.constraint addConstraint:[MLStringQueryConstraint stringQuery:self.searchField.text.lowercaseString]];
 		}
 	}
 	else if(constraint != nil) {
@@ -275,7 +275,7 @@
 	NSString *facetName = [self facetNameForCurrentFacet];
 	NSArray *results = [self.facetResponse facetNamed:facetName].results;
 	if([facetName isEqualToString:@"speaker"]) {
-		results = [results sortedArrayUsingComparator:^(CCFacetResult *result1, CCFacetResult *result2) {
+		results = [results sortedArrayUsingComparator:^(MLFacetResult *result1, MLFacetResult *result2) {
 			NSString *cleaned1 = [result1.label stringByReplacingOccurrencesOfString:@"Admiral " withString:@""];
 			cleaned1 = [cleaned1 stringByReplacingOccurrencesOfString:@"Dr. " withString:@""];
 			NSString *cleaned2 = [result2.label stringByReplacingOccurrencesOfString:@"Admiral " withString:@""];
@@ -287,7 +287,7 @@
 
 	if([facetName isEqualToString:@"track"]) {
 		NSMutableArray *filteredResults = [NSMutableArray arrayWithCapacity:results.count];
-		for(CCFacetResult *result in results) {
+		for(MLFacetResult *result in results) {
 			if([result.label isEqualToString:@""]) {
 				continue;
 			}
@@ -300,8 +300,8 @@
 	return results;
 }
 
-- (CCRangeConstraint *)rangeConstraintForCurrentFacet {
-	return (CCRangeConstraint *)[[self.constraint rangeConstraintsNamed:[self facetNameForCurrentFacet]] lastObject];
+- (MLRangeConstraint *)rangeConstraintForCurrentFacet {
+	return (MLRangeConstraint *)[[self.constraint rangeConstraintsNamed:[self facetNameForCurrentFacet]] lastObject];
 }
 
 - (void)viewDidUnload {

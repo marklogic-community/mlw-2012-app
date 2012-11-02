@@ -1,8 +1,7 @@
 /*
-    MarkLogic World-Prefix.pch
-	MarkLogic World
-    Created by Ryan Grimm on 3/9/12.
-    Ripped up and ported from Corona to REST API by Eric Bloch November 2012
+    MLFacetResult.m
+	ML Connector
+    Created by Ryan Grimm on 3/22/12.
 
 	Copyright 2012 MarkLogic
 
@@ -19,16 +18,26 @@
 	limitations under the License.
 */
 
-#import <Availability.h>
+#import "MLFacetResult.h"
 
-#ifndef __IPHONE_4_0
-#warning "This project uses features only available in iOS SDK 4.0 and later."
-#endif
+@implementation MLFacetResult
 
-#ifdef __OBJC__
-    #import <UIKit/UIKit.h>
-    #import <Foundation/Foundation.h>
-	#define APIBASE @"http://mlw12.marklogic.com/rest-api/v1"
-    #define APIUSER @"admin"
-    #define APIPASS @"XXXX" /* replace this with a valid password */
-#endif
+@synthesize label = _label;
+@synthesize count = _count;
+
+- (id)initWithLabel:(NSString *) label count:(NSUInteger ) count {
+	self = [super init];
+	if(self) {
+		_label = [label copy];
+		_count = count;
+	}
+	return self;
+}
+
+- (void)dealloc {
+	[_label release];
+
+	[super dealloc];
+}
+
+@end

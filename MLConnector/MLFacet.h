@@ -1,8 +1,7 @@
 /*
-    MarkLogic World-Prefix.pch
-	MarkLogic World
-    Created by Ryan Grimm on 3/9/12.
-    Ripped up and ported from Corona to REST API by Eric Bloch November 2012
+    MLFacet.h
+	ML Connector
+    Created by Ryan Grimm on 3/22/12.
 
 	Copyright 2012 MarkLogic
 
@@ -19,16 +18,14 @@
 	limitations under the License.
 */
 
-#import <Availability.h>
+#import <UIKit/UIKit.h>
 
-#ifndef __IPHONE_4_0
-#warning "This project uses features only available in iOS SDK 4.0 and later."
-#endif
+@interface MLFacet : NSObject
 
-#ifdef __OBJC__
-    #import <UIKit/UIKit.h>
-    #import <Foundation/Foundation.h>
-	#define APIBASE @"http://mlw12.marklogic.com/rest-api/v1"
-    #define APIUSER @"admin"
-    #define APIPASS @"XXXX" /* replace this with a valid password */
-#endif
+- (id)initFacetNamed:(NSString *) name fromData:(NSArray *) data;
++ (MLFacet *)facetNamed:(NSString *) name fromData:(NSArray *) data;
+
+@property (readonly) NSString *name;
+@property (readonly) NSArray *results;
+
+@end

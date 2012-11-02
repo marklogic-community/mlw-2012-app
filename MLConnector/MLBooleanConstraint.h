@@ -1,8 +1,7 @@
 /*
-    MarkLogic World-Prefix.pch
-	MarkLogic World
-    Created by Ryan Grimm on 3/9/12.
-    Ripped up and ported from Corona to REST API by Eric Bloch November 2012
+    MLBooleanConstraint.h
+	ML Connector
+    Created by Ryan Grimm on 3/22/12.
 
 	Copyright 2012 MarkLogic
 
@@ -19,16 +18,20 @@
 	limitations under the License.
 */
 
-#import <Availability.h>
+#import "MLConstraint.h"
 
-#ifndef __IPHONE_4_0
-#warning "This project uses features only available in iOS SDK 4.0 and later."
-#endif
+@interface MLBooleanConstraint : MLConstraint
 
-#ifdef __OBJC__
-    #import <UIKit/UIKit.h>
-    #import <Foundation/Foundation.h>
-	#define APIBASE @"http://mlw12.marklogic.com/rest-api/v1"
-    #define APIUSER @"admin"
-    #define APIPASS @"XXXX" /* replace this with a valid password */
-#endif
+- (void)addConstraint:(MLConstraint *) constraint;
+
+- (NSArray *)constraints;
+- (NSArray *)rangeConstraintsNamed:(NSString *) name;
+- (NSArray *)keywordConstraints;
+- (NSArray *)stringQueryConstraints;
+
+- (void)removeConstraint:(MLConstraint *) constraint;
+- (void)removeRangeConstraintsNamed:(NSString *) name;
+- (void)removeKeywordConstraints;
+- (void)removeStringQueryConstraints;
+
+@end

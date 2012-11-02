@@ -24,10 +24,11 @@
 #import "MLWSponsor.h"
 #import "MLWTweet.h"
 #import "SBJson.h"
-#import "CCSearchRequest.h"
-#import "CCAndConstraint.h"
-#import "CCKeywordConstraint.h"
-#import "CCFacetRequest.h"
+#import "MLSearchRequest.h"
+#import "MLAndConstraint.h"
+#import "MLKeywordConstraint.h"
+#import "MLFacetRequest.h"
+#import "MLURLRequest.h"
 
 @interface MLWConference ()
 @property (nonatomic, retain) NSArray *sessions;
@@ -54,7 +55,7 @@
 	return self;
 }
 
-- (BOOL)fetchSessionsWithConstraint:(CCConstraint *) constraint callback:(void (^)(NSArray *, NSError *)) callback {
+- (BOOL)fetchSessionsWithConstraint:(MLConstraint *) constraint callback:(void (^)(NSArray *, NSError *)) callback {
 	/*
 	if(_sessions != nil && _speakers != nil) {
 		callback(_sessions, nil);
@@ -62,9 +63,10 @@
 	}
 	*/
 
-	CCAndConstraint *sessionConstraint = [CCAndConstraint andConstraints:[CCKeywordConstraint key:@"type" equals:@"session"], constraint, nil];
+	MLAndConstraint *sessionConstraint = [MLAndConstraint andConstraints:[MLKeywordConstraint key:@"type" equals:@"session"], constraint, nil];
+    // MLConstraint *sessionConstraint = [MLKeywordConstraint key:@"type" equals:@"session"]; 
 
-	if(self.userSchedule == nil) {
+    if(self.userSchedule == nil) {
 		[self populateUserSchedule:^(NSError *error) {
 			if(self.speakers == nil) {
 				[self populateSpeakers:^(NSError *error) {
@@ -106,11 +108,12 @@
 	return NO;
 }
 
-- (BOOL)fetchFacetsWithConstraint:(CCConstraint *) constraint callback:(void (^)(CCFacetResponse *, NSError *)) callback {
-	CCAndConstraint *sessionConstraint = [CCAndConstraint andConstraints:[CCKeywordConstraint key:@"type" equals:@"session"], constraint, nil];
-
-	CCFacetRequest *request = [[CCFacetRequest alloc] initWithConstraint:sessionConstraint];
-	request.baseURL = [NSURL URLWithString:CORONABASE];
+- (BOOL)fetchFacetsWithConstraint:(MLConstraint *) constraint callback:(void (^)(MLFacetResponse *, NSError *)) callback {
+	MLAndConstraint *sessionConstraint = [MLAndConstraint andConstraints:[MLKeywordConstraint key:@"type" equals:@"session"], constraint, nil];
+    // MLConstraint *sessionConstraint = [MLKeywordConstraint key:@"type" equals:@"session"];
+    
+	MLFacetRequest *request = [[MLFacetRequest alloc] initWithConstraint:sessionConstraint];
+	request.baseURL = [NSURL URLWithString:APIBASE];
 	request.order = @"ascending";
 	[request fetchResultsForFacets:[NSArray arrayWithObjects:@"speaker", @"track", nil] length:10000 callback:callback];
 	[request release];
@@ -118,9 +121,9 @@
 }
 
 - (void)populateSpeakers:(void (^)(NSError *)) callback {
-	CCKeywordConstraint *speakerConstraint = [CCKeywordConstraint key:@"type" equals:@"speaker"];
-	CCSearchRequest *speakerSearch = [[CCSearchRequest alloc] initWithConstraint:speakerConstraint];
-	speakerSearch.baseURL = [NSURL URLWithString:CORONABASE];
+	MLKeywordConstraint *speakerConstraint = [MLKeywordConstraint key:@"type" equals:@"speaker"];
+	MLSearchRequest *speakerSearch = [[MLSearchRequest alloc] initWithConstraint:speakerConstraint];
+	speakerSearch.baseURL = [NSURL URLWithString:APIBASE];
 	[speakerSearch fetchResults:1 length:1000 callback:^(NSDictionary *results, NSError *error) {
 		NSMutableArray *speakerObjects = [NSMutableArray arrayWithCapacity:100];
 		for(NSDictionary *rawSpeaker in [results objectForKey:@"results"]) {
@@ -135,9 +138,9 @@
 	[speakerSearch release];
 };
 
-- (void)populateSessionsWithConstraint:(CCConstraint *) constraint callback:(void (^)(NSError *)) callback {
-	CCSearchRequest *sessionSearch = [[CCSearchRequest alloc] initWithConstraint:constraint];
-	sessionSearch.baseURL = [NSURL URLWithString:CORONABASE];
+- (void)populateSessionsWithConstraint:(MLConstraint *) constraint callback:(void (^)(NSError *)) callback {
+	MLSearchRequest *sessionSearch = [[MLSearchRequest alloc] initWithConstraint:constraint];
+	sessionSearch.baseURL = [NSURL URLWithString:APIBASE];
 	[sessionSearch fetchResults:1 length:1000 callback:^(NSDictionary *results, NSError *error) {
 		NSMutableArray *sessionObjects = [NSMutableArray arrayWithCapacity:100];
 		for(NSDictionary *rawSession in [results objectForKey:@"results"]) {
@@ -217,9 +220,10 @@
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 		SBJsonParser *parser = [[[SBJsonParser alloc] init] autorelease];
 
-		NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/store?uri=/sponsors.json", CORONABASE]];
-		NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+		NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/documents?uri=/sponsors.json&format=json", APIBASE]];
+		NSMutableURLRequest *request = [[MLURLRequest alloc] init];
 		request.URL = url;
+  
 
 		NSURLResponse *response = nil;
 		NSError *error = nil;

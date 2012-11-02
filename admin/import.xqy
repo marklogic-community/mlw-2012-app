@@ -1,4 +1,5 @@
-import module namespace json="http://marklogic.com/json" at "/corona/lib/json.xqy";
+(: import module namespace json="http://marklogic.com/json" at "/corona/lib/json.xqy"; :)
+declare namespace json="http://marklogic.com/xdmp/json/basic";
 
 for $i in /json:json[json:type = "session"]
 let $speakers := /json:json[json:id = $i/json:speakerIds/*]
